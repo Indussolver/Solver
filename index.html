@@ -3,205 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solver by Indus - Organize Your Life With Simplicity</title>
+    <title>Solver by Indus - Simple Productivity</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Floating Gradient Shapes -->
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-    <div class="floating-shape shape-3"></div>
+    <!-- Floating Background -->
+    <div class="floating-bg"></div>
+    <div class="floating-shape s1"></div>
+    <div class="floating-shape s2"></div>
 
-    <!-- Navbar -->
+    <!-- Shared Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <span class="logo-text">Solver by Indus</span>
+                <div class="logo-main">Solver</div>
+                <div class="logo-sub">by Indus</div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#features" class="nav-link">Features</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <a href="#get-started" class="cta-button">Get Started</a>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-links">
+                <a href="tasks.html" target="_blank" class="nav-item">Task</a>
+                <a href="achievements.html" target="_blank" class="nav-item">Achievement</a>
+                <a href="rewards.html" target="_blank" class="nav-item">Rewards</a>
+                <a href="account.html" target="_blank" class="nav-item">Account</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Organize Your Life 
-                    <span class="gradient-text">With Simplicity</span>
-                </h1>
-                <p class="hero-subtitle">
-                    A smarter way to manage tasks, track achievements and stay productive. 
-                    Built for people who value clarity over complexity.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#get-started" class="btn btn-primary">Get Started</a>
-                    <a href="#features" class="btn btn-secondary">Learn More</a>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Simple 
+                <span class="gradient-text">Productivity</span>
+            </h1>
+            <p class="hero-subtitle">Manage tasks, track achievements, earn rewards. Clean design for focused work.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Users</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Uptime</span>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="phone-mockup">
-                    <div class="phone-screen"></div>
-                </div>
+        </div>
+        <div class="hero-visual">
+            <div class="phone-frame">
+                <div class="phone-screen"></div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">Everything You Need</h2>
-            <p class="section-subtitle">Simple tools designed to transform how you work</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3>Task Management</h3>
-                    <p>Create, organize, and complete tasks with intuitive drag-and-drop interface.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Achievements Tracking</h3>
-                    <p>Visual progress bars and milestones keep you motivated every step of the way.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎁</div>
-                    <h3>Reward System</h3>
-                    <p>Earn points for consistency and redeem them for exclusive productivity perks.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Productivity Insights</h3>
-                    <p>Weekly reports and analytics show your progress and help you improve.</p>
-                </div>
+    <!-- Features -->
+    <section class="features">
+        <div class="feature-grid">
+            <div class="feature-card" data-hover="Task Management">
+                <div class="feature-icon">📝</div>
+                <h3>Task Management</h3>
+                <p>Organize priorities with drag & drop. Clean interface, zero distractions.</p>
+            </div>
+            <div class="feature-card" data-hover="Achievements Tracking">
+                <div class="feature-icon">🏅</div>
+                <h3>Achievements</h3>
+                <p>Visual progress tracking. Stay motivated with meaningful milestones.</p>
+            </div>
+            <div class="feature-card" data-hover="Rewards System">
+                <div class="feature-icon">⭐</div>
+                <h3>Rewards</h3>
+                <p>Earn points for consistency. Unlock premium features through productivity.</p>
+            </div>
+            <div class="feature-card" data-hover="Personal Account">
+                <div class="feature-icon">👤</div>
+                <h3>Account</h3>
+                <p>Personal dashboard. Analytics, settings, and team collaboration.</p>
             </div>
         </div>
     </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-number">01</div>
-                    <h3>Add Tasks</h3>
-                    <p>Create your daily priorities in seconds with our simple input.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">02</div>
-                    <h3>Track Progress</h3>
-                    <p>Check off tasks and watch your achievements unlock automatically.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-number">03</div>
-                    <h3>Earn Rewards</h3>
-                    <p>Build streaks and redeem points for exclusive productivity boosts.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Built for Clarity</h2>
-                    <p>Solver by Indus was created by productivity enthusiasts who were tired of bloated task apps. We believe great tools should be simple, beautiful, and actually help you get things done.</p>
-                    <p>Every feature is carefully crafted to reduce friction and increase focus. No unnecessary notifications. No complex menus. Just you and your priorities.</p>
-                    <a href="#get-started" class="btn btn-primary">Start Solving</a>
-                </div>
-                <div class="about-image">
-                    <div class="floating-cards">
-                        <div class="card-float"></div>
-                        <div class="card-float delay-1"></div>
-                        <div class="card-float delay-2"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">What People Are Saying</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="avatar">RS</div>
-                        <div>
-                            <h4>Rahul Sharma</h4>
-                            <span>Founder, Tech Startup</span>
-                        </div>
-                    </div>
-                    <p>"Solver transformed how I manage my day. Finally, a tool that respects my time."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="avatar">PS</div>
-                        <div>
-                            <h4>Priya Singh</h4>
-                            <span>Freelance Designer</span>
-                        </div>
-                    </div>
-                    <p>"The achievement system keeps me motivated. Best productivity app I've used."</p>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <div class="avatar">AK</div>
-                        <div>
-                            <h4>Amit Kumar</h4>
-                            <span>Product Manager</span>
-                        </div>
-                    </div>
-                    <p>"Clean design, zero learning curve. My entire team now uses Solver daily."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="get-started" class="cta">
-        <div class="container">
-            <h2>Ready to Solve Your Day?</h2>
-            <p>Join thousands who are already more productive with Solver.</p>
-            <a href="#" class="btn btn-primary btn-large">Get Started Free</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact" class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-text">Solver by Indus</span>
-                    <p>Simple productivity for ambitious people.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Contact</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Solver by Indus. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
