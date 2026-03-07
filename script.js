@@ -167,3 +167,89 @@ if (document.querySelector('.task-main')) {
     // Initialize task manager
     new TaskManager();
 }
+// === ACHIEVEMENTS & ACCOUNT FUNCTIONALITY ===
+document.addEventListener('DOMContentLoaded', function() {
+    // Achievements Stats Animation
+    if (document.querySelector('.achievements-dashboard')) {
+        const stats = [
+            { selector: '[data-metric="tasks"] .stat-number', value: 127 },
+            { selector: '[data-metric="completion"] .stat-number', value: 89 },
+            { selector: '[data-metric="streak"] .stat-number', value: 12 }
+        ];
+        
+        stats.forEach(stat => {
+            const element = document.querySelector(stat.selector);
+            if (element) {
+                const animateNumber = () => {
+                    let current = 0;
+                    const increment = stat.value / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= stat.value) {
+                            current = stat.value;
+                            clearInterval(timer);
+                        }
+                        element.textContent = Math.floor(current) + (stat.selector.includes('completion') ? '%' : '');
+                    }, 30);
+                };
+                setTimeout(animateNumber, 500);
+            }
+        });
+
+        // Streak Progress Ring
+        const progressFill = document.querySelector('.progress-ring-fill');
+        const progressNumber = document.querySelector('.progress-number');
+        if (progressFill && progressNumber) {
+            const progress = 12 / 30; // 12/30 days
+            const circumference = 377;
+            const offset = circumference * (1 - progress);
+            progressFill.style.strokeDashoffset = offset;
+            progressNumber.textContent = '12';
+        }
+    }
+
+    // Account Profile Upload
+    if (document.querySelector('.account-dashboard')) {
+        const fileInput = document.getElementById('profileUpload');
+        const profileImg = document.getElementById('profileImg');
+        const editBtn = document.querySelector('.edit-avatar-btn');
+
+        const loadImage = (file) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                profileImg.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        };
+
+        editBtn.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                loadImage(e.target.files[0]);
+            }
+        });
+
+        // Username Save
+        document.querySelector('.save-profile-btn').addEventListener('click', () => {
+            const username = document.getElementById('usernameInput').value;
+            localStorage.setItem('solver-username', username);
+            // Add save animation
+            const btn = event.target;
+            btn.textContent = 'Saved!';
+            setTimeout(() => btn.textContent = 'Save Profile', 2000);
+        });
+
+        // Load saved username
+        const savedUsername = localStorage.getItem('solver-username');
+        if (savedUsername) {
+            document.getElementById('usernameInput').value = savedUsername;
+        }
+
+        // Toggle switches
+        document.querySelectorAll('.toggle-switch').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('active');
+            });
+        });
+    }
+});
