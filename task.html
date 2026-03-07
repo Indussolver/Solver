@@ -8,7 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Same navbar as index -->
+    <!-- Floating Background Elements -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -16,37 +20,74 @@
                 <div class="logo-sub">by Indus</div>
             </div>
             <div class="nav-links">
-                <a href="tasks.html" target="_blank" class="nav-item active">Task</a>
-                <a href="achievements.html" target="_blank" class="nav-item">Achievement</a>
-                <a href="rewards.html" target="_blank" class="nav-item">Rewards</a>
-                <a href="account.html" target="_blank" class="nav-item">Account</a>
+                <a href="#" class="nav-item active">Task</a>
+                <a href="#" class="nav-item">Achievement</a>
+                <a href="#" class="nav-item">Rewards</a>
+                <a href="#" class="nav-item">Account</a>
             </div>
         </div>
     </nav>
 
-    <section class="page-content tasks-page">
-        <div class="container">
-            <h1 class="page-title">Task Management</h1>
-            <p class="page-subtitle">Your daily priorities, beautifully organized.</p>
-            
-            <div class="task-demo">
-                <div class="task-list">
-                    <div class="task-item">
-                        <div class="task-checkbox"></div>
-                        <span>Plan weekly goals</span>
-                        <div class="task-time">Today 9AM</div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header Section -->
+        <section class="header-section">
+            <div class="container">
+                <h1 class="page-title fade-in">Tasks</h1>
+                <p class="page-subtitle fade-in">Organize your day with clarity.</p>
+            </div>
+        </section>
+
+        <!-- Search Bar Section -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <div class="search-icon">🔍</div>
+                        <input type="text" id="taskInput" class="search-input" placeholder="What needs to be solved today?">
                     </div>
-                    <div class="task-item completed">
-                        <div class="task-checkbox checked"></div>
-                        <span>Review yesterday's progress</span>
-                        <div class="task-time">Done</div>
-                    </div>
-                </div>
-                <div class="task-input">
-                    <input type="text" placeholder="+ Add new task..." class="task-input-field">
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Recommended Tasks -->
+        <section class="recommended-section">
+            <div class="container">
+                <h3 class="section-label fade-in">Recommended</h3>
+                <div class="recommended-grid" id="recommendedGrid">
+                    <div class="recommend-card fade-in" data-task="Finish project proposal">Work</div>
+                    <div class="recommend-card fade-in" data-task="Review chapter 5">Study</div>
+                    <div class="recommend-card fade-in" data-task="Prepare dinner menu">Cooking</div>
+                    <div class="recommend-card fade-in" data-task="Read 20 pages">Reading</div>
+                    <div class="recommend-card fade-in" data-task="Practice free kicks">Football</div>
+                    <div class="recommend-card fade-in" data-task="30 min strength training">Workout</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Task List -->
+        <section class="tasks-section">
+            <div class="container">
+                <div class="task-stats fade-in">
+                    <span id="pendingCount">0</span> pending • 
+                    <span id="completedCount">0</span> completed
+                </div>
+                <div class="tasks-container" id="tasksContainer">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Add Button -->
+    <button class="floating-add-btn" id="addTaskBtn">
+        <span class="add-icon">+</span>
+        <span class="add-text">Add Task</span>
+    </button>
+
+    <!-- Celebration Canvas -->
+    <canvas id="celebrationCanvas" class="celebration-canvas"></canvas>
+
+    <script src="script.js"></script>
 </body>
 </html>
