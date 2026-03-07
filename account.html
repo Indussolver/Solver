@@ -5,50 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account - Solver by Indus</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <div class="logo-main">Solver</div>
-                <div class="logo-sub">by Indus</div>
-            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-main">Solver</div>
+                    <div class="logo-sub">by Indus</div>
+                </div>
+            </a>
             <div class="nav-links">
-                <a href="tasks.html" target="_blank" class="nav-item">Task</a>
-                <a href="achievements.html" target="_blank" class="nav-item">Achievement</a>
-                <a href="rewards.html" target="_blank" class="nav-item">Rewards</a>
-                <a href="account.html" target="_blank" class="nav-item active">Account</a>
+                <a href="task.html" class="nav-item">Task</a>
+                <a href="achievements.html" class="nav-item">Achievement</a>
+                <a href="rewards.html" class="nav-item">Rewards</a>
+                <a href="account.html" class="nav-item active">Account</a>
             </div>
         </div>
     </nav>
 
-    <section class="page-content account-page">
+    <!-- Account Dashboard -->
+    <main class="account-dashboard fade-in">
         <div class="container">
-            <h1 class="page-title">Account</h1>
-            <p class="page-subtitle">Your productivity dashboard.</p>
-            
-            <div class="profile-card">
-                <div class="profile-avatar">SI</div>
-                <h3>Indus Solver</h3>
-                <p>indus@solver.com</p>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number">127</span>
-                    <span>Total Tasks</span>
+            <div class="dashboard-grid">
+                <!-- Profile Section -->
+                <div class="profile-section">
+                    <h2 class="section-title">Profile</h2>
+                    
+                    <!-- Profile Card -->
+                    <div class="profile-card">
+                        <div class="profile-avatar-section">
+                            <div class="avatar-wrapper">
+                                <img id="profileImg" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSIyNiIgciIxOCIgZmlsbD0iIzdGNkJGMCIvPgo8cGF0aCBkPSJNMzIgNDBDOC4zIDQwIDIgNDYuMyAyIDUzQzIgNjAuNCA4LjMgNjcuMiAxNiA2N0MyMS41IDY4LjMgMjggNjguOCA1MCA2OC44QzcyIDE2OC43IDgwIDYxLjMgODAgNTNDODAgNDYuMyA3My43IDQwIDY0IDQwSDMyWiIgZmlsbD0iI0U1RTVFNCIvPgo8L3N2Zz4K" alt="Profile" class="profile-avatar">
+                                <input type="file" id="profileUpload" accept="image/*" class="file-input">
+                                <button class="edit-avatar-btn" title="Change photo">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-info">
+                            <input type="text" id="usernameInput" class="profile-username" value="Indus Solver" placeholder="Enter your name">
+                            <button class="save-profile-btn">Save Profile</button>
+                        </div>
+                    </div>
+
+                    <!-- Google Signin -->
+                    <div class="google-signin-card">
+                        <button class="google-btn">
+                            <svg class="google-icon" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.26H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                            Continue with Google
+                        </button>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-number">89%</span>
-                    <span>Completion</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">12</span>
-                    <span>Streak</span>
+
+                <!-- Settings Section -->
+                <div class="settings-section">
+                    <h2 class="section-title">Settings</h2>
+                    
+                    <!-- Account Settings -->
+                    <div class="settings-card">
+                        <h3>Account</h3>
+                        <div class="setting-item">
+                            <span>Change Password</span>
+                            <div class="toggle-switch">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span>Email Preferences</span>
+                            <div class="toggle-switch">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span>Notifications</span>
+                            <div class="toggle-switch active">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Premium Upgrade -->
+                    <div class="premium-card">
+                        <h3>Upgrade to Premium</h3>
+                        <ul class="premium-features">
+                            <li>✅ Advanced Analytics</li>
+                            <li>✅ Custom Rewards</li>
+                            <li>✅ Unlimited Tasks</li>
+                            <li>✅ Priority Support</li>
+                        </ul>
+                        <button class="premium-btn">Upgrade Plan</button>
+                    </div>
+
+                    <!-- Legal -->
+                    <div class="legal-section">
+                        <a href="#" class="legal-link">Terms & Conditions</a>
+                        <a href="#" class="legal-link">Privacy Policy</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
