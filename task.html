@@ -8,11 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Floating Background Elements -->
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-
-    <!-- Navbar -->
+    <!-- Navbar (same as your existing site) -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -20,73 +16,54 @@
                 <div class="logo-sub">by Indus</div>
             </div>
             <div class="nav-links">
-                <a href="#" class="nav-item active">Task</a>
-                <a href="#" class="nav-item">Achievement</a>
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="tasks.html" class="nav-item active">Task</a>
                 <a href="#" class="nav-item">Rewards</a>
                 <a href="#" class="nav-item">Account</a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Header Section -->
-        <section class="header-section">
-            <div class="container">
-                <h1 class="page-title fade-in">Tasks</h1>
-                <p class="page-subtitle fade-in">Organize your day with clarity.</p>
-            </div>
-        </section>
+    <!-- NEW Task Page Content -->
+    <main class="task-main fade-in">
+        <div class="container">
+            <!-- Header -->
+            <h1 class="task-title">Tasks</h1>
+            <p class="task-subtitle">Organize your day with clarity.</p>
 
-        <!-- Search Bar Section -->
-        <section class="search-section">
-            <div class="container">
-                <div class="search-container">
-                    <div class="search-bar">
-                        <div class="search-icon">🔍</div>
-                        <input type="text" id="taskInput" class="search-input" placeholder="What needs to be solved today?">
-                    </div>
+            <!-- Search Bar -->
+            <div class="task-search">
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="newTaskInput" class="task-search-input" placeholder="What needs to be done?">
                 </div>
             </div>
-        </section>
 
-        <!-- Recommended Tasks -->
-        <section class="recommended-section">
-            <div class="container">
-                <h3 class="section-label fade-in">Recommended</h3>
-                <div class="recommended-grid" id="recommendedGrid">
-                    <div class="recommend-card fade-in" data-task="Finish project proposal">Work</div>
-                    <div class="recommend-card fade-in" data-task="Review chapter 5">Study</div>
-                    <div class="recommend-card fade-in" data-task="Prepare dinner menu">Cooking</div>
-                    <div class="recommend-card fade-in" data-task="Read 20 pages">Reading</div>
-                    <div class="recommend-card fade-in" data-task="Practice free kicks">Football</div>
-                    <div class="recommend-card fade-in" data-task="30 min strength training">Workout</div>
+            <!-- Recommended Tasks -->
+            <div class="recommended-tasks">
+                <h3>Quick Start</h3>
+                <div class="recommended-grid">
+                    <button class="rec-task-btn" data-task="Finish project work">Work</button>
+                    <button class="rec-task-btn" data-task="Study chapter 3">Study</button>
+                    <button class="rec-task-btn" data-task="Cook dinner">Cooking</button>
+                    <button class="rec-task-btn" data-task="Read 20 pages">Reading</button>
+                    <button class="rec-task-btn" data-task="Practice skills">Practice</button>
+                    <button class="rec-task-btn" data-task="Workout 30min">Workout</button>
                 </div>
             </div>
-        </section>
 
-        <!-- Task List -->
-        <section class="tasks-section">
-            <div class="container">
-                <div class="task-stats fade-in">
-                    <span id="pendingCount">0</span> pending • 
-                    <span id="completedCount">0</span> completed
-                </div>
-                <div class="tasks-container" id="tasksContainer">
-                    <!-- Tasks will be dynamically added here -->
-                </div>
+            <!-- Task List -->
+            <div class="task-stats">
+                <span id="pendingTasks">0</span> pending • <span id="doneTasks">0</span> completed
             </div>
-        </section>
+            <div class="task-list" id="taskList">
+                <!-- Tasks appear here -->
+            </div>
+        </div>
     </main>
 
     <!-- Floating Add Button -->
-    <button class="floating-add-btn" id="addTaskBtn">
-        <span class="add-icon">+</span>
-        <span class="add-text">Add Task</span>
-    </button>
-
-    <!-- Celebration Canvas -->
-    <canvas id="celebrationCanvas" class="celebration-canvas"></canvas>
+    <button class="task-add-btn" id="addTaskBtn">+</button>
 
     <script src="script.js"></script>
 </body>
