@@ -1,86 +1,58 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+// Smooth page transitions
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
 });
 
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
-});
-
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
+// Intersection Observer for animations
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('fade-in');
         }
     });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-// Observe all sections and cards
-document.querySelectorAll('section, .feature-card, .timeline-item, .testimonial-card').forEach(el => {
+// Observe elements
+document.querySelectorAll('.feature-card, .task-item, .achievement-card, .reward-card, .stat-card').forEach(el => {
     observer.observe(el);
 });
 
-// Mobile menu toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    const scroll = window.scrollY;
+    
+    navbar.style.backdropFilter = scroll > 50 ? 'blur(25px)' : 'blur(20px)';
+    navbar.style.background = scroll > 50 
+        ? 'rgba(255, 255, 255, 0.98)' 
+        : 'rgba(255, 255, 255, 0.96)';
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+// Feature card hover effects
+document.querySelectorAll('.feature-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-16px) scale(1.02)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
     });
 });
 
-// Phone mockup floating animation
-const phoneMockup = document.querySelector('.phone-mockup');
-if (phoneMockup) {
-    phoneMockup.style.animationPlayState = 'running';
+// Task input focus effect
+const taskInput = document.querySelector('.task-input-field');
+if (taskInput) {
+    taskInput.addEventListener('focus', () => {
+        taskInput.parentElement.style.transform = 'scale(1.02)';
+    });
+    
+    taskInput.addEventListener('blur', () => {
+        taskInput.parentElement.style.transform = 'scale(1)';
+    });
 }
 
-// Parallax effect for floating cards
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallax = document.querySelector('.floating-cards');
-    if (parallax) {
-        parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
-
-// CTA button hover animation
-document.querySelectorAll('.btn-primary').forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-3px)';
-    });
-    btn.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
-});
+// Phone floating animation
+const phoneFrame = document.querySelector('.phone-frame');
+if (phoneFrame) {
+    phoneFrame.style.animation = 'float 6s ease-in-out infinite';
+}
