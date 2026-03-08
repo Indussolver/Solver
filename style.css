@@ -127,7 +127,7 @@ body {
 
 /* Hero */
 .hero {
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     align-items: center;
     padding-top: 120px;
@@ -298,7 +298,7 @@ body {
 
 /* Page Content */
 .page-content {
-    min-height: 100vh;
+    min-height: auto;
     padding-top: 140px;
     padding-bottom: 120px;
 }
@@ -610,7 +610,7 @@ body {
 /* === TASK PAGE STYLES (ADD ONLY) === */
 .task-main {
     padding: 160px 0 100px;
-    min-height: 100vh;
+    min-height: auto;
 }
 
 .task-title {
@@ -818,7 +818,7 @@ body {
 /* Achievements Dashboard */
 .achievements-dashboard {
     padding: 160px 0 120px;
-    min-height: 100vh;
+    min-height: auto;
 }
 
 .dash-header {
@@ -1028,7 +1028,7 @@ body {
 /* Account Dashboard */
 .account-dashboard {
     padding: 160px 0 120px;
-    min-height: 100vh;
+    min-height: auto;
 }
 
 .dashboard-grid {
