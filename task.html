@@ -3,67 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks - Solver by Indus</title>
+    <title>Tasks - Solver</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Navbar (same as your existing site) -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-main">Solver</div>
-                <div class="logo-sub">by Indus</div>
-            </div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-item">Home</a>
-                <a href="tasks.html" class="nav-item active">Task</a>
-                <a href="#" class="nav-item">Rewards</a>
-                <a href="#" class="nav-item">Account</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- NEW Task Page Content -->
-    <main class="task-main fade-in">
+<body class="page-transition">
+    <header class="header">
         <div class="container">
-            <!-- Header -->
-            <h1 class="task-title">Tasks</h1>
-            <p class="task-subtitle">Organize your day with clarity.</p>
+            <h1 class="brand">Solver</h1>
+            <button class="menu-toggle" aria-label="Menu">
+                <span class="three-dots">⋮</span>
+            </button>
+            <nav class="dropdown-menu hidden">
+                <a href="index.html" class="menu-item">Home</a>
+                <a href="notes.html" class="menu-item">Notes</a>
+                <a href="achievement.html" class="menu-item">Achievement</a>
+                <a href="accounts.html" class="menu-item">Account</a>
+            </nav>
+        </div>
+    </header>
 
-            <!-- Search Bar -->
-            <div class="task-search">
-                <div class="search-input-wrapper">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="newTaskInput" class="task-search-input" placeholder="What needs to be done?">
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Tasks</h1>
+                <div class="task-stats">
+                    <span class="stat">0 pending</span>
+                    <span class="stat completed">0 completed</span>
                 </div>
             </div>
-
-            <!-- Recommended Tasks -->
-            <div class="recommended-tasks">
-                <h3>Quick Start</h3>
-                <div class="recommended-grid">
-                    <button class="rec-task-btn" data-task="Finish project work">Work</button>
-                    <button class="rec-task-btn" data-task="Study chapter 3">Study</button>
-                    <button class="rec-task-btn" data-task="Cook dinner">Cooking</button>
-                    <button class="rec-task-btn" data-task="Read 20 pages">Reading</button>
-                    <button class="rec-task-btn" data-task="Practice skills">Practice</button>
-                    <button class="rec-task-btn" data-task="Workout 30min">Workout</button>
-                </div>
+            
+            <div class="input-group">
+                <input type="text" id="newTask" placeholder="What needs to be done?" class="input-field">
+                <button id="addTask" class="btn btn-primary">Add Task</button>
             </div>
 
-            <!-- Task List -->
-            <div class="task-stats">
-                <span id="pendingTasks">0</span> pending • <span id="doneTasks">0</span> completed
-            </div>
-            <div class="task-list" id="taskList">
-                <!-- Tasks appear here -->
+            <div class="tasks-list" id="tasksList">
+                <!-- Tasks will be populated by JavaScript -->
             </div>
         </div>
     </main>
-
-    <!-- Floating Add Button -->
-    <button class="task-add-btn" id="addTaskBtn">+</button>
 
     <script src="script.js"></script>
 </body>
