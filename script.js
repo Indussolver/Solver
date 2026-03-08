@@ -253,3 +253,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+// === TASK SECTION ANIMATIONS ===
+if (document.querySelector('.task-feature-section')) {
+    // Stagger step animations
+    const stepCards = document.querySelectorAll('.step-card');
+    stepCards.forEach((card, index) => {
+        const delay = card.dataset.delay || 0;
+        setTimeout(() => {
+            card.style.animation = `fadeInUpAnim 0.8s cubic-bezier(0.4,0,0.2,1) ${delay}s forwards`;
+        }, index * 200);
+    });
+
+    // CTA hover sound effect (subtle)
+    const ctaBtn = document.querySelector('.cta-button');
+    if (ctaBtn) {
+        ctaBtn.addEventListener('mouseenter', () => {
+            ctaBtn.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        ctaBtn.addEventListener('mouseleave', () => {
+            ctaBtn.style.transform = '';
+        });
+    }
+
+    // Step card hover interactions
+    document.querySelectorAll('.step-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-16px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
