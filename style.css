@@ -3,11 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body {
     font-family: 'Inter', -apple-system, sans-serif;
@@ -91,7 +86,7 @@ body {
     font-size: 12px;
     font-weight: 400;
     color: #64748b;
-    margin-top: 20px;
+    margin-top: 2px;
     letter-spacing: 0.05em;
 }
 
@@ -132,11 +127,11 @@ body {
 
 /* Hero */
 .hero {
-    
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 120px;
+    padding-bottom: 120px;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -303,9 +298,9 @@ body {
 
 /* Page Content */
 .page-content {
-    
-    padding-top: 40px;
-    padding-bottom: 40px;
+    min-height: 100vh;
+    padding-top: 140px;
+    padding-bottom: 120px;
 }
 
 .page-title {
@@ -502,7 +497,7 @@ body {
     border-radius: 20px;
     font-size: 14px;
     font-weight: 500;
-    margin-top: 20px;
+    margin-top: 12px;
 }
 
 /* Account Page */
@@ -599,7 +594,7 @@ body {
     }
     
     .page-content {
-        padding-top: 40px;
+        padding-top: 120px;
     }
 }
 
@@ -615,7 +610,7 @@ body {
 /* === TASK PAGE STYLES (ADD ONLY) === */
 .task-main {
     padding: 160px 0 100px;
-    
+    min-height: 100vh;
 }
 
 .task-title {
@@ -823,7 +818,7 @@ body {
 /* Achievements Dashboard */
 .achievements-dashboard {
     padding: 160px 0 120px;
-    
+    min-height: 100vh;
 }
 
 .dash-header {
@@ -1033,7 +1028,7 @@ body {
 /* Account Dashboard */
 .account-dashboard {
     padding: 160px 0 120px;
-    
+    min-height: 100vh;
 }
 
 .dashboard-grid {
@@ -2526,7 +2521,7 @@ body {
     font-size: 12px;
     color: #94a3b8;
     font-weight: 400;
-    margin-top: 20px;
+    margin-top: 4px;
     letter-spacing: 0.15em;
     opacity: 0.9;
 }
@@ -2588,7 +2583,7 @@ body {
     font-weight: 500;
     transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
     position: relative;
-    padding-bottom: 40px;
+    padding-bottom: 4px;
 }
 
 .footer-links a::after {
@@ -2680,29 +2675,4 @@ body {
     .social-links {
         justify-content: center;
     }
-}
-/* Complete Fix - सभी devices के लिए */
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;  /* Right scroll भी हटेगा */
-}
-
-section:not(:last-child) {
-    margin-bottom: -40px;  /* Negative margin = sections overlap slightly */
-}
-
-.task-feature-section,
-.achievements-preview-section,
-.rewards-preview-section,
-.about-solver-section {
-    padding: 80px 0 !important;  /* Consistent 80px top+bottom */
-}
-/* Sabhi bade gaps ko fix karne ke liye */
-section, .container, .hero, .achievements {
-    padding-top: 50px !important;
-    padding-bottom: 50px !important;
-    min-height: auto !important;
-    height: auto !important;
-    margin: 0 !important;
 }
