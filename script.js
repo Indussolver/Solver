@@ -286,3 +286,51 @@ if (document.querySelector('.task-feature-section')) {
         });
     });
 }
+// === ACHIEVEMENTS SECTION ANIMATIONS ===
+if (document.querySelector('.achievements-preview-section')) {
+    // Achievement counters
+    const achievementNumbers = document.querySelectorAll('.achievement-number');
+    achievementNumbers.forEach(number => {
+        const target = parseInt(number.dataset.target);
+        let current = 0;
+        const increment = target / 60;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            number.textContent = Math.floor(current);
+        }, 25);
+    });
+
+    // Progress bars animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                document.querySelectorAll('.progress-bar').forEach(bar => {
+                    bar.style.setProperty('--fill', bar.style.getPropertyValue('--fill'));
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    const progressSection = document.querySelector('.progress-preview');
+    if (progressSection) observer.observe(progressSection);
+
+    // Staggered fade-in
+    const fadeElements = document.querySelectorAll('.fade-in-up');
+    const observer2 = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay * 1000;
+                setTimeout(() => {
+                    entry.target.style.animation = 'fadeInUpAnim 0.8s cubic-bezier(0.4,0,0.2,1) forwards';
+                }, delay * 1000);
+            }
+        });
+    });
+
+    fadeElements.forEach(el => observer2.observe(el));
+}
