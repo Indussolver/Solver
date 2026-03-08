@@ -1,462 +1,297 @@
-// Smooth page transitions
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
+// Global variables
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let notes = JSON.parse(localStorage.getItem('notes')) || [];
+let profile = JSON.parse(localStorage.getItem('profile')) || { name: '', email: '' };
+let totalTasksCompleted = parseInt(localStorage.getItem('totalTasksCompleted')) || 0;
 
-// Intersection Observer for animations
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-        }
-    });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+// DOM elements
+const menuToggle = document.querySelector('.menu-toggle');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+const tasksList = document.getElementById('tasksList');
+const newTaskInput = document.getElementById('newTask');
+const addTaskBtn = document.getElementById('addTask');
+const notesGrid = document.getElementById('notesGrid');
+const newNoteTitle = document.getElementById('newNoteTitle');
+const newNoteContent = document.getElementById('newNoteContent');
+const addNoteBtn = document.getElementById('addNote');
+const achievementsGrid = document.getElementById('achievementsGrid');
+const userNameInput = document.getElementById('userName');
+const userEmailInput = document.getElementById('userEmail');
+const saveProfileBtn = document.getElementById('saveProfile');
+const avatarInitials = document.getElementById('avatarInitials');
+const taskStats = document.querySelector('.task-stats');
 
-// Observe elements
-document.querySelectorAll('.feature-card, .task-item, .achievement-card, .reward-card, .stat-card').forEach(el => {
-    observer.observe(el);
-});
-
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    const scroll = window.scrollY;
-    
-    navbar.style.backdropFilter = scroll > 50 ? 'blur(25px)' : 'blur(20px)';
-    navbar.style.background = scroll > 50 
-        ? 'rgba(255, 255, 255, 0.98)' 
-        : 'rgba(255, 255, 255, 0.96)';
-});
-
-// Feature card hover effects
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-16px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// Task input focus effect
-const taskInput = document.querySelector('.task-input-field');
-if (taskInput) {
-    taskInput.addEventListener('focus', () => {
-        taskInput.parentElement.style.transform = 'scale(1.02)';
-    });
-    
-    taskInput.addEventListener('blur', () => {
-        taskInput.parentElement.style.transform = 'scale(1)';
-    });
-}
-
-// Phone floating animation
-const phoneFrame = document.querySelector('.phone-frame');
-if (phoneFrame) {
-    phoneFrame.style.animation = 'float 6s ease-in-out infinite';
-}
-// === TASK PAGE FUNCTIONALITY (ADD ONLY) ===
-if (document.querySelector('.task-main')) {
-    class TaskManager {
-        constructor() {
-            this.tasks = JSON.parse(localStorage.getItem('solverTasks')) || [];
-            this.init();
-        }
-
-        init() {
-            this.bindEvents();
-            this.renderTasks();
-            this.updateStats();
-        }
-
-        bindEvents() {
-            // Add task from search
-            document.getElementById('newTaskInput').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && e.target.value.trim()) {
-                    this.addTask(e.target.value.trim());
-                    e.target.value = '';
-                }
-            });
-
-            // Recommended tasks
-            document.querySelectorAll('.rec-task-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    this.addTask(btn.dataset.task);
-                });
-            });
-
-            // Floating button
-            document.getElementById('addTaskBtn').addEventListener('click', () => {
-                document.getElementById('newTaskInput').focus();
-            });
-
-            // Task checkboxes
-            document.getElementById('taskList').addEventListener('click', (e) => {
-                if (e.target.closest('.task-checkbox')) {
-                    const taskItem = e.target.closest('.task-item');
-                    const taskId = taskItem.dataset.id;
-                    this.toggleTask(taskId);
-                }
-            });
-        }
-
-        addTask(text) {
-            const task = {
-                id: Date.now().toString(),
-                text: text,
-                completed: false
-            };
-            this.tasks.unshift(task);
-            this.saveTasks();
-            this.renderTasks();
-            this.updateStats();
-        }
-
-        toggleTask(id) {
-            const task = this.tasks.find(t => t.id === id);
-            if (task) {
-                task.completed = !task.completed;
-                this.saveTasks();
-                this.renderTasks();
-                this.updateStats();
-                
-                if (task.completed) {
-                    this.celebrate();
-                }
-            }
-        }
-
-        renderTasks() {
-            const container = document.getElementById('taskList');
-            container.innerHTML = '';
-            
-            this.tasks.forEach(task => {
-                const taskEl = document.createElement('div');
-                taskEl.className = `task-item ${task.completed ? 'completed' : ''}`;
-                taskEl.dataset.id = task.id;
-                taskEl.innerHTML = `
-                    <div class="task-checkbox ${task.completed ? 'checked' : ''}"></div>
-                    <div class="task-text">${task.text}</div>
-                `;
-                container.appendChild(taskEl);
-            });
-        }
-
-        updateStats() {
-            const pending = this.tasks.filter(t => !t.completed).length;
-            const completed = this.tasks.filter(t => t.completed).length;
-            document.getElementById('pendingTasks').textContent = pending;
-            document.getElementById('doneTasks').textContent = completed;
-        }
-
-        saveTasks() {
-            localStorage.setItem('solverTasks', JSON.stringify(this.tasks));
-        }
-
-        celebrate() {
-            // Simple celebration - scale animation
-            const btn = document.querySelector('.task-add-btn');
-            btn.style.transform = 'scale(1.3) rotate(180deg)';
-            setTimeout(() => {
-                btn.style.transform = '';
-            }, 300);
-        }
-    }
-
-    // Initialize task manager
-    new TaskManager();
-}
-// === ACHIEVEMENTS & ACCOUNT FUNCTIONALITY ===
+// Initialize page based on current URL
 document.addEventListener('DOMContentLoaded', function() {
-    // Achievements Stats Animation
-    if (document.querySelector('.achievements-dashboard')) {
-        const stats = [
-            { selector: '[data-metric="tasks"] .stat-number', value: 127 },
-            { selector: '[data-metric="completion"] .stat-number', value: 89 },
-            { selector: '[data-metric="streak"] .stat-number', value: 12 }
-        ];
-        
-        stats.forEach(stat => {
-            const element = document.querySelector(stat.selector);
-            if (element) {
-                const animateNumber = () => {
-                    let current = 0;
-                    const increment = stat.value / 50;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= stat.value) {
-                            current = stat.value;
-                            clearInterval(timer);
-                        }
-                        element.textContent = Math.floor(current) + (stat.selector.includes('completion') ? '%' : '');
-                    }, 30);
-                };
-                setTimeout(animateNumber, 500);
-            }
-        });
-
-        // Streak Progress Ring
-        const progressFill = document.querySelector('.progress-ring-fill');
-        const progressNumber = document.querySelector('.progress-number');
-        if (progressFill && progressNumber) {
-            const progress = 12 / 30; // 12/30 days
-            const circumference = 377;
-            const offset = circumference * (1 - progress);
-            progressFill.style.strokeDashoffset = offset;
-            progressNumber.textContent = '12';
-        }
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Initialize dropdown menu
+    initMenu();
+    
+    // Page-specific initialization
+    if (currentPage.includes('task')) {
+        initTasks();
+        updateTaskStats();
+    } else if (currentPage.includes('notes')) {
+        initNotes();
+    } else if (currentPage.includes('achievement')) {
+        updateAchievements();
+    } else if (currentPage.includes('accounts')) {
+        initProfile();
     }
-
-    // Account Profile Upload
-    if (document.querySelector('.account-dashboard')) {
-        const fileInput = document.getElementById('profileUpload');
-        const profileImg = document.getElementById('profileImg');
-        const editBtn = document.querySelector('.edit-avatar-btn');
-
-        const loadImage = (file) => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                profileImg.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        };
-
-        editBtn.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files[0]) {
-                loadImage(e.target.files[0]);
-            }
-        });
-
-        // Username Save
-        document.querySelector('.save-profile-btn').addEventListener('click', () => {
-            const username = document.getElementById('usernameInput').value;
-            localStorage.setItem('solver-username', username);
-            // Add save animation
-            const btn = event.target;
-            btn.textContent = 'Saved!';
-            setTimeout(() => btn.textContent = 'Save Profile', 2000);
-        });
-
-        // Load saved username
-        const savedUsername = localStorage.getItem('solver-username');
-        if (savedUsername) {
-            document.getElementById('usernameInput').value = savedUsername;
-        }
-
-        // Toggle switches
-        document.querySelectorAll('.toggle-switch').forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                toggle.classList.toggle('active');
-            });
-        });
-    }
+    
+    // Page transition effect
+    setTimeout(() => {
+        document.body.classList.remove('page-transition');
+    }, 100);
 });
-// === TASK SECTION ANIMATIONS ===
-if (document.querySelector('.task-feature-section')) {
-    // Stagger step animations
-    const stepCards = document.querySelectorAll('.step-card');
-    stepCards.forEach((card, index) => {
-        const delay = card.dataset.delay || 0;
-        setTimeout(() => {
-            card.style.animation = `fadeInUpAnim 0.8s cubic-bezier(0.4,0,0.2,1) ${delay}s forwards`;
-        }, index * 200);
+
+// Menu functionality
+function initMenu() {
+    menuToggle.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('show');
+        dropdownMenu.classList.toggle('hidden');
     });
 
-    // CTA hover sound effect (subtle)
-    const ctaBtn = document.querySelector('.cta-button');
-    if (ctaBtn) {
-        ctaBtn.addEventListener('mouseenter', () => {
-            ctaBtn.style.transform = 'translateY(-8px) scale(1.02)';
-        });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!menuToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.add('hidden');
+            dropdownMenu.classList.remove('show');
+        }
+    });
+}
+
+// TASKS FUNCTIONALITY
+function initTasks() {
+    renderTasks();
+    
+    addTaskBtn.addEventListener('click', addTask);
+    newTaskInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') addTask();
+    });
+}
+
+function addTask() {
+    const text = newTaskInput.value.trim();
+    if (!text) return;
+    
+    const task = {
+        id: Date.now(),
+        text: text,
+        completed: false,
+        createdAt: new Date().toISOString()
+    };
+    
+    tasks.unshift(task);
+    saveTasks();
+    renderTasks();
+    newTaskInput.value = '';
+    newTaskInput.focus();
+    
+    // Animate new task
+    const newTaskEl = tasksList.querySelector('.task-item:last-child');
+    newTaskEl.style.opacity = '0';
+    newTaskEl.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+        newTaskEl.style.transition = 'all 0.3s ease';
+        newTaskEl.style.opacity = '1';
+        newTaskEl.style.transform = 'translateY(0)';
+    }, 10);
+}
+
+function toggleTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        task.completed = !task.completed;
+        if (task.completed) {
+            totalTasksCompleted++;
+            localStorage.setItem('totalTasksCompleted', totalTasksCompleted);
+        }
+        saveTasks();
+        renderTasks();
+        updateTaskStats();
+        updateAchievements();
+    }
+}
+
+function deleteTask(id) {
+    if (confirm('Delete this task?')) {
+        tasks = tasks.filter(t => t.id !== id);
+        saveTasks();
+        renderTasks();
+        updateTaskStats();
+    }
+}
+
+function renderTasks() {
+    if (!tasksList) return;
+    
+    tasksList.innerHTML = tasks.map(task => `
+        <div class="task-item ${task.completed ? 'completed' : ''}" data-id="${task.id}">
+            <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${task.id})">
+            <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
+            <button class="task-delete" onclick="deleteTask(${task.id})">×</button>
+        </div>
+    `).join('');
+}
+
+function updateTaskStats() {
+    if (!taskStats) return;
+    
+    const pending = tasks.filter(t => !t.completed).length;
+    const completed = tasks.filter(t => t.completed).length;
+    
+    taskStats.innerHTML = `
+        <span class="stat">${pending} pending</span>
+        <span class="stat completed">${completed} completed</span>
+    `;
+}
+
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// NOTES FUNCTIONALITY
+function initNotes() {
+    renderNotes();
+    
+    addNoteBtn.addEventListener('click', addNote);
+    newNoteTitle.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            addNote();
+        }
+    });
+}
+
+function addNote() {
+    const title = newNoteTitle.value.trim();
+    const content = newNoteContent.value.trim();
+    
+    if (!title && !content) return;
+    
+    const note = {
+        id: Date.now(),
+        title: title || 'Untitled',
+        content: content,
+        createdAt: new Date().toISOString()
+    };
+    
+    notes.unshift(note);
+    saveNotes();
+    renderNotes();
+    newNoteTitle.value = '';
+    newNoteContent.value = '';
+    newNoteTitle.focus();
+}
+
+function deleteNote(id) {
+    if (confirm('Delete this note?')) {
+        notes = notes.filter(n => n.id !== id);
+        saveNotes();
+        renderNotes();
+    }
+}
+
+function renderNotes() {
+    if (!notesGrid) return;
+    
+    notesGrid.innerHTML = notes.map(note => `
+        <div class="note-card" data-id="${note.id}">
+            <button class="note-delete" onclick="deleteNote(${note.id})">×</button>
+            <div class="note-title">${note.title}</div>
+            <div class="note-content">${note.content}</div>
+        </div>
+    `).join('');
+}
+
+function saveNotes() {
+    localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+// ACHIEVEMENTS FUNCTIONALITY
+function updateAchievements() {
+    if (!achievementsGrid) return;
+    
+    const achievements = [
+        { id: 1, title: 'Task Starter', desc: 'Complete 10 tasks', target: 10 },
+        { id: 2, title: 'Productivity Pro', desc: 'Complete 50 tasks', target: 50 },
+        { id: 3, title: 'Master Solver', desc: 'Complete 100 tasks', target: 100 }
+    ];
+    
+    achievementsGrid.innerHTML = achievements.map(ach => {
+        const unlocked = totalTasksCompleted >= ach.target;
+        const progress = Math.min((totalTasksCompleted / ach.target) * 100, 100);
         
-        ctaBtn.addEventListener('mouseleave', () => {
-            ctaBtn.style.transform = '';
-        });
-    }
-
-    // Step card hover interactions
-    document.querySelectorAll('.step-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-16px) scale(1.02)';
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0) scale(1)';
-        });
-    });
+        return `
+            <div class="achievement-card ${unlocked ? 'unlocked' : 'locked'}">
+                <div class="achievement-icon">${getAchievementIcon(ach.id)}</div>
+                <h3>${ach.title}</h3>
+                <p>${ach.desc}</p>
+                <div class="achievement-progress">
+                    <div class="progress-bar ${unlocked ? '' : 'locked'}" style="width: ${progress}%"></div>
+                </div>
+            </div>
+        `;
+    }).join('');
 }
-// === ACHIEVEMENTS SECTION ANIMATIONS ===
-if (document.querySelector('.achievements-preview-section')) {
-    // Achievement counters
-    const achievementNumbers = document.querySelectorAll('.achievement-number');
-    achievementNumbers.forEach(number => {
-        const target = parseInt(number.dataset.target);
-        let current = 0;
-        const increment = target / 60;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            number.textContent = Math.floor(current);
-        }, 25);
-    });
 
-    // Progress bars animation
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                document.querySelectorAll('.progress-bar').forEach(bar => {
-                    bar.style.setProperty('--fill', bar.style.getPropertyValue('--fill'));
-                });
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-
-    const progressSection = document.querySelector('.progress-preview');
-    if (progressSection) observer.observe(progressSection);
-
-    // Staggered fade-in
-    const fadeElements = document.querySelectorAll('.fade-in-up');
-    const observer2 = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                const delay = entry.target.dataset.delay * 1000;
-                setTimeout(() => {
-                    entry.target.style.animation = 'fadeInUpAnim 0.8s cubic-bezier(0.4,0,0.2,1) forwards';
-                }, delay * 1000);
-            }
-        });
-    });
-
-    fadeElements.forEach(el => observer2.observe(el));
+function getAchievementIcon(id) {
+    const icons = ['🎯', '🚀', '🏆'];
+    return icons[id - 1];
 }
-// === REWARDS SECTION ANIMATIONS ===
-if (document.querySelector('.rewards-preview-section')) {
-    // Points counter animation
-    const pointsCounter = document.querySelector('.points-counter');
-    if (pointsCounter) {
-        const target = parseInt(pointsCounter.dataset.target);
-        let current = 0;
-        const increment = target / 80;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            pointsCounter.textContent = Math.floor(current).toLocaleString();
-        }, 20);
-    }
 
-    // Rank progression bars
-    const rankCards = document.querySelectorAll('.rank-card');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.querySelectorAll('.rank-fill').forEach((fill, index) => {
-                    setTimeout(() => {
-                        fill.style.width = fill.style.getPropertyValue('--fill');
-                    }, index * 150);
-                });
-                observer.unobserve(entry.target);
-            }
-        });
-    });
-
-    rankCards.forEach(card => observer.observe(card));
-
-    // Point rules hover effects
-    document.querySelectorAll('.rule-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            const icon = card.querySelector('.rule-icon');
-            icon.style.transform = 'scale(1.2) rotate(5deg)';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            const icon = card.querySelector('.rule-icon');
-            icon.style.transform = '';
-        });
-    });
-
-    // Rank card click effects
-    rankCards.forEach((card, index) => {
-        card.addEventListener('click', () => {
-            card.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                card.style.transform = '';
-            }, 200);
-        });
-    });
+// PROFILE FUNCTIONALITY
+function initProfile() {
+    userNameInput.value = profile.name;
+    userEmailInput.value = profile.email;
+    updateAvatar();
+    
+    saveProfileBtn.addEventListener('click', saveProfile);
 }
-// === ABOUT SOLVER SECTION ANIMATIONS ===
-if (document.querySelector('.about-solver-section')) {
-    // Philosophy cards stagger animation
-    const philosophyCards = document.querySelectorAll('.philosophy-card');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                const delay = entry.target.dataset.delay * 1000;
-                setTimeout(() => {
-                    entry.target.style.animation = 'fadeInUpAnim 0.8s cubic-bezier(0.4,0,0.2,1) forwards';
-                }, delay * 1000);
-                observer.unobserve(entry.target);
-            }
-        });
-    });
 
-    philosophyCards.forEach(card => observer.observe(card));
-
-    // Founder card hover effect
-    const founderCard = document.querySelector('.founder-card');
-    if (founderCard) {
-        founderCard.addEventListener('mouseenter', () => {
-            founderCard.style.transform = 'translateY(-8px)';
-        });
-        
-        founderCard.addEventListener('mouseleave', () => {
-            founderCard.style.transform = '';
-        });
-    }
-
-    // Floating elements continuous animation
-    const floatCircles = document.querySelectorAll('.float-circle');
-    floatCircles.forEach((circle, index) => {
-        circle.animate([
-            { transform: 'translateY(0px) scale(1)', filter: 'blur(0px)' },
-            { transform: 'translateY(-15px) scale(1.1)', filter: 'blur(1px)' },
-            { transform: 'translateY(0px) scale(1)', filter: 'blur(0px)' }
-        ], {
-            duration: 4000 + (index * 500),
-            iterations: Infinity,
-            easing: 'cubic-bezier(0.4,0,0.2,1)'
-        });
-    });
+function saveProfile() {
+    profile.name = userNameInput.value.trim();
+    profile.email = userEmailInput.value.trim();
+    
+    localStorage.setItem('profile', JSON.stringify(profile));
+    updateAvatar();
+    
+    // Visual feedback
+    saveProfileBtn.textContent = 'Saved!';
+    saveProfileBtn.style.background = '#10b981';
+    setTimeout(() => {
+        saveProfileBtn.textContent = 'Save Profile';
+        saveProfileBtn.style.background = '';
+    }, 2000);
 }
-// === FOOTER SUBTLE ANIMATIONS ===
-document.addEventListener('DOMContentLoaded', function() {
-    // Footer fade-in on load
-    const footer = document.querySelector('.premium-footer');
-    if (footer) {
-        footer.style.opacity = '0';
-        footer.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-            footer.style.transition = 'all 0.8s cubic-bezier(0.4,0,0.2,1)';
-            footer.style.opacity = '1';
-            footer.style.transform = 'translateY(0)';
-        }, 100);
-    }
 
-    // Link hover scale effect
-    document.querySelectorAll('.footer-links a, .social-link').forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            link.style.transform = 'scale(1.05)';
-        });
-        link.addEventListener('mouseleave', () => {
-            link.style.transform = 'scale(1)';
-        });
+function updateAvatar() {
+    if (profile.name) {
+        const initials = profile.name
+            .split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .slice(0, 2);
+        avatarInitials.textContent = initials;
+    } else {
+        avatarInitials.textContent = 'UI';
+    }
+}
+
+// Close dropdown on route change
+window.addEventListener('popstate', () => {
+    dropdownMenu.classList.add('hidden');
+    dropdownMenu.classList.remove('show');
+});
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        dropdownMenu.classList.add('hidden');
+        dropdownMenu.classList.remove('show');
     });
 });
