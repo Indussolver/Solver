@@ -1275,3 +1275,333 @@ body {
         justify-content: center;
     }
 }
+/* === TASK FEATURE SECTION === */
+.task-feature-section {
+    padding: 160px 0;
+    background: linear-gradient(180deg, #fafbff 0%, #f0f4ff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.task-feature-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(102,126,234,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16,185,129,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #1e293b 0%, #3b82f6 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+    font-size: 20px;
+    color: #64748b;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Steps */
+.steps-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto 120px;
+    position: relative;
+    z-index: 1;
+}
+
+.step-card {
+    flex: 1;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 28px;
+    padding: 48px 40px;
+    text-align: center;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+}
+
+.step-card:hover {
+    transform: translateY(-16px);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+}
+
+.step-number {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 12px 24px rgba(59,130,246,0.3);
+}
+
+.step-content h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 16px;
+}
+
+.step-content p {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.step-illustration {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Step Illustrations */
+.task-input-preview {
+    width: 240px;
+    height: 48px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #94a3b8;
+}
+
+.task-list-preview {
+    width: 240px;
+    max-height: 100px;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.preview-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.preview-checkbox.checked {
+    background: #10b981;
+    border-color: #059669;
+    position: relative;
+}
+
+.preview-checkbox.checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.task-preview-item span {
+    font-size: 14px;
+    color: #374151;
+}
+
+.completion-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.check-circle {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0 16px 32px rgba(16,185,129,0.3);
+}
+
+.streak-badge {
+    background: rgba(59,130,246,0.1);
+    color: #3b82f6;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Benefits */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto 120px;
+}
+
+.benefit-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 40px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 24px;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+}
+
+.benefit-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+}
+
+.benefit-card h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.benefit-card p {
+    color: #64748b;
+    font-size: 16px;
+}
+
+/* CTA */
+.section-cta {
+    text-align: center;
+    padding: 80px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-content h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 32px;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 48px;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 
+        0 25px 50px rgba(59,130,246,0.4),
+        0 0 0 1px rgba(255,255,255,0.2) inset;
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    backdrop-filter: blur(20px);
+}
+
+.cta-button:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 35px 70px rgba(59,130,246,0.5),
+        0 0 0 1px rgba(255,255,255,0.3) inset;
+}
+
+.cta-arrow {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .cta-arrow {
+    transform: translateX(8px);
+}
+
+/* Animations */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+@keyframes fadeInUpAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .steps-container {
+        flex-direction: column;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .cta-content h3 {
+        font-size: 26px;
+    }
+}
