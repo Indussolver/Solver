@@ -3,96 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achievements - Solver by Indus</title>
+    <title>Achievements - Solver</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo-link">
-                <div class="logo">
-                    <div class="logo-main">Solver</div>
-                    <div class="logo-sub">by Indus</div>
-                </div>
-            </a>
-            <div class="nav-links">
-                <a href="task.html" class="nav-item">Task</a>
-                <a href="achievements.html" class="nav-item active">Achievement</a>
-                <a href="rewards.html" class="nav-item">Rewards</a>
-                <a href="account.html" class="nav-item">Account</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Achievements Dashboard -->
-    <main class="achievements-dashboard fade-in">
+<body class="page-transition">
+    <header class="header">
         <div class="container">
-            <!-- Header -->
-            <div class="dash-header">
-                <h1 class="dash-title">Achievements</h1>
-                <p class="dash-subtitle">Your productivity journey visualized</p>
+            <h1 class="brand">Solver</h1>
+            <button class="menu-toggle" aria-label="Menu">
+                <span class="three-dots">⋮</span>
+            </button>
+            <nav class="dropdown-menu hidden">
+                <a href="index.html" class="menu-item">Home</a>
+                <a href="task.html" class="menu-item">Task</a>
+                <a href="notes.html" class="menu-item">Notes</a>
+                <a href="accounts.html" class="menu-item">Account</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Achievements</h1>
+                <p class="page-subtitle">Your productivity milestones</p>
             </div>
 
-            <!-- Stats Cards -->
-            <div class="stats-grid">
-                <div class="stat-card" data-metric="tasks">
-                    <div class="stat-icon">📝</div>
-                    <div class="stat-number" data-value="127">0</div>
-                    <div class="stat-label">Total Tasks</div>
-                </div>
-                <div class="stat-card" data-metric="completion">
-                    <div class="stat-icon">🎯</div>
-                    <div class="stat-number" data-value="89">0</div>
-                    <div class="stat-label">% Complete</div>
-                </div>
-                <div class="stat-card" data-metric="streak">
-                    <div class="stat-icon">🔥</div>
-                    <div class="stat-number" data-value="12">0</div>
-                    <div class="stat-label">Streak</div>
-                </div>
-            </div>
-
-            <!-- Streak Progress -->
-            <div class="streak-section">
-                <div class="streak-card">
-                    <div class="streak-header">
-                        <h3>Current Streak</h3>
-                        <div class="streak-flame">
-                            <span>🔥</span><span>🔥</span><span>🔥</span>
-                        </div>
-                    </div>
-                    <div class="streak-progress">
-                        <div class="progress-ring">
-                            <svg width="140" height="140">
-                                <circle class="progress-ring-bg" cx="70" cy="70" r="60"></circle>
-                                <circle class="progress-ring-fill" cx="70" cy="70" r="60"></circle>
-                            </svg>
-                            <div class="progress-text">
-                                <span class="progress-number">12</span>
-                                <span class="progress-label">days</span>
-                            </div>
-                        </div>
+            <div class="achievements-grid" id="achievementsGrid">
+                <div class="achievement-card locked">
+                    <div class="achievement-icon">🎯</div>
+                    <h3>Task Starter</h3>
+                    <p>Complete 10 tasks</p>
+                    <div class="achievement-progress">
+                        <div class="progress-bar locked"></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Milestones -->
-            <div class="milestones-section">
-                <h3 class="section-title">Your Productivity Journey</h3>
-                <div class="milestones-grid">
-                    <div class="milestone unlocked">
-                        <div class="milestone-icon">🥉</div>
-                        <span>10 Tasks</span>
+                <div class="achievement-card locked">
+                    <div class="achievement-icon">🚀</div>
+                    <h3>Productivity Pro</h3>
+                    <p>Complete 50 tasks</p>
+                    <div class="achievement-progress">
+                        <div class="progress-bar locked"></div>
                     </div>
-                    <div class="milestone unlocked">
-                        <div class="milestone-icon">🥈</div>
-                        <span>50 Tasks</span>
-                    </div>
-                    <div class="milestone locked">
-                        <div class="milestone-icon">🥇</div>
-                        <span>100 Tasks</span>
+                </div>
+                <div class="achievement-card locked">
+                    <div class="achievement-icon">🏆</div>
+                    <h3>Master Solver</h3>
+                    <p>Complete 100 tasks</p>
+                    <div class="achievement-progress">
+                        <div class="progress-bar locked"></div>
                     </div>
                 </div>
             </div>
