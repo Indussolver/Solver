@@ -1,3 +1,13 @@
+/* 🔥 NUCLEAR GAP KILLER - MOST IMPORTANT */
+* { margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; }
+html, body { margin: 0 !important; padding: 0 !important; height: 100% !important; }
+
+/* SPECIFIC GAP FIXES */
+.section-cta { margin: 0 !important; padding: 20px 0 !important; }
+.achievements-preview-section { padding-top: 0 !important; margin-top: -80px !important; }
+.task-feature-section { padding-bottom: 40px !important; }
+section { margin-bottom: -20px !important; }
+
 * {
     margin: 0;
     padding: 0;
@@ -2692,19 +2702,4 @@ section:not(:last-child) {
 .rewards-preview-section,
 .about-solver-section {
     padding: 80px 0 !important;  /* Consistent 80px top+bottom */
-}
-/* 🔥 SCREENSHOT GAP INSTANT FIX */
-.section-cta { margin: 40px 0 !important; padding: 40px 0 !important; }
-.achievements-preview-section { padding-top: 20px !important; }
-.task-feature-section .section-cta { margin-bottom: 0 !important; }
-.achievements-preview-section { margin-top: -60px !important; }
-
-/* हर section के gaps fix */
-section + section { margin-top: -40px !important; }
-.cta-button { margin-top: 20px !important; }
-
-/* Mobile भी perfect */
-@media (max-width: 768px) {
-    .section-cta { margin: 20px 0 !important; }
-    .achievements-preview-section { margin-top: -30px !important; }
 }
