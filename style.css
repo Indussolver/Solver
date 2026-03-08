@@ -2693,3 +2693,20 @@ section:not(:last-child) {
 .about-solver-section {
     padding: 80px 0 !important;  /* Consistent 80px top+bottom */
 }
+/* 🔥 OUR MISSION ↔ FOUNDER GAP ZERO FIX */
+.mission-block { margin-bottom: 32px !important; }
+.philosophy-grid { margin-bottom: 32px !important; }
+.founder-section { margin-top: 0 !important; padding-top: 40px !important; }
+
+/* ALL SECTIONS PERFECT SPACING */
+.about-solver-section .mission-block,
+.about-solver-section .philosophy-grid,
+.about-solver-section .founder-section {
+    margin-bottom: 24px !important;
+}
+
+/* MOBILE भी perfect */
+@media (max-width: 768px) {
+    .mission-block, .philosophy-grid { margin-bottom: 20px !important; }
+    .founder-section { margin-top: -10px !important; }
+}
