@@ -2676,3 +2676,20 @@ body {
         justify-content: center;
     }
 }
+/* Complete Fix - सभी devices के लिए */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;  /* Right scroll भी हटेगा */
+}
+
+section:not(:last-child) {
+    margin-bottom: -40px;  /* Negative margin = sections overlap slightly */
+}
+
+.task-feature-section,
+.achievements-preview-section,
+.rewards-preview-section,
+.about-solver-section {
+    padding: 80px 0 !important;  /* Consistent 80px top+bottom */
+}
