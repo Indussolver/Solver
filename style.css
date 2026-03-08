@@ -1277,7 +1277,7 @@ body {
 }
 /* === TASK FEATURE SECTION === */
 .task-feature-section {
-    padding: 160px 0;
+    padding: 120px 0;
     background: linear-gradient(180deg, #fafbff 0%, #f0f4ff 100%);
     position: relative;
     overflow: hidden;
@@ -1299,7 +1299,7 @@ body {
 /* Section Header */
 .section-header {
     text-align: center;
-    margin-bottom: 100px;
+    margin-bottom: 48px;
     position: relative;
     z-index: 1;
 }
@@ -1326,9 +1326,9 @@ body {
 /* Steps */
 .steps-container {
     display: flex;
-    gap: 40px;
+    gap: 32px;
     max-width: 1200px;
-    margin: 0 auto 120px;
+    margin: 0 auto 48px;
     position: relative;
     z-index: 1;
 }
@@ -1483,10 +1483,10 @@ body {
 /* Benefits */
 .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
     max-width: 1000px;
-    margin: 0 auto 120px;
+    margin: 0 auto 48px;
 }
 
 .benefit-card {
