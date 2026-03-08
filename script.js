@@ -153,62 +153,211 @@ function saveTasks() {
 }
 
 // NOTES FUNCTIONALITY
-function initNotes() {
+// NOTES FUNCTIONALITY ONLY
+// Add this to your existing script.js file, replacing any existing notes code
+
+// Notes data
+let notes = JSON.parse(localStorage.getItem('notes')) || [];
+let currentNoteToDelete = null;
+let noteTitleInput, noteContentInput, noteModal, cancelConfirmModal, deleteConfirmModal;
+
+// DOM Elements (Notes specific)
+const createNoteBtn = document.getElementById('createNoteBtn');
+const noteModalEl = document.getElementById('noteModal');
+const cancelNoteBtn = document.getElementById('cancelNoteBtn');
+const saveNoteBtn = document.getElementById('saveNoteBtn');
+const cancelConfirmModalEl = document.getElementById('cancelConfirmModal');
+const deleteConfirmModalEl = document.getElementById('deleteConfirmModal');
+const continueWritingBtn = document.getElementById('continueWritingBtn');
+const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+const notesGrid = document.getElementById('notesGrid');
+
+// Initialize notes page
+function initNotesPage() {
+    // Get input elements
+    noteTitleInput = document.getElementById('noteTitle');
+    noteContentInput = document.getElementById('noteContent');
+    noteModal = noteModalEl;
+    cancelConfirmModal = cancelConfirmModalEl;
+    deleteConfirmModal = deleteConfirmModalEl;
+    
+    // Render existing notes
     renderNotes();
     
-    addNoteBtn.addEventListener('click', addNote);
-    newNoteTitle.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            addNote();
-        }
+    // Event listeners
+    createNoteBtn.addEventListener('click', openNoteEditor);
+    cancelNoteBtn.addEventListener('click', showCancelConfirm);
+    saveNoteBtn.addEventListener('click', saveNote);
+    continueWritingBtn.addEventListener('click', closeCancelConfirm);
+    confirmCancelBtn.addEventListener('click', cancelNote);
+    
+    cancelDeleteBtn.addEventListener('click', closeDeleteConfirm);
+    confirmDeleteBtn.addEventListener('click', deleteNote);
+    
+    // Close modals on escape key
+    document.addEventListener('keydown', handleKeydown);
+    
+    // Close modals on outside click
+    noteModal.addEventListener('click', (e) => {
+        if (e.target === noteModal) showCancelConfirm();
     });
 }
 
-function addNote() {
-    const title = newNoteTitle.value.trim();
-    const content = newNoteContent.value.trim();
+// Open note editor modal
+function openNoteEditor() {
+    noteTitleInput.value = '';
+    noteContentInput.value = '';
+    noteTitleInput.focus();
+    noteModal.classList.remove('hidden');
+    noteModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close note editor (with confirmation)
+function showCancelConfirm() {
+    noteModal.classList.remove('show');
+    cancelConfirmModal.classList.remove('hidden');
+    cancelConfirmModal.classList.add('show');
+}
+
+// Close cancel confirmation and return to editor
+function closeCancelConfirm() {
+    cancelConfirmModal.classList.remove('show');
+    cancelConfirmModal.classList.add('hidden');
+    noteModal.classList.add('show');
+}
+
+// Actually cancel and close editor
+function cancelNote() {
+    closeCancelConfirm();
+    closeNoteModal();
+}
+
+// Save note
+function saveNote() {
+    const title = noteTitleInput.value.trim();
+    const content = noteContentInput.value.trim();
     
-    if (!title && !content) return;
+    if (!title && !content) {
+        closeNoteModal();
+        return;
+    }
     
     const note = {
         id: Date.now(),
         title: title || 'Untitled',
         content: content,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
     };
     
     notes.unshift(note);
     saveNotes();
     renderNotes();
-    newNoteTitle.value = '';
-    newNoteContent.value = '';
-    newNoteTitle.focus();
+    closeNoteModal();
+    
+    // Success feedback
+    createNoteBtn.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        createNoteBtn.style.transform = '';
+    }, 150);
 }
 
-function deleteNote(id) {
-    if (confirm('Delete this note?')) {
-        notes = notes.filter(n => n.id !== id);
+// Delete note
+function deleteNote() {
+    if (currentNoteToDelete) {
+        notes = notes.filter(note => note.id !== currentNoteToDelete);
         saveNotes();
         renderNotes();
+        closeDeleteConfirm();
+        currentNoteToDelete = null;
     }
 }
 
-function renderNotes() {
-    if (!notesGrid) return;
-    
-    notesGrid.innerHTML = notes.map(note => `
-        <div class="note-card" data-id="${note.id}">
-            <button class="note-delete" onclick="deleteNote(${note.id})">×</button>
-            <div class="note-title">${note.title}</div>
-            <div class="note-content">${note.content}</div>
-        </div>
-    `).join('');
+// Show delete confirmation
+function showDeleteConfirm(noteId) {
+    currentNoteToDelete = noteId;
+    deleteConfirmModal.classList.remove('hidden');
+    deleteConfirmModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
 }
 
+// Close delete confirmation
+function closeDeleteConfirm() {
+    deleteConfirmModal.classList.remove('show');
+    deleteConfirmModal.classList.add('hidden');
+    document.body.style.overflow = '';
+    currentNoteToDelete = null;
+}
+
+// Close note modal
+function closeNoteModal() {
+    noteModal.classList.remove('show');
+    noteModal.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+// Render notes grid
+function renderNotes() {
+    if (notesGrid) {
+        if (notes.length === 0) {
+            notesGrid.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <h3>No notes yet</h3>
+                    <p>Click the + button to create your first note</p>
+                </div>
+            `;
+        } else {
+            notesGrid.innerHTML = notes.map(note => `
+                <div class="note-card" data-id="${note.id}">
+                    <button class="note-delete" onclick="showDeleteConfirm(${note.id})">×</button>
+                    <h3>${escapeHtml(note.title)}</h3>
+                    <p>${escapeHtml(note.content) || 'No content'}</p>
+                </div>
+            `).join('');
+        }
+    }
+}
+
+// Save notes to localStorage
 function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
+
+// Utility functions
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function handleKeydown(e) {
+    // Escape key closes modals
+    if (e.key === 'Escape') {
+        if (noteModal.classList.contains('show')) {
+            showCancelConfirm();
+        } else if (cancelConfirmModal.classList.contains('show')) {
+            closeCancelConfirm();
+        } else if (deleteConfirmModal.classList.contains('show')) {
+            closeDeleteConfirm();
+        }
+    }
+    
+    // Enter + Shift saves note in editor
+    if (e.key === 'Enter' && e.shiftKey && noteModal.classList.contains('show')) {
+        e.preventDefault();
+        saveNote();
+    }
+}
+
+// Initialize notes page if on notes.html
+if (window.location.pathname.includes('notes.html')) {
+    document.addEventListener('DOMContentLoaded', initNotesPage);
+}
+
 
 // ACHIEVEMENTS FUNCTIONALITY
 function updateAchievements() {
