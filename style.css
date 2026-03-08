@@ -2693,3 +2693,16 @@ section:not(:last-child) {
 .about-solver-section {
     padding: 80px 0 !important;  /* Consistent 80px top+bottom */
 }
+/* Gap fixing code */
+section, .container, div[class*="section"] {
+    min-height: auto !important;
+    height: auto !important;
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+header, footer {
+    min-height: auto !important;
+}
