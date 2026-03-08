@@ -436,3 +436,27 @@ if (document.querySelector('.about-solver-section')) {
         });
     });
 }
+// === FOOTER SUBTLE ANIMATIONS ===
+document.addEventListener('DOMContentLoaded', function() {
+    // Footer fade-in on load
+    const footer = document.querySelector('.premium-footer');
+    if (footer) {
+        footer.style.opacity = '0';
+        footer.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            footer.style.transition = 'all 0.8s cubic-bezier(0.4,0,0.2,1)';
+            footer.style.opacity = '1';
+            footer.style.transform = 'translateY(0)';
+        }, 100);
+    }
+
+    // Link hover scale effect
+    document.querySelectorAll('.footer-links a, .social-link').forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            link.style.transform = 'scale(1.05)';
+        });
+        link.addEventListener('mouseleave', () => {
+            link.style.transform = 'scale(1)';
+        });
+    });
+});
