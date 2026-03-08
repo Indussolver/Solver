@@ -1,13 +1,3 @@
-/* 🔥 NUCLEAR GAP KILLER - MOST IMPORTANT */
-* { margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; }
-html, body { margin: 0 !important; padding: 0 !important; height: 100% !important; }
-
-/* SPECIFIC GAP FIXES */
-.section-cta { margin: 0 !important; padding: 20px 0 !important; }
-.achievements-preview-section { padding-top: 0 !important; margin-top: -80px !important; }
-.task-feature-section { padding-bottom: 40px !important; }
-section { margin-bottom: -20px !important; }
-
 * {
     margin: 0;
     padding: 0;
