@@ -1,6 +1,5 @@
 // Global variables
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-let notes = JSON.parse(localStorage.getItem('notes')) || [];
 let profile = JSON.parse(localStorage.getItem('profile')) || { name: '', email: '' };
 let totalTasksCompleted = parseInt(localStorage.getItem('totalTasksCompleted')) || 0;
 
@@ -10,7 +9,7 @@ const dropdownMenu = document.querySelector('.dropdown-menu');
 const tasksList = document.getElementById('tasksList');
 const newTaskInput = document.getElementById('newTask');
 const addTaskBtn = document.getElementById('addTask');
-const notesGrid = document.getElementById('notesGrid');
+
 const newNoteTitle = document.getElementById('newNoteTitle');
 const newNoteContent = document.getElementById('newNoteContent');
 const addNoteBtn = document.getElementById('addNote');
