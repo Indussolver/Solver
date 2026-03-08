@@ -2676,3 +2676,11 @@ body {
         justify-content: center;
     }
 }
+/* Sabse safe aur premium gap fix */
+section, .section, .container, [class*="section"] {
+    display: block !important;
+    min-height: unset !important;
+    height: auto !important;
+    padding: 60px 20px !important; /* Upar-niche 60px aur side mein 20px space */
+    margin: 0 auto !important;
+}
