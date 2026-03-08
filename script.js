@@ -334,3 +334,61 @@ if (document.querySelector('.achievements-preview-section')) {
 
     fadeElements.forEach(el => observer2.observe(el));
 }
+// === REWARDS SECTION ANIMATIONS ===
+if (document.querySelector('.rewards-preview-section')) {
+    // Points counter animation
+    const pointsCounter = document.querySelector('.points-counter');
+    if (pointsCounter) {
+        const target = parseInt(pointsCounter.dataset.target);
+        let current = 0;
+        const increment = target / 80;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            pointsCounter.textContent = Math.floor(current).toLocaleString();
+        }, 20);
+    }
+
+    // Rank progression bars
+    const rankCards = document.querySelectorAll('.rank-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.rank-fill').forEach((fill, index) => {
+                    setTimeout(() => {
+                        fill.style.width = fill.style.getPropertyValue('--fill');
+                    }, index * 150);
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    rankCards.forEach(card => observer.observe(card));
+
+    // Point rules hover effects
+    document.querySelectorAll('.rule-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const icon = card.querySelector('.rule-icon');
+            icon.style.transform = 'scale(1.2) rotate(5deg)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            const icon = card.querySelector('.rule-icon');
+            icon.style.transform = '';
+        });
+    });
+
+    // Rank card click effects
+    rankCards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            card.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 200);
+        });
+    });
+}
