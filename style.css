@@ -127,11 +127,11 @@ body {
 
 /* Hero */
 .hero {
-    min-height: 100vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     padding-top: 120px;
-    padding-bottom: 120px;
+    padding-bottom: 80px;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -227,7 +227,7 @@ body {
 
 /* Features */
 .features {
-    padding: 160px 0;
+    padding: 80px 0;
 }
 
 .feature-grid {
@@ -298,9 +298,9 @@ body {
 
 /* Page Content */
 .page-content {
-    min-height: 100vh;
-    padding-top: 140px;
-    padding-bottom: 120px;
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 80px;
 }
 
 .page-title {
@@ -609,8 +609,8 @@ body {
 }
 /* === TASK PAGE STYLES (ADD ONLY) === */
 .task-main {
-    padding: 160px 0 100px;
-    min-height: 100vh;
+    padding: 120px 0 80px;
+    min-height: 80vh;
 }
 
 .task-title {
@@ -817,8 +817,8 @@ body {
 
 /* Achievements Dashboard */
 .achievements-dashboard {
-    padding: 160px 0 120px;
-    min-height: 100vh;
+    padding: 100px 0 80px;
+    min-height: 80vh;
 }
 
 .dash-header {
@@ -1027,8 +1027,8 @@ body {
 
 /* Account Dashboard */
 .account-dashboard {
-    padding: 160px 0 120px;
-    min-height: 100vh;
+    padding: 100px 0 80px;
+    min-height: 80vh;
 }
 
 .dashboard-grid {
@@ -1277,7 +1277,7 @@ body {
 }
 /* === TASK FEATURE SECTION === */
 .task-feature-section {
-    padding: 160px 0;
+    padding: 100px 0;
     background: linear-gradient(180deg, #fafbff 0%, #f0f4ff 100%);
     position: relative;
     overflow: hidden;
@@ -2174,7 +2174,7 @@ body {
 }
 /* === ABOUT SOLVER SECTION === */
 .about-solver-section {
-    padding: 160px 0 200px;
+    padding: 100px 0 120px;
     background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
     position: relative;
     overflow: hidden;
