@@ -392,3 +392,47 @@ if (document.querySelector('.rewards-preview-section')) {
         });
     });
 }
+// === ABOUT SOLVER SECTION ANIMATIONS ===
+if (document.querySelector('.about-solver-section')) {
+    // Philosophy cards stagger animation
+    const philosophyCards = document.querySelectorAll('.philosophy-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay * 1000;
+                setTimeout(() => {
+                    entry.target.style.animation = 'fadeInUpAnim 0.8s cubic-bezier(0.4,0,0.2,1) forwards';
+                }, delay * 1000);
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+
+    philosophyCards.forEach(card => observer.observe(card));
+
+    // Founder card hover effect
+    const founderCard = document.querySelector('.founder-card');
+    if (founderCard) {
+        founderCard.addEventListener('mouseenter', () => {
+            founderCard.style.transform = 'translateY(-8px)';
+        });
+        
+        founderCard.addEventListener('mouseleave', () => {
+            founderCard.style.transform = '';
+        });
+    }
+
+    // Floating elements continuous animation
+    const floatCircles = document.querySelectorAll('.float-circle');
+    floatCircles.forEach((circle, index) => {
+        circle.animate([
+            { transform: 'translateY(0px) scale(1)', filter: 'blur(0px)' },
+            { transform: 'translateY(-15px) scale(1.1)', filter: 'blur(1px)' },
+            { transform: 'translateY(0px) scale(1)', filter: 'blur(0px)' }
+        ], {
+            duration: 4000 + (index * 500),
+            iterations: Infinity,
+            easing: 'cubic-bezier(0.4,0,0.2,1)'
+        });
+    });
+}
