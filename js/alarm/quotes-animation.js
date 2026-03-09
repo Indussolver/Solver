@@ -20,25 +20,31 @@ card.style.transform = "translateY(0)"
 }
 
 window.addEventListener("scroll",revealCards)
-const bigQuotes = document.querySelectorAll(".big-quote")
+const quotes = document.querySelectorAll(".big-quote");
 
-function revealBigQuotes(){
+function revealQuotes() {
 
-const trigger = window.innerHeight * 0.85
+const triggerPoint = window.innerHeight * 0.85;
 
-bigQuotes.forEach(q => {
+quotes.forEach((quote) => {
 
-const top = q.getBoundingClientRect().top
+const quoteTop = quote.getBoundingClientRect().top;
 
-if(top < trigger){
+if (quoteTop < triggerPoint) {
 
-q.style.opacity = "1"
-q.style.transform = "translateY(0)"
-
-}
-
-})
+quote.style.opacity = "1";
+quote.style.transform = "translateY(0)";
 
 }
 
-window.addEventListener("scroll", revealBigQuotes)
+});
+
+}
+
+/* run on scroll */
+
+window.addEventListener("scroll", revealQuotes);
+
+/* run once when page loads */
+
+window.addEventListener("load", revealQuotes);
