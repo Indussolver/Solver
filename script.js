@@ -153,6 +153,93 @@ function saveTasks() {
 }
 
 // NOTES FUNCTIONALITY
+
+
+// ACHIEVEMENTS FUNCTIONALITY
+function updateAchievements() {
+    if (!achievementsGrid) return;
+    
+    const achievements = [
+        { id: 1, title: 'Task Starter', desc: 'Complete 10 tasks', target: 10 },
+        { id: 2, title: 'Productivity Pro', desc: 'Complete 50 tasks', target: 50 },
+        { id: 3, title: 'Master Solver', desc: 'Complete 100 tasks', target: 100 }
+    ];
+    
+    achievementsGrid.innerHTML = achievements.map(ach => {
+        const unlocked = totalTasksCompleted >= ach.target;
+        const progress = Math.min((totalTasksCompleted / ach.target) * 100, 100);
+        
+        return `
+            <div class="achievement-card ${unlocked ? 'unlocked' : 'locked'}">
+                <div class="achievement-icon">${getAchievementIcon(ach.id)}</div>
+                <h3>${ach.title}</h3>
+                <p>${ach.desc}</p>
+                <div class="achievement-progress">
+                    <div class="progress-bar ${unlocked ? '' : 'locked'}" style="width: ${progress}%"></div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function getAchievementIcon(id) {
+    const icons = ['🎯', '🚀', '🏆'];
+    return icons[id - 1];
+}
+
+// PROFILE FUNCTIONALITY
+function initProfile() {
+    userNameInput.value = profile.name;
+    userEmailInput.value = profile.email;
+    updateAvatar();
+    
+    saveProfileBtn.addEventListener('click', saveProfile);
+}
+
+function saveProfile() {
+    profile.name = userNameInput.value.trim();
+    profile.email = userEmailInput.value.trim();
+    
+    localStorage.setItem('profile', JSON.stringify(profile));
+    updateAvatar();
+    
+    // Visual feedback
+    saveProfileBtn.textContent = 'Saved!';
+    saveProfileBtn.style.background = '#10b981';
+    setTimeout(() => {
+        saveProfileBtn.textContent = 'Save Profile';
+        saveProfileBtn.style.background = '';
+    }, 2000);
+}
+
+function updateAvatar() {
+    if (profile.name) {
+        const initials = profile.name
+            .split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .slice(0, 2);
+        avatarInitials.textContent = initials;
+    } else {
+        avatarInitials.textContent = 'UI';
+    }
+}
+
+// Close dropdown on route change
+window.addEventListener('popstate', () => {
+    dropdownMenu.classList.add('hidden');
+    dropdownMenu.classList.remove('show');
+});
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        dropdownMenu.classList.add('hidden');
+        dropdownMenu.classList.remove('show');
+    });
+});
 // COMPLETE NOTES SYSTEM - FIXED & PREMIUM
 // Replace ALL existing notes code with this
 
@@ -489,91 +576,4 @@ document.addEventListener('DOMContentLoaded', () => {
             dropdown.classList.toggle('hidden');
         };
     }
-});
-
-
-// ACHIEVEMENTS FUNCTIONALITY
-function updateAchievements() {
-    if (!achievementsGrid) return;
-    
-    const achievements = [
-        { id: 1, title: 'Task Starter', desc: 'Complete 10 tasks', target: 10 },
-        { id: 2, title: 'Productivity Pro', desc: 'Complete 50 tasks', target: 50 },
-        { id: 3, title: 'Master Solver', desc: 'Complete 100 tasks', target: 100 }
-    ];
-    
-    achievementsGrid.innerHTML = achievements.map(ach => {
-        const unlocked = totalTasksCompleted >= ach.target;
-        const progress = Math.min((totalTasksCompleted / ach.target) * 100, 100);
-        
-        return `
-            <div class="achievement-card ${unlocked ? 'unlocked' : 'locked'}">
-                <div class="achievement-icon">${getAchievementIcon(ach.id)}</div>
-                <h3>${ach.title}</h3>
-                <p>${ach.desc}</p>
-                <div class="achievement-progress">
-                    <div class="progress-bar ${unlocked ? '' : 'locked'}" style="width: ${progress}%"></div>
-                </div>
-            </div>
-        `;
-    }).join('');
-}
-
-function getAchievementIcon(id) {
-    const icons = ['🎯', '🚀', '🏆'];
-    return icons[id - 1];
-}
-
-// PROFILE FUNCTIONALITY
-function initProfile() {
-    userNameInput.value = profile.name;
-    userEmailInput.value = profile.email;
-    updateAvatar();
-    
-    saveProfileBtn.addEventListener('click', saveProfile);
-}
-
-function saveProfile() {
-    profile.name = userNameInput.value.trim();
-    profile.email = userEmailInput.value.trim();
-    
-    localStorage.setItem('profile', JSON.stringify(profile));
-    updateAvatar();
-    
-    // Visual feedback
-    saveProfileBtn.textContent = 'Saved!';
-    saveProfileBtn.style.background = '#10b981';
-    setTimeout(() => {
-        saveProfileBtn.textContent = 'Save Profile';
-        saveProfileBtn.style.background = '';
-    }, 2000);
-}
-
-function updateAvatar() {
-    if (profile.name) {
-        const initials = profile.name
-            .split(' ')
-            .map(n => n[0])
-            .join('')
-            .toUpperCase()
-            .slice(0, 2);
-        avatarInitials.textContent = initials;
-    } else {
-        avatarInitials.textContent = 'UI';
-    }
-}
-
-// Close dropdown on route change
-window.addEventListener('popstate', () => {
-    dropdownMenu.classList.add('hidden');
-    dropdownMenu.classList.remove('show');
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        dropdownMenu.classList.add('hidden');
-        dropdownMenu.classList.remove('show');
-    });
 });
