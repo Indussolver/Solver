@@ -150,3 +150,100 @@ font-weight:600;
 100%{transform:translateY(0)}
 
 }
+/* SUCCESS QUOTES SECTION */
+
+.success-quotes{
+
+padding:180px 20px;
+
+text-align:center;
+
+}
+
+
+
+.success-container{
+
+max-width:1000px;
+
+margin:auto;
+
+}
+
+
+
+/* SECTION TITLE */
+
+.success-title{
+
+font-size:48px;
+
+margin-bottom:120px;
+
+color:#94a3b8;
+
+}
+
+
+
+/* BIG QUOTES */
+
+.big-quotes{
+
+display:flex;
+
+flex-direction:column;
+
+gap:120px;
+
+}
+
+
+
+/* SINGLE QUOTE */
+
+.big-quote{
+
+opacity:0;
+
+transform:translateY(50px);
+
+transition:all 1s ease;
+
+}
+
+
+
+/* GRADIENT TEXT */
+
+.big-quote p{
+
+font-size:42px;
+
+font-weight:700;
+
+line-height:1.4;
+
+background:linear-gradient(90deg,#38bdf8,#6366f1);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+
+
+/* AUTHOR */
+
+.big-quote span{
+
+display:block;
+
+margin-top:20px;
+
+color:#cbd5f5;
+
+font-size:18px;
+
+}
