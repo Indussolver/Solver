@@ -1,46 +1,47 @@
-import { setAlarm } from "./core.js";
-
-const openBtn = document.getElementById("openAlarm");
-const modal = document.getElementById("alarmModal");
-const closeBtn = document.getElementById("closeAlarm");
-
-const saveBtn = document.getElementById("saveAlarm");
-
-const alarmDate = document.getElementById("alarmDate");
-const alarmTime = document.getElementById("alarmTime");
-
+const modal = document.getElementById("alarmModal")
+const openBtn = document.getElementById("openAlarm")
+const closeBtn = document.getElementById("closeModal")
 
 openBtn.onclick = ()=>{
 
-modal.style.display="flex";
+modal.style.display="flex"
 
 }
 
 closeBtn.onclick = ()=>{
 
-modal.style.display="none";
+modal.style.display="none"
 
 }
 
 
 
-saveBtn.onclick = ()=>{
+const picker = flatpickr("#alarmPicker",{
 
-const date = alarmDate.value;
-const time = alarmTime.value;
+enableTime:true,
 
-if(!date || !time){
+dateFormat:"Y-m-d H:i",
 
-alert("Select date and time");
+time_24hr:true
 
-return;
+})
+
+
+
+document.getElementById("saveAlarm").onclick = ()=>{
+
+const time = picker.selectedDates[0]
+
+if(!time){
+
+alert("Select time")
+
+return
 
 }
 
-setAlarm(date,time,()=>{});
+alert("Alarm set for "+time.toLocaleString())
 
-modal.style.display="none";
-
-alert("Alarm Created");
+modal.style.display="none"
 
 }
