@@ -36,19 +36,57 @@ Build disciplined mornings.
 </p>
 
 
-<div class="alarm-card">
+<section class="alarm-ui">
 
-<div class="alarm-toggle">
+<h1 class="alarm-heading">Smart Alarm</h1>
 
-<span>Alarm</span>
+<p class="alarm-subheading">Make your day</p>
 
-<label class="switch">
+</section>
 
-<input type="checkbox" id="alarmToggle">
 
-<span class="slider"></span>
 
-</label>
+<button class="floating-add" id="openAlarm">
+
++
+
+</button>
+
+
+
+<div class="alarm-modal" id="alarmModal">
+
+<div class="alarm-popup">
+
+<div class="popup-header">
+
+<h2>Create Alarm</h2>
+
+<span id="closeAlarm" class="close-btn">✕</span>
+
+</div>
+
+
+<div class="popup-body">
+
+<label>Set Time</label>
+
+<input type="time" id="alarmTime" class="time-input">
+
+<label>Select Date</label>
+
+<input type="date" id="alarmDate" class="date-input">
+
+</div>
+
+
+<div class="popup-actions">
+
+<button id="saveAlarm" class="save-btn">Save Alarm</button>
+
+</div>
+
+</div>
 
 </div>
 
