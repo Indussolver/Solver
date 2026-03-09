@@ -1,25 +1,50 @@
-const reveals = document.querySelectorAll(".reveal");
+const cards = document.querySelectorAll(".quote-card")
 
-function revealOnScroll(){
+function revealCards(){
 
-for(let i=0;i<reveals.length;i++){
+const trigger = window.innerHeight * 0.85
 
-const windowHeight = window.innerHeight;
+cards.forEach(card => {
 
-const revealTop = reveals[i].getBoundingClientRect().top;
+const top = card.getBoundingClientRect().top
 
-const revealPoint = 120;
+if(top < trigger){
 
-if(revealTop < windowHeight - revealPoint){
-
-reveals[i].classList.add("active");
-
-}
+card.style.opacity = "1"
+card.style.transform = "translateY(0)"
 
 }
 
+})
+
 }
 
-window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("scroll",revealCards)
+const quotes = document.querySelectorAll(".big-quote");
 
-window.addEventListener("load", revealOnScroll);
+function revealQuotes() {
+
+const triggerPoint = window.innerHeight * 0.85;
+
+quotes.forEach((quote) => {
+
+const quoteTop = quote.getBoundingClientRect().top;
+
+if (quoteTop < triggerPoint) {
+
+quote.style.opacity = "1";
+quote.style.transform = "translateY(0)";
+
+}
+
+});
+
+}
+
+/* run on scroll */
+
+window.addEventListener("scroll", revealQuotes);
+
+/* run once when page loads */
+
+window.addEventListener("load", revealQuotes);
