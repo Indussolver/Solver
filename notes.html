@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="page-transition">
+<body class="notes-body">
     <header class="header">
         <div class="container">
             <h1 class="brand">Solver</h1>
@@ -25,59 +25,75 @@
         </div>
     </header>
 
-    <main class="notes-page">
+    <main class="notes-main">
         <div class="container">
-            <div class="page-header">
-                <h1 class="page-title">Notes</h1>
-                <p class="page-subtitle">Capture your thoughts instantly</p>
+            <div class="notes-header">
+                <h1 class="notes-title">Solver Notes</h1>
+                <p class="notes-subtitle">
+                    Designed for you<span class="gradient-text">...</span>
+                </p>
             </div>
-
-            <div class="notes-grid" id="notesGrid">
-                <!-- Notes will be dynamically populated -->
-            </div>
+            <div class="notes-grid" id="notesGrid"></div>
         </div>
     </main>
 
     <!-- Floating Action Button -->
-    <button class="fab" id="createNoteBtn" aria-label="Create new note">+</button>
+    <button class="fab" id="newNoteBtn">+</button>
 
     <!-- Note Editor Modal -->
-    <div class="note-modal hidden" id="noteModal">
+    <div class="modal hidden" id="noteModal">
         <div class="note-editor">
-            <div class="note-editor-header">
-                <h2>Create Note</h2>
+            <div class="editor-header">
+                <h2>New Note</h2>
                 <div class="editor-actions">
-                    <button class="btn btn-cancel" id="cancelNoteBtn">Cancel</button>
-                    <button class="btn btn-save" id="saveNoteBtn">Save</button>
+                    <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                    <button class="btn btn-save" id="saveBtn">Save</button>
                 </div>
             </div>
-            <div class="note-editor-body">
-                <input type="text" id="noteTitle" class="note-title-input" placeholder="Note Title">
-                <textarea id="noteContent" class="note-content-textarea" placeholder="Write your note here..."></textarea>
+            <div class="editor-body">
+                <input type="text" id="noteTitle" class="input-title" placeholder="Title">
+                <textarea id="noteContent" class="input-content" placeholder="Write your note..."></textarea>
+                
+                <!-- Checklist Section -->
+                <div class="checklist-section">
+                    <div class="section-header">
+                        <h3>Checklist</h3>
+                        <button class="btn-add-checklist" id="addChecklistBtn">Add Item</button>
+                    </div>
+                    <div class="checklist-items" id="checklistItems"></div>
+                </div>
+
+                <!-- Reminder Section -->
+                <div class="reminder-section">
+                    <button class="btn-reminder" id="reminderBtn">
+                        🔔 Set Reminder
+                    </button>
+                    <input type="datetime-local" id="reminderInput" class="input-reminder hidden">
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Cancel Confirmation Modal -->
-    <div class="confirm-modal hidden" id="cancelConfirmModal">
+    <!-- Cancel Confirmation -->
+    <div class="modal hidden" id="cancelModal">
         <div class="confirm-dialog">
             <div class="confirm-icon">?</div>
-            <h3>Are you sure?</h3>
-            <p>Are you sure you want to cancel writing this note? All unsaved content will be lost.</p>
-            <div class="confirm-actions">
-                <button class="btn btn-secondary" id="continueWritingBtn">Continue Writing</button>
-                <button class="btn btn-cancel-confirm" id="confirmCancelBtn">Yes, Cancel</button>
+            <h3>Cancel Note?</h3>
+            <p>Are you sure you want to cancel writing this note?</p>
+            <div class="confirm-buttons">
+                <button class="btn btn-continue" id="continueBtn">Continue Writing</button>
+                <button class="btn btn-confirm-cancel" id="confirmCancelBtn">Yes, Cancel</button>
             </div>
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
-    <div class="confirm-modal hidden" id="deleteConfirmModal">
+    <!-- Delete Confirmation -->
+    <div class="modal hidden" id="deleteModal">
         <div class="confirm-dialog">
             <div class="confirm-icon">🗑️</div>
             <h3>Delete Note?</h3>
             <p>This action cannot be undone.</p>
-            <div class="confirm-actions">
+            <div class="confirm-buttons">
                 <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
                 <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
             </div>
