@@ -9,93 +9,95 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="notes-body">
-    <header class="header">
-        <div class="container">
-            <h1 class="brand">Solver</h1>
-            <button class="menu-toggle" aria-label="Menu">
-                <span class="three-dots">⋮</span>
-            </button>
-            <nav class="dropdown-menu hidden">
-                <a href="index.html" class="menu-item">Home</a>
-                <a href="task.html" class="menu-item">Task</a>
-                <a href="achievement.html" class="menu-item">Achievement</a>
-                <a href="accounts.html" class="menu-item">Account</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="notes-main">
-        <div class="container">
-            <div class="notes-header">
-                <h1 class="notes-title">Solver Notes</h1>
-                <p class="notes-subtitle">
-                    Designed for you<span class="gradient-text">...</span>
-                </p>
+<body>
+    <!-- Notes List View -->
+    <div id="notesListView" class="view active">
+        <header class="header">
+            <div class="container">
+                <h1 class="brand">Solver</h1>
+                <button class="menu-toggle" aria-label="Menu">
+                    <span class="three-dots">⋮</span>
+                </button>
+                <nav class="dropdown-menu hidden">
+                    <a href="index.html" class="menu-item">Home</a>
+                    <a href="task.html" class="menu-item">Task</a>
+                    <a href="achievement.html" class="menu-item">Achievement</a>
+                    <a href="accounts.html" class="menu-item">Account</a>
+                </nav>
             </div>
-            <div class="notes-grid" id="notesGrid"></div>
-        </div>
-    </main>
+        </header>
 
-    <!-- Floating Action Button -->
-    <button class="fab" id="newNoteBtn">+</button>
-
-    <!-- Note Editor Modal -->
-    <div class="modal hidden" id="noteModal">
-        <div class="note-editor">
-            <div class="editor-header">
-                <h2>New Note</h2>
-                <div class="editor-actions">
-                    <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
-                    <button class="btn btn-save" id="saveBtn">Save</button>
+        <main class="notes-main">
+            <div class="container">
+                <div class="hero-header">
+                    <h1 class="hero-title">Solver Notes</h1>
+                    <p class="hero-subtitle">
+                        Designed for you<span class="gradient-glow">...</span>
+                    </p>
+                </div>
+                <div class="notes-grid" id="notesGrid">
+                    <!-- Notes will be rendered here -->
                 </div>
             </div>
-            <div class="editor-body">
-                <input type="text" id="noteTitle" class="input-title" placeholder="Title">
-                <textarea id="noteContent" class="input-content" placeholder="Write your note..."></textarea>
-                
-                <!-- Checklist Section -->
-                <div class="checklist-section">
-                    <div class="section-header">
-                        <h3>Checklist</h3>
-                        <button class="btn-add-checklist" id="addChecklistBtn">Add Item</button>
-                    </div>
-                    <div class="checklist-items" id="checklistItems"></div>
-                </div>
+        </main>
 
-                <!-- Reminder Section -->
-                <div class="reminder-section">
-                    <button class="btn-reminder" id="reminderBtn">
-                        🔔 Set Reminder
-                    </button>
-                    <input type="datetime-local" id="reminderInput" class="input-reminder hidden">
-                </div>
-            </div>
-        </div>
+        <!-- Floating Action Button -->
+        <button class="fab" id="newNoteBtn" title="New Note">+</button>
     </div>
 
-    <!-- Cancel Confirmation -->
-    <div class="modal hidden" id="cancelModal">
-        <div class="confirm-dialog">
-            <div class="confirm-icon">?</div>
-            <h3>Cancel Note?</h3>
-            <p>Are you sure you want to cancel writing this note?</p>
-            <div class="confirm-buttons">
-                <button class="btn btn-continue" id="continueBtn">Continue Writing</button>
-                <button class="btn btn-confirm-cancel" id="confirmCancelBtn">Yes, Cancel</button>
+    <!-- Full Screen Editor View -->
+    <div id="editorView" class="view editor-view hidden">
+        <div class="editor-overlay" id="editorOverlay"></div>
+        <div class="editor-container">
+            <!-- Editor Header -->
+            <div class="editor-header">
+                <button class="btn btn-icon btn-cancel" id="editorCancelBtn" title="Cancel">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
+                <div class="editor-title-input-wrapper">
+                    <input type="text" id="editorTitle" class="editor-title" placeholder="Untitled">
+                </div>
+                <button class="btn btn-primary" id="editorSaveBtn">Save</button>
+            </div>
+
+            <!-- Editor Content -->
+            <div class="editor-content">
+                <textarea id="editorContent" class="editor-textarea" placeholder="Write your note..."></textarea>
+                
+                <!-- Checklist -->
+                <div class="checklist-container" id="checklistContainer">
+                    <div class="checklist-header">
+                        <span>Checklist</span>
+                        <button class="btn-add-checklist" id="addChecklistItem">+</button>
+                    </div>
+                </div>
+
+                <!-- Reminder -->
+                <div class="reminder-container">
+                    <button class="btn-reminder-toggle" id="reminderToggle">
+                        🔔 Add Reminder
+                    </button>
+                    <div class="reminder-picker hidden" id="reminderPicker">
+                        <div class="picker-inputs">
+                            <input type="date" id="reminderDate" class="picker-date">
+                            <input type="time" id="reminderTime" class="picker-time">
+                        </div>
+                        <button class="btn-reminder-save" id="saveReminder">Set Reminder</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Delete Confirmation -->
-    <div class="modal hidden" id="deleteModal">
-        <div class="confirm-dialog">
+    <div class="confirm-modal hidden" id="deleteConfirm">
+        <div class="confirm-content">
             <div class="confirm-icon">🗑️</div>
             <h3>Delete Note?</h3>
             <p>This action cannot be undone.</p>
-            <div class="confirm-buttons">
-                <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
-                <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            <div class="confirm-actions">
+                <button class="btn btn-secondary" id="cancelDelete">Cancel</button>
+                <button class="btn btn-danger" id="confirmDelete">Delete</button>
             </div>
         </div>
     </div>
