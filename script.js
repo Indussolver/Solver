@@ -1,5 +1,6 @@
 // Global variables
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let notes = JSON.parse(localStorage.getItem('notes')) || [];
 let profile = JSON.parse(localStorage.getItem('profile')) || { name: '', email: '' };
 let totalTasksCompleted = parseInt(localStorage.getItem('totalTasksCompleted')) || 0;
 
@@ -9,7 +10,7 @@ const dropdownMenu = document.querySelector('.dropdown-menu');
 const tasksList = document.getElementById('tasksList');
 const newTaskInput = document.getElementById('newTask');
 const addTaskBtn = document.getElementById('addTask');
-
+const notesGrid = document.getElementById('notesGrid');
 const newNoteTitle = document.getElementById('newNoteTitle');
 const newNoteContent = document.getElementById('newNoteContent');
 const addNoteBtn = document.getElementById('addNote');
@@ -152,209 +153,294 @@ function saveTasks() {
 }
 
 // NOTES FUNCTIONALITY
-// NOTES FUNCTIONALITY ONLY
-// Add this to your existing script.js file, replacing any existing notes code
+// NOTES SYSTEM - COMPLETE FUNCTIONALITY
+// Replace all existing notes code with this
 
-// Notes data
-let notes = JSON.parse(localStorage.getItem('notes')) || [];
-let currentNoteToDelete = null;
-let noteTitleInput, noteContentInput, noteModal, cancelConfirmModal, deleteConfirmModal;
-
-// DOM Elements (Notes specific)
-const createNoteBtn = document.getElementById('createNoteBtn');
-const noteModalEl = document.getElementById('noteModal');
-const cancelNoteBtn = document.getElementById('cancelNoteBtn');
-const saveNoteBtn = document.getElementById('saveNoteBtn');
-const cancelConfirmModalEl = document.getElementById('cancelConfirmModal');
-const deleteConfirmModalEl = document.getElementById('deleteConfirmModal');
-const continueWritingBtn = document.getElementById('continueWritingBtn');
-const confirmCancelBtn = document.getElementById('confirmCancelBtn');
-const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-const notesGrid = document.getElementById('notesGrid');
-
-// Initialize notes page
-function initNotesPage() {
-    // Get input elements
-    noteTitleInput = document.getElementById('noteTitle');
-    noteContentInput = document.getElementById('noteContent');
-    noteModal = noteModalEl;
-    cancelConfirmModal = cancelConfirmModalEl;
-    deleteConfirmModal = deleteConfirmModalEl;
-    
-    // Render existing notes
-    renderNotes();
-    
-    // Event listeners
-    createNoteBtn.addEventListener('click', openNoteEditor);
-    cancelNoteBtn.addEventListener('click', showCancelConfirm);
-    saveNoteBtn.addEventListener('click', saveNote);
-    continueWritingBtn.addEventListener('click', closeCancelConfirm);
-    confirmCancelBtn.addEventListener('click', cancelNote);
-    
-    cancelDeleteBtn.addEventListener('click', closeDeleteConfirm);
-    confirmDeleteBtn.addEventListener('click', deleteNote);
-    
-    // Close modals on escape key
-    document.addEventListener('keydown', handleKeydown);
-    
-    // Close modals on outside click
-    noteModal.addEventListener('click', (e) => {
-        if (e.target === noteModal) showCancelConfirm();
-    });
-}
-
-// Open note editor modal
-function openNoteEditor() {
-    noteTitleInput.value = '';
-    noteContentInput.value = '';
-    noteTitleInput.focus();
-    noteModal.classList.remove('hidden');
-    noteModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
-
-// Close note editor (with confirmation)
-function showCancelConfirm() {
-    noteModal.classList.remove('show');
-    cancelConfirmModal.classList.remove('hidden');
-    cancelConfirmModal.classList.add('show');
-}
-
-// Close cancel confirmation and return to editor
-function closeCancelConfirm() {
-    cancelConfirmModal.classList.remove('show');
-    cancelConfirmModal.classList.add('hidden');
-    noteModal.classList.add('show');
-}
-
-// Actually cancel and close editor
-function cancelNote() {
-    closeCancelConfirm();
-    closeNoteModal();
-}
-
-// Save note
-function saveNote() {
-    const title = noteTitleInput.value.trim();
-    const content = noteContentInput.value.trim();
-    
-    if (!title && !content) {
-        closeNoteModal();
-        return;
+class SolverNotes {
+    constructor() {
+        this.notes = JSON.parse(localStorage.getItem('notes')) || [];
+        this.currentNoteId = null;
+        this.checklistItems = [];
+        this.reminderTime = null;
+        
+        this.init();
     }
-    
-    const note = {
-        id: Date.now(),
-        title: title || 'Untitled',
-        content: content,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-    };
-    
-    notes.unshift(note);
-    saveNotes();
-    renderNotes();
-    closeNoteModal();
-    
-    // Success feedback
-    createNoteBtn.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        createNoteBtn.style.transform = '';
-    }, 150);
-}
 
-// Delete note
-function deleteNote() {
-    if (currentNoteToDelete) {
-        notes = notes.filter(note => note.id !== currentNoteToDelete);
-        saveNotes();
-        renderNotes();
-        closeDeleteConfirm();
-        currentNoteToDelete = null;
+    init() {
+        this.bindEvents();
+        this.renderNotes();
+        this.requestNotificationPermission();
     }
-}
 
-// Show delete confirmation
-function showDeleteConfirm(noteId) {
-    currentNoteToDelete = noteId;
-    deleteConfirmModal.classList.remove('hidden');
-    deleteConfirmModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
+    bindEvents() {
+        // FAB
+        document.getElementById('newNoteBtn').addEventListener('click', () => this.openEditor());
+        
+        // Editor
+        document.getElementById('saveBtn').addEventListener('click', () => this.saveNote());
+        document.getElementById('cancelBtn').addEventListener('click', () => this.showCancelConfirm());
+        document.getElementById('addChecklistBtn').addEventListener('click', () => this.addChecklistItem());
+        document.getElementById('reminderBtn').addEventListener('click', () => this.toggleReminder());
+        
+        // Confirmations
+        document.getElementById('continueBtn').addEventListener('click', () => this.hideCancelConfirm());
+        document.getElementById('confirmCancelBtn').addEventListener('click', () => this.cancelNote());
+        document.getElementById('cancelDeleteBtn').addEventListener('click', () => this.hideDeleteConfirm());
+        document.getElementById('confirmDeleteBtn').addEventListener('click', () => this.deleteNote());
+        
+        // Keyboard
+        document.addEventListener('keydown', (e) => this.handleKeydown(e));
+    }
 
-// Close delete confirmation
-function closeDeleteConfirm() {
-    deleteConfirmModal.classList.remove('show');
-    deleteConfirmModal.classList.add('hidden');
-    document.body.style.overflow = '';
-    currentNoteToDelete = null;
-}
+    openEditor(noteId = null) {
+        this.currentNoteId = noteId;
+        this.checklistItems = [];
+        this.reminderTime = null;
+        
+        if (noteId) {
+            const note = this.notes.find(n => n.id === noteId);
+            if (note) {
+                document.getElementById('noteTitle').value = note.title;
+                document.getElementById('noteContent').value = note.content;
+                this.checklistItems = note.checklist || [];
+                this.reminderTime = note.reminder;
+            }
+        } else {
+            document.getElementById('noteTitle').value = '';
+            document.getElementById('noteContent').value = '';
+        }
+        
+        this.renderChecklist();
+        this.updateReminderUI();
+        this.showModal('noteModal');
+    }
 
-// Close note modal
-function closeNoteModal() {
-    noteModal.classList.remove('show');
-    noteModal.classList.add('hidden');
-    document.body.style.overflow = '';
-}
+    saveNote() {
+        const title = document.getElementById('noteTitle').value.trim();
+        const content = document.getElementById('noteContent').value.trim();
+        
+        if (!title && !content && this.checklistItems.length === 0) return;
+        
+        const note = {
+            id: this.currentNoteId || Date.now(),
+            title: title || 'Untitled',
+            content: content,
+            checklist: this.checklistItems.filter(item => item.text.trim()),
+            reminder: this.reminderTime,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+        
+        if (this.currentNoteId) {
+            const index = this.notes.findIndex(n => n.id === this.currentNoteId);
+            this.notes[index] = note;
+        } else {
+            this.notes.unshift(note);
+        }
+        
+        this.saveToStorage();
+        this.renderNotes();
+        this.hideModal('noteModal');
+        
+        // Schedule reminder if set
+        if (this.reminderTime) {
+            this.scheduleReminder(note);
+        }
+    }
 
-// Render notes grid
-function renderNotes() {
-    if (notesGrid) {
-        if (notes.length === 0) {
-            notesGrid.innerHTML = `
+    addChecklistItem() {
+        const item = { id: Date.now(), text: '', checked: false };
+        this.checklistItems.push(item);
+        this.renderChecklist();
+    }
+
+    deleteChecklistItem(id) {
+        this.checklistItems = this.checklistItems.filter(item => item.id !== id);
+        this.renderChecklist();
+    }
+
+    toggleChecklistItem(id) {
+        const item = this.checklistItems.find(item => item.id === id);
+        if (item) item.checked = !item.checked;
+        this.renderChecklist();
+    }
+
+    renderChecklist() {
+        const container = document.getElementById('checklistItems');
+        container.innerHTML = this.checklistItems.map(item => `
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" 
+                       ${item.checked ? 'checked' : ''} 
+                       onchange="notes.toggleChecklistItem(${item.id})">
+                <input type="text" class="checklist-input" 
+                       value="${item.text}" 
+                       placeholder="Checklist item..."
+                       oninput="notes.updateChecklistItem(${item.id}, this.value)">
+                <button class="checklist-delete" onclick="notes.deleteChecklistItem(${item.id})">×</button>
+            </div>
+        `).join('');
+    }
+
+    updateChecklistItem(id, text) {
+        const item = this.checklistItems.find(item => item.id === id);
+        if (item) item.text = text;
+    }
+
+    toggleReminder() {
+        const input = document.getElementById('reminderInput');
+        const btn = document.getElementById('reminderBtn');
+        input.classList.toggle('hidden');
+        if (!input.classList.contains('hidden')) {
+            input.focus();
+        }
+    }
+
+    updateReminderUI() {
+        const input = document.getElementById('reminderInput');
+        const btn = document.getElementById('reminderBtn');
+        
+        if (this.reminderTime) {
+            input.value = this.reminderTime;
+        } else {
+            input.value = '';
+        }
+        
+        input.onchange = (e) => {
+            this.reminderTime = e.target.value;
+        };
+    }
+
+    showCancelConfirm() {
+        this.hideModal('noteModal');
+        this.showModal('cancelModal');
+    }
+
+    hideCancelConfirm() {
+        this.hideModal('cancelModal');
+        this.showModal('noteModal');
+    }
+
+    cancelNote() {
+        this.hideModal('cancelModal');
+        this.hideModal('noteModal');
+    }
+
+    showDeleteConfirm(noteId) {
+        this.currentNoteId = noteId;
+        this.showModal('deleteModal');
+    }
+
+    deleteNote() {
+        this.notes = this.notes.filter(note => note.id !== this.currentNoteId);
+        this.saveToStorage();
+        this.renderNotes();
+        this.hideModal('deleteModal');
+    }
+
+    renderNotes() {
+        const grid = document.getElementById('notesGrid');
+        if (this.notes.length === 0) {
+            grid.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-icon">📝</div>
                     <h3>No notes yet</h3>
-                    <p>Click the + button to create your first note</p>
+                    <p>Click + to create your first note</p>
                 </div>
             `;
         } else {
-            notesGrid.innerHTML = notes.map(note => `
-                <div class="note-card" data-id="${note.id}">
-                    <button class="note-delete" onclick="showDeleteConfirm(${note.id})">×</button>
-                    <h3>${escapeHtml(note.title)}</h3>
-                    <p>${escapeHtml(note.content) || 'No content'}</p>
+            grid.innerHTML = this.notes.map(note => `
+                <div class="note-card" onclick="notes.openEditor(${note.id})">
+                    <button class="note-delete" onclick="notes.showDeleteConfirm(${note.id}); event.stopPropagation()">×</button>
+                    <h3>${this.escapeHtml(note.title)}</h3>
+                    <p>${this.escapeHtml(note.content || 'No content')}${note.checklist && note.checklist.length ? `<br><small>• ${note.checklist.length} checklist items</small>` : ''}</p>
                 </div>
             `).join('');
         }
     }
-}
 
-// Save notes to localStorage
-function saveNotes() {
-    localStorage.setItem('notes', JSON.stringify(notes));
-}
+    showModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+        setTimeout(() => document.getElementById(id).classList.add('show'), 10);
+        document.body.style.overflow = 'hidden';
+    }
 
-// Utility functions
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
+    hideModal(id) {
+        const modal = document.getElementById(id);
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 300);
+    }
 
-function handleKeydown(e) {
-    // Escape key closes modals
-    if (e.key === 'Escape') {
-        if (noteModal.classList.contains('show')) {
-            showCancelConfirm();
-        } else if (cancelConfirmModal.classList.contains('show')) {
-            closeCancelConfirm();
-        } else if (deleteConfirmModal.classList.contains('show')) {
-            closeDeleteConfirm();
+    saveToStorage() {
+        localStorage.setItem('notes', JSON.stringify(this.notes));
+    }
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    requestNotificationPermission() {
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
         }
     }
-    
-    // Enter + Shift saves note in editor
-    if (e.key === 'Enter' && e.shiftKey && noteModal.classList.contains('show')) {
-        e.preventDefault();
-        saveNote();
+
+    scheduleReminder(note) {
+        if (!note.reminder || !('Notification' in window)) return;
+        
+        const reminderTime = new Date(note.reminder).getTime();
+        const now = Date.now();
+        
+        const timeUntil = reminderTime - now;
+        if (timeUntil > 0) {
+            setTimeout(() => {
+                if (Notification.permission === 'granted') {
+                    new Notification('Reminder from Solver Notes', {
+                        body: `${note.title}\n${note.content.substring(0, 100)}...`,
+                        icon: '/favicon.ico'
+                    });
+                }
+            }, timeUntil);
+        }
+    }
+
+    handleKeydown(e) {
+        if (e.key === 'Escape') {
+            if (document.getElementById('noteModal').classList.contains('show')) {
+                this.showCancelConfirm();
+            }
+        }
+        if (e.key === 'Enter' && e.ctrlKey) {
+            this.saveNote();
+        }
     }
 }
 
-// Initialize notes page if on notes.html
+// Initialize when DOM loads
 if (window.location.pathname.includes('notes.html')) {
-    document.addEventListener('DOMContentLoaded', initNotesPage);
+    document.addEventListener('DOMContentLoaded', () => {
+        window.notes = new SolverNotes();
+        
+        // Menu functionality (keep existing)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const dropdown = document.querySelector('.dropdown-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            dropdown.classList.toggle('show');
+            dropdown.classList.toggle('hidden');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.add('hidden');
+                dropdown.classList.remove('show');
+            }
+        });
+    });
 }
 
 
