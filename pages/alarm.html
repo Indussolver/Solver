@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Smart Alarm | Solver by Indus</title>
-
-<link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet" href="../css/alarm.css">
-
-</head>
-
-<body>
-
 <header class="navbar">
 
 <h1 class="logo">Solver by Indus</h1>
@@ -24,29 +7,18 @@
 </header>
 
 
-<section class="alarm-section">
 
-<h2 class="alarm-title">Smart Alarm</h2>
+<section class="alarm-page">
 
-<p class="alarm-subtitle">
+<h1 class="alarm-title">Smart Alarm</h1>
 
-Wake up with intention.  
-Build disciplined mornings.
-
-</p>
-
-
-<section class="alarm-ui">
-
-<h1 class="alarm-heading">Smart Alarm</h1>
-
-<p class="alarm-subheading">Make your day</p>
+<p class="alarm-tagline">Make your day</p>
 
 </section>
 
 
 
-<button class="floating-add" id="openAlarm">
+<button class="fab" id="openAlarm">
 
 +
 
@@ -54,74 +26,39 @@ Build disciplined mornings.
 
 
 
-<div class="alarm-modal" id="alarmModal">
+<div class="modal" id="alarmModal">
 
-<div class="alarm-popup">
+<div class="modal-content">
 
-<div class="popup-header">
+<div class="modal-header">
 
-<h2>Create Alarm</h2>
+<h2>Set Alarm</h2>
 
-<span id="closeAlarm" class="close-btn">✕</span>
-
-</div>
-
-
-<div class="popup-body">
-
-<label>Set Time</label>
-
-<input type="time" id="alarmTime" class="time-input">
-
-<label>Select Date</label>
-
-<input type="date" id="alarmDate" class="date-input">
+<span id="closeModal">✕</span>
 
 </div>
 
+<div class="modal-body">
 
-<div class="popup-actions">
-
-<button id="saveAlarm" class="save-btn">Save Alarm</button>
-
-</div>
+<input id="alarmPicker">
 
 </div>
 
-</div>
+<button id="saveAlarm" class="save-btn">
 
-
-<div class="alarm-inputs">
-
-<label>Date</label>
-<input type="date" id="alarmDate">
-
-<label>Time</label>
-<input type="time" id="alarmTime">
-
-</div>
-
-
-<button class="set-alarm" id="setAlarm">
-
-Create Alarm
+Save Alarm
 
 </button>
 
-
-<p class="alarm-status" id="alarmStatus">
-
-No alarm set
-
-</p>
+</div>
 
 </div>
 
-</section>
 
 
-<script src="../js/alarm.js"></script>
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script type="module" src="../js/alarm/ui.js"></script>
-</body>
-
-</html>
