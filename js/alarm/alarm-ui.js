@@ -1,40 +1,46 @@
-import { setAlarm, startAlarmChecker } from "./core.js";
+import { setAlarm } from "./core.js";
 
-const alarmToggle = document.getElementById("alarmToggle");
+const openBtn = document.getElementById("openAlarm");
+const modal = document.getElementById("alarmModal");
+const closeBtn = document.getElementById("closeAlarm");
+
+const saveBtn = document.getElementById("saveAlarm");
+
 const alarmDate = document.getElementById("alarmDate");
 const alarmTime = document.getElementById("alarmTime");
-const setAlarmBtn = document.getElementById("setAlarm");
-const status = document.getElementById("alarmStatus");
 
-function updateStatus(message){
 
-status.innerText = message;
+openBtn.onclick = ()=>{
+
+modal.style.display="flex";
+
+}
+
+closeBtn.onclick = ()=>{
+
+modal.style.display="none";
 
 }
 
-setAlarmBtn.addEventListener("click",()=>{
 
-if(!alarmToggle.checked){
 
-updateStatus("Turn on the alarm first");
-
-return;
-
-}
+saveBtn.onclick = ()=>{
 
 const date = alarmDate.value;
 const time = alarmTime.value;
 
 if(!date || !time){
 
-updateStatus("Select date and time");
+alert("Select date and time");
 
 return;
 
 }
 
-setAlarm(date,time,updateStatus);
+setAlarm(date,time,()=>{});
 
-});
+modal.style.display="none";
 
-startAlarmChecker(updateStatus);
+alert("Alarm Created");
+
+}
