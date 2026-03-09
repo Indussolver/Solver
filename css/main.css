@@ -305,91 +305,50 @@ transform:translateY(0);
 }
 
 }
-/* MORNING SYSTEM SECTION */
+/* WAKE UP SECTION */
 
-.morning-system{
+.wake-section{
 
 max-width:900px;
 margin:140px auto;
 padding:0 20px;
-text-align:center;
-
-animation:fadeUp 1s ease;
 
 }
 
-/* SMART ALARM SECTION */
+/* BLOCK */
 
-.morning-system{
+.wake-block{
 
-max-width:900px;
-
-margin:160px auto;
-
-padding:0 20px;
-
-text-align:center;
-
-animation:fadeUp 1s ease;
+margin-bottom:70px;
 
 }
 
 /* HEADING */
 
-.alarm-heading{
+.wake-heading{
 
-font-size:52px;
+font-size:36px;
+font-weight:700;
 
-font-weight:800;
+margin-bottom:16px;
 
-margin-bottom:40px;
-
-background:linear-gradient(90deg,#38bdf8,#22c55e);
+background:linear-gradient(90deg,#22c55e,#38bdf8);
 
 -webkit-background-clip:text;
-
 color:transparent;
-
-letter-spacing:1px;
 
 }
 
-/* DESCRIPTION */
+/* TEXT */
 
-.alarm-description{
+.wake-text{
 
-font-size:21px;
-
+font-size:20px;
 line-height:1.9;
 
-max-width:720px;
-
-margin:auto;
-
-margin-bottom:30px;
-
-background:linear-gradient(180deg,#cbd5f5,#94a3b8);
+background:linear-gradient(180deg,#e2e8f0,#94a3b8);
 
 -webkit-background-clip:text;
-
-color:transparent;
-
-}
-
-/* FINAL LINE */
-
-.alarm-description.final{
-
-font-size:23px;
-
-font-weight:600;
-
-margin-top:30px;
-
-background:linear-gradient(90deg,#e2e8f0,#94a3b8);
-
--webkit-background-clip:text;
-
 color:transparent;
 
 }
