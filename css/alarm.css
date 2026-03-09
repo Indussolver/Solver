@@ -47,47 +47,183 @@ margin-bottom:30px;
 animation:floatTitle 5s ease-in-out infinite;
 
 }
-/* QUOTES SECTION */
 
-.quotes-section{
 
-padding:140px 20px;
+/* INTRO */
 
-background:linear-gradient(
-180deg,
-#0f172a,
-#020617
-);
+.quotes-intro{
+
+font-size:20px;
+
+line-height:1.8;
+
+color:#cbd5f5;
+
+max-width:750px;
+
+margin:auto;
+
+margin-bottom:80px;
+
+}
+
+
+/* GRID */
+
+.quotes-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:35px;
+
+}
+
+
+/* CARD */
+
+.quote-card{
+
+background:#0f172a;
+
+padding:40px;
+
+border-radius:18px;
+
+text-align:left;
+
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+
+transition:.4s;
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+
+/* HOVER */
+
+.quote-card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 30px 70px rgba(0,0,0,0.7);
+
+}
+
+
+/* QUOTE TEXT */
+
+.quote-text{
+
+font-size:20px;
+
+line-height:1.6;
+
+margin-bottom:20px;
+
+}
+
+
+/* AUTHOR */
+
+.quote-author{
+
+color:#38bdf8;
+
+font-weight:600;
+
+}
+
+
+/* FLOAT TITLE */
+
+@keyframes floatTitle{
+
+0%{transform:translateY(0)}
+
+50%{transform:translateY(-6px)}
+
+100%{transform:translateY(0)}
+
+}
+/* SUCCESS QUOTES SECTION */
+
+.success-quotes{
+
+padding:180px 20px;
 
 text-align:center;
 
 }
 
-/* container */
 
-.quotes-container{
 
-max-width:900px;
+.success-container{
+
+max-width:1000px;
 
 margin:auto;
 
 }
 
-/* title */
 
-.quotes-title{
 
-font-size:38px;
+/* SECTION TITLE */
+
+.success-title{
+
+font-size:48px;
+
+margin-bottom:120px;
+
+color:#94a3b8;
+
+}
+
+
+
+/* BIG QUOTES */
+
+.big-quotes{
+
+display:flex;
+
+flex-direction:column;
+
+gap:120px;
+
+}
+
+
+
+/* SINGLE QUOTE */
+
+.big-quote{
+
+opacity:0;
+transform:translateY(60px);
+
+transition:opacity 1s ease, transform 1s ease;
+
+}
+
+
+
+/* GRADIENT TEXT */
+
+.big-quote p{
+
+font-size:42px;
 
 font-weight:700;
 
-margin-bottom:80px;
+line-height:1.4;
 
-background:linear-gradient(
-90deg,
-#38bdf8,
-#22c55e
-);
+background:linear-gradient(90deg,#38bdf8,#6366f1);
 
 -webkit-background-clip:text;
 
@@ -95,72 +231,18 @@ color:transparent;
 
 }
 
-/* quote card */
 
-.quote-card{
 
-background:rgba(255,255,255,0.03);
+/* AUTHOR */
 
-backdrop-filter:blur(10px);
-
-border-radius:20px;
-
-padding:40px;
-
-margin-bottom:40px;
-
-border:1px solid rgba(255,255,255,0.05);
-
-font-size:22px;
-
-line-height:1.6;
-
-color:#e2e8f0;
-
-transition:all .6s ease;
-
-}
-
-/* author */
-
-.quote-card span{
+.big-quote span{
 
 display:block;
 
 margin-top:20px;
 
-font-size:16px;
+color:#cbd5f5;
 
-color:#94a3b8;
-
-}
-
-/* hover glow */
-
-.quote-card:hover{
-
-transform:translateY(-8px);
-
-box-shadow:0 20px 60px rgba(0,0,0,0.6);
-
-}
-
-/* reveal animation */
-
-.reveal{
-
-opacity:0;
-
-transform:translateY(80px);
-
-transition:all 1s ease;
-
-}
-
-.reveal.active{
-
-opacity:1;
-
-transform:translateY(0);
+font-size:18px;
 
 }
