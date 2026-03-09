@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Alarm | Solver by Indus</title>
+
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/alarm.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<h1 class="logo">Solver by Indus</h1>
+
+<a class="back-home" href="../index.html">Home</a>
+
+</header>
+
+
+<section class="alarm-section">
+
+<h2 class="alarm-title">Smart Alarm</h2>
+
+<p class="alarm-subtitle">
+
+Wake up with intention.  
+Build disciplined mornings.
+
+</p>
+
+
+<div class="alarm-card">
+
+<div class="alarm-toggle">
+
+<span>Alarm</span>
+
+<label class="switch">
+
+<input type="checkbox" id="alarmToggle">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="alarm-inputs">
+
+<label>Date</label>
+<input type="date" id="alarmDate">
+
+<label>Time</label>
+<input type="time" id="alarmTime">
+
+</div>
+
+
+<button class="set-alarm" id="setAlarm">
+
+Create Alarm
+
+</button>
+
+
+<p class="alarm-status" id="alarmStatus">
+
+No alarm set
+
+</p>
+
+</div>
+
+</section>
+
+
+<script src="../js/alarm.js"></script>
+<script type="module" src="../js/alarm/ui.js"></script>
+</body>
+
+</html>
