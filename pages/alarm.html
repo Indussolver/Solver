@@ -1,101 +1,91 @@
-<header class="navbar">
-  <h1 class="logo">Solver by Indus</h1>
-  <a class="back-home" href="../index.html">Home</a>
-</header>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Smart Alarm — Solver by Indus</title>
 
+  <!-- Inline pre-hide to avoid FOUC (must be before external CSS) -->
+  <style>
+    /* Hide animated elements immediately to prevent flash-of-unstyled-content */
+    .quote-card, .big-quote { opacity: 0; transform: translateY(40px); }
+  </style>
 
-<section class="quotes-section">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="../css/alarm.css">
 
-<div class="quotes-container">
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
 
-<h1 class="quotes-title">
+  <header class="navbar">
+    <div class="brand">Solver <span>by Indus</span></div>
+    <nav class="nav">
+      <a class="nav-link" href="../index.html">Home</a>
+    </nav>
+  </header>
 
-Why Winning Your Morning Matters
+  <!-- HERO (keeps top identity) -->
+  <section class="hero-brief">
+    <h1 class="hero-title">Smart Alarm</h1>
+    <p class="hero-sub">Make your day before the world wakes up.</p>
+    <p class="hero-note">Smart Alarm helps you break the snooze loop and start your morning with clarity and action.</p>
+  </section>
 
-</h1>
+  <!-- WHY / QUOTES SECTION (Apple-style, premium) -->
+  <section class="quotes-section">
 
-<p class="quotes-intro">
+    <div class="quotes-container">
 
-Most people start their day in chaos.
+      <h2 class="quotes-title">Why Winning Your Morning Matters</h2>
 
-They wake up tired, hit the snooze button, scroll their phone, and begin the day already behind.
+      <p class="quotes-intro">
+        Most people start their day in chaos — they wake up tired, hit the snooze button, and open their phone.
+        The first hour sets the tone for everything that follows. Protecting it is not about motivation; it is about systems.
+        Smart Alarm is designed around one idea: win the morning, win the day.
+      </p>
 
-But successful people treat their mornings differently.  
-They protect their mornings because the first hour of the day often decides the direction of everything that follows.
+      <!-- GRID of small quote cards (first level) -->
+      <div class="quotes-grid">
+        <article class="quote-card">
+          <p class="quote-text">“Early to bed and early to rise makes a man healthy, wealthy and wise.”</p>
+          <span class="quote-author">Benjamin Franklin</span>
+        </article>
 
-Smart Alarm is built around this philosophy —  
-not just waking you up, but helping you **build discipline and control your mornings**.
+        <article class="quote-card">
+          <p class="quote-text">“I wake up at 3:45 AM every morning. The early hours give me the edge.”</p>
+          <span class="quote-author">Dwayne Johnson</span>
+        </article>
 
-</p>
+        <article class="quote-card">
+          <p class="quote-text">“I start my mornings before sunrise. Those quiet hours are where real focus happens.”</p>
+          <span class="quote-author">Tim Cook</span>
+        </article>
+      </div>
 
+      <!-- BIG impact quotes stacked vertically (Apple-style treat) -->
+      <div class="big-quotes">
+        <section class="big-quote">
+          <p>“Early to bed and early to rise<br>makes a man healthy, wealthy and wise.”</p>
+          <span class="big-author">— Benjamin Franklin</span>
+        </section>
 
+        <section class="big-quote">
+          <p>“Success isn't always about talent. It's about discipline. And mornings build discipline.”</p>
+          <span class="big-author">— Dwayne Johnson</span>
+        </section>
 
-<div class="quotes-grid">
+        <section class="big-quote">
+          <p>“The early hours are when the mind is at its sharpest. Protect them.”</p>
+          <span class="big-author">— Tim Cook</span>
+        </section>
+      </div>
 
+    </div>
+  </section>
 
-<div class="quote-card">
-
-<p class="quote-text">
-
-“Early to bed and early to rise makes a man healthy, wealthy and wise.”
-
-</p>
-
-<span class="quote-author">
-
-Benjamin Franklin
-
-</span>
-
-</div>
-
-
-
-<div class="quote-card">
-
-<p class="quote-text">
-
-“I wake up at 3:45 AM every morning.  
-Those quiet hours before sunrise give me the edge.”
-
-</p>
-
-<span class="quote-author">
-
-Dwayne Johnson
-
-</span>
-
-</div>
-
-
-
-<div class="quote-card">
-
-<p class="quote-text">
-
-“I start my mornings before sunrise.  
-Those early hours are where real focus happens.”
-
-</p>
-
-<span class="quote-author">
-
-Tim Cook
-
-</span>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<link rel="stylesheet" href="../css/alarm.css">
-
-<script src="../js/quotes-animation.js"></script>
+  <!-- JS last, use defer-like loading: include with src relative to pages/ -->
+  <script src="../js/quotes-animation.js" defer></script>
+</body>
+</html>
