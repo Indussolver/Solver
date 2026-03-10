@@ -46,21 +46,40 @@ color:#38bdf8;
 
 }
 
-/* NAV ICON STYLE */
 
-.nav-links{
+/* NAVBAR */
+
+.navbar{
 
 display:flex;
-
-gap:24px;
-
 align-items:center;
+justify-content:space-between;
+
+padding:18px 40px;
+
+background:#020617;
+
+border-bottom:1px solid rgba(255,255,255,0.05);
 
 }
 
-/* ICON ITEM */
 
-.nav-icon{
+/* MENU */
+
+.nav-menu{
+
+display:flex;
+
+align-items:center;
+
+gap:28px;
+
+}
+
+
+/* NAV ITEM */
+
+.nav-item{
 
 display:flex;
 
@@ -70,13 +89,18 @@ align-items:center;
 
 text-decoration:none;
 
-font-size:12px;
+font-size:11px;
+
+color:#94a3b8;
+
+transition:0.25s;
 
 }
 
-/* ICON IMAGE */
 
-.nav-icon img{
+/* ICON */
+
+.nav-icon{
 
 width:22px;
 
@@ -84,13 +108,14 @@ height:22px;
 
 margin-bottom:4px;
 
-filter:invert(80%);
+filter:invert(75%);
 
 }
 
+
 /* TEXT */
 
-.nav-icon span{
+.nav-item span{
 
 background:linear-gradient(180deg,#cbd5f5,#94a3b8);
 
@@ -100,17 +125,18 @@ color:transparent;
 
 }
 
+
 /* HOVER */
 
-.nav-icon:hover img{
+.nav-item:hover .nav-icon{
 
-filter:invert(60%) sepia(60%) saturate(500%) hue-rotate(170deg);
+filter:invert(60%) sepia(70%) saturate(400%) hue-rotate(170deg);
 
 }
 
-.nav-link:hover{
+.nav-item:hover span{
 
-color:white;
+color:#38bdf8;
 
 }
 
