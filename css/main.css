@@ -431,14 +431,13 @@ font-weight:800;
 
 line-height:1.4;
 
-/* GOLD GRADIENT */
+/* GREEN GRADIENT */
 
 background:linear-gradient(
 90deg,
-#facc15,
-#fde68a,
-#fbbf24,
-#facc15
+#22c55e,
+#4ade80,
+#16a34a
 );
 
 background-size:200% 200%;
