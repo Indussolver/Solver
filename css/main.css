@@ -374,15 +374,48 @@ max-width:720px;
 /* WAKE UP SECTION */
 
 .wake-section{
-max-width:900px;
+
+max-width:1200px;
+
 margin:140px auto;
+
 padding:0 20px;
+
+/* TWO COLUMN LAYOUT */
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:60px;
+
 }
 
+/* MOBILE RESPONSIVE */
+
+@media (max-width:768px){
+
+.wake-section{
+
+grid-template-columns:1fr;
+
+}
+
+.wake-block{
+
+max-width:100%;
+
+}
+
+}
 /* BLOCK */
 
 .wake-block{
+
 margin-bottom:70px;
+
+max-width:520px;
+
 }
 
 /* HEADING */
