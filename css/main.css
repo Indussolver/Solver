@@ -476,3 +476,79 @@ background-position:0% 50%;
 }
 
 }
+/* FOCUS TIMER SECTION */
+
+.focus-section{
+
+max-width:900px;
+
+margin:200px auto;
+
+padding:0 20px;
+
+opacity:0;
+
+transform:translateY(60px);
+
+transition:all 1.2s ease;
+
+}
+
+/* SHOW ON SCROLL */
+
+.focus-section.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+/* HEADING */
+
+.focus-heading{
+
+font-size:44px;
+
+font-weight:800;
+
+margin-bottom:25px;
+
+/* BLUE GRADIENT */
+
+background:linear-gradient(
+90deg,
+#38bdf8,
+#0ea5e9,
+#6366f1
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+/* TEXT */
+
+.focus-text{
+
+font-size:20px;
+
+line-height:1.9;
+
+max-width:720px;
+
+/* WHITE GRAY GRADIENT */
+
+background:linear-gradient(
+180deg,
+#e2e8f0,
+#94a3b8
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
