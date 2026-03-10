@@ -711,3 +711,65 @@ background-position:0% 50%;
 }
 
 }
+/* ACHIEVEMENT SECTION */
+
+.achievement-section{
+
+max-width:900px;
+
+margin:220px auto;
+
+padding:0 20px;
+
+}
+
+/* HEADING */
+
+.achievement-heading{
+
+font-size:46px;
+
+font-weight:800;
+
+margin-bottom:30px;
+
+/* PURPLE PINK GRADIENT */
+
+background:linear-gradient(
+90deg,
+#a855f7,
+#ec4899,
+#f43f5e
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+/* TEXT */
+
+.achievement-text{
+
+font-size:20px;
+
+line-height:1.9;
+
+margin-bottom:20px;
+
+/* SOFT SILVER GRADIENT */
+
+background:linear-gradient(
+180deg,
+#f1f5f9,
+#cbd5f5
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+max-width:720px;
+
+}
