@@ -100,3 +100,17 @@ disciplineQuote.classList.add("show");
 }
 
 window.addEventListener("scroll", revealDisciplineQuote);
+const accountSection = document.querySelector(".account-section");
+
+window.addEventListener("scroll", () => {
+
+const position = accountSection.getBoundingClientRect().top;
+const screenPosition = window.innerHeight / 1.2;
+
+if(position < screenPosition){
+
+accountSection.classList.add("show");
+
+}
+
+});
