@@ -12,71 +12,63 @@ color:white;
 
 }
 
-/* ICON NAVBAR */
 
-.nav-icons{
+/* NAVBAR */
 
-display:flex;
-
-justify-content:center;
-
-gap:40px;
-
-padding:20px;
-
-background:#020617;
-
-border-bottom:1px solid rgba(255,255,255,0.08);
-
-}
-
-/* NAV ITEM */
-
-.nav-item{
+.navbar{
 
 display:flex;
-
-flex-direction:column;
-
+justify-content:space-between;
 align-items:center;
 
-text-decoration:none;
+padding:20px 40px;
 
-color:#94a3b8;
+background:rgba(255,255,255,0.05);
 
-font-size:14px;
+backdrop-filter:blur(10px);
 
-transition:0.3s;
-
-}
-
-/* ICON */
-
-.nav-item img{
-
-width:26px;
-
-height:26px;
-
-margin-bottom:6px;
-
-filter:invert(70%);
+border-bottom:1px solid rgba(255,255,255,0.1);
 
 }
 
-/* HOVER */
 
-.nav-item:hover{
+.logo{
+
+font-size:22px;
+font-weight:700;
+letter-spacing:1px;
+
+}
+
+.logo span{
 
 color:#38bdf8;
 
 }
 
-.nav-item:hover img{
 
-filter:invert(56%) sepia(91%) saturate(396%) hue-rotate(165deg);
+.nav-link{
+
+margin-left:20px;
+
+text-decoration:none;
+
+color:#cbd5f5;
+
+font-weight:500;
+
+transition:0.3s;
 
 }
+
+
+.nav-link:hover{
+
+color:white;
+
+}
+
+
 
 /* HERO */
 
