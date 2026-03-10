@@ -628,3 +628,86 @@ background:linear-gradient(
 color:transparent;
 
 }
+/* DISCIPLINE QUOTE SECTION */
+
+.discipline-quote-section{
+
+max-width:900px;
+
+margin:220px auto;
+
+padding:0 20px;
+
+opacity:0;
+
+transform:translateY(70px);
+
+transition:all 1.3s ease;
+
+}
+
+/* SHOW ON SCROLL */
+
+.discipline-quote-section.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+/* GOLD GRADIENT QUOTE */
+
+.discipline-quote-text{
+
+font-size:46px;
+
+font-weight:800;
+
+line-height:1.4;
+
+/* GOLD GRADIENT */
+
+background:linear-gradient(
+90deg,
+#facc15,
+#fde68a,
+#fbbf24,
+#facc15
+);
+
+background-size:200% 200%;
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+/* GOLD GLOW */
+
+text-shadow:
+0 0 20px rgba(250,204,21,0.15),
+0 0 40px rgba(250,204,21,0.08);
+
+/* GRADIENT FLOW */
+
+animation:goldShift 6s ease infinite;
+
+}
+
+/* GRADIENT ANIMATION */
+
+@keyframes goldShift{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+
+}
