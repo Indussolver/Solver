@@ -66,3 +66,20 @@ focusSection.classList.add("show");
 }
 
 window.addEventListener("scroll", revealFocus);
+const howSection = document.querySelector(".how-section");
+
+function revealHow(){
+
+const trigger = window.innerHeight * 0.85;
+
+const top = howSection.getBoundingClientRect().top;
+
+if(top < trigger){
+
+howSection.classList.add("show");
+
+}
+
+}
+
+window.addEventListener("scroll", revealHow);
