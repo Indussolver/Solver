@@ -391,3 +391,88 @@ background:linear-gradient(180deg,#e2e8f0,#94a3b8);
 -webkit-background-clip:text;
 color:transparent;
 }
+/* PREMIUM QUOTE SECTION */
+
+.premium-quote{
+
+max-width:900px;
+
+margin:200px auto;
+
+padding:0 20px;
+
+opacity:0;
+
+transform:translateY(60px);
+
+transition:all 1.2s ease;
+
+text-align:left;
+
+}
+
+/* SCROLL SHOW */
+
+.premium-quote.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+/* GOLD QUOTE TEXT */
+
+.premium-quote-text{
+
+font-size:48px;
+
+font-weight:800;
+
+line-height:1.4;
+
+/* GOLD GRADIENT */
+
+background:linear-gradient(
+90deg,
+#facc15,
+#fde68a,
+#fbbf24,
+#facc15
+);
+
+background-size:200% 200%;
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+/* SOFT GLOW */
+
+text-shadow:
+0 0 20px rgba(250,204,21,0.15),
+0 0 40px rgba(250,204,21,0.08);
+
+/* ANIMATION */
+
+animation:goldFlow 6s ease infinite;
+
+}
+
+/* GRADIENT FLOW */
+
+@keyframes goldFlow{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+
+}
