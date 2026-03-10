@@ -49,3 +49,20 @@ quoteSection.classList.add("show");
 }
 
 window.addEventListener("scroll", revealQuote);
+const focusSection = document.querySelector(".focus-section");
+
+function revealFocus(){
+
+const trigger = window.innerHeight * 0.85;
+
+const top = focusSection.getBoundingClientRect().top;
+
+if(top < trigger){
+
+focusSection.classList.add("show");
+
+}
+
+}
+
+window.addEventListener("scroll", revealFocus);
