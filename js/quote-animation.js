@@ -83,3 +83,20 @@ howSection.classList.add("show");
 }
 
 window.addEventListener("scroll", revealHow);
+const disciplineQuote = document.querySelector(".discipline-quote-section");
+
+function revealDisciplineQuote(){
+
+const trigger = window.innerHeight * 0.85;
+
+const top = disciplineQuote.getBoundingClientRect().top;
+
+if(top < trigger){
+
+disciplineQuote.classList.add("show");
+
+}
+
+}
+
+window.addEventListener("scroll", revealDisciplineQuote);
