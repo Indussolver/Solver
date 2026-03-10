@@ -665,14 +665,13 @@ font-weight:800;
 
 line-height:1.4;
 
-/* GOLD GRADIENT */
+/* BLUE GRADIENT */
 
 background:linear-gradient(
 90deg,
-#facc15,
-#fde68a,
-#fbbf24,
-#facc15
+#38bdf8,
+#0ea5e9,
+#6366f1
 );
 
 background-size:200% 200%;
@@ -684,8 +683,8 @@ color:transparent;
 /* GOLD GLOW */
 
 text-shadow:
-0 0 20px rgba(250,204,21,0.15),
-0 0 40px rgba(250,204,21,0.08);
+0 0 20px rgba(56,189,248,0.15),
+0 0 40px rgba(56,189,248,0.08);
 
 /* GRADIENT FLOW */
 
