@@ -1,51 +1,59 @@
-// 1. HTML Elements ko JavaScript se connect karna (IDs aur Classes ke through)
+// HTML Elements
 const elements = {
     display: document.getElementById('time-display'),
     startBtn: document.getElementById('start-btn'),
     pauseBtn: document.getElementById('pause-btn'),
     resetBtn: document.getElementById('reset-btn'),
+    
     modeBtns: document.querySelectorAll('.mode-btn'),
-    customBtn: document.getElementById('custom-btn'),
+    customToggleBtn: document.getElementById('custom-toggle-btn'),
+    customArea: document.getElementById('custom-input-area'),
+    customInput: document.getElementById('custom-minutes'),
+    setCustomBtn: document.getElementById('set-custom-btn'),
+    
     sessionCount: document.getElementById('session-count'),
+    totalTimeDisplay: document.getElementById('total-focus-time'),
     alarm: document.getElementById('alarm-sound'),
     body: document.body
 };
 
-// 2. State Variables (Timer ka data)
+// State
 let timerInterval;
-let timeLeft = 25 * 60; // Default timer 25 minutes ka hai
+let defaultFocusTime = 25 * 60;
+let timeLeft = defaultFocusTime;
 let isRunning = false;
 let sessions = 0;
+let totalFocusMinutes = 0; // Performance tracking
 
-// 3. Seconds ko MM:SS format mein dikhane ka function
+// Helper: Format Time
 function formatTime(seconds) {
     const m = Math.floor(seconds / 60).toString().padStart(2, '0');
     const s = (seconds % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
 }
 
-// 4. Screen aur Browser Tab par time update karna
+// Update Display & Tab Title
 function updateDisplay() {
     const formatted = formatTime(timeLeft);
     elements.display.textContent = formatted;
-    document.title = `${formatted} - timeflow`; // Tab me time dikhega
+    document.title = `${formatted} - Timeflow`; // T capital
 }
 
-// 5. Focus Mode Toggle (CSS se connected: baki cheezein hide karne ke liye)
+// Focus Mode Animation Trigger
 function toggleFocusMode(active) {
     if (active) {
         elements.body.classList.add('focus-mode');
+        elements.customArea.classList.add('hidden'); // Hide custom input if active
     } else {
         elements.body.classList.remove('focus-mode');
     }
 }
 
-// 6. Timer Start karna
+// Timer Controls
 function startTimer() {
-    if (isRunning) return; // Agar pehle se chal raha hai toh dobara start na ho
-    
+    if (isRunning) return;
     isRunning = true;
-    toggleFocusMode(true); // Focus mode on
+    toggleFocusMode(true);
     
     timerInterval = setInterval(() => {
         if (timeLeft > 0) {
@@ -54,36 +62,32 @@ function startTimer() {
         } else {
             sessionComplete();
         }
-    }, 1000); // Har 1 second (1000ms) me update hoga
+    }, 1000);
 }
 
-// 7. Timer Pause karna
 function pauseTimer() {
     isRunning = false;
-    clearInterval(timerInterval); // Interval rokna
-    toggleFocusMode(false); // Focus mode off
+    clearInterval(timerInterval);
+    toggleFocusMode(false);
 }
 
-// 8. Timer Reset karna (Jo mode selected hai wahi time wapas aayega)
 function resetTimer() {
     pauseTimer();
-    
     const activeMode = document.querySelector('.mode-btn.active');
     
     if (activeMode && activeMode.dataset.time) {
         timeLeft = parseInt(activeMode.dataset.time) * 60;
     } else {
-        timeLeft = 25 * 60; // Default fallback
+        timeLeft = defaultFocusTime;
     }
-    
     updateDisplay();
 }
 
-// 9. Focus ya Break mode set karna
+// Mode Selection (Focus/Break)
 function setMode(minutes, btnElement) {
     pauseTimer();
+    elements.customArea.classList.add('hidden'); // Hide custom area when switching modes
     
-    // Purane button se 'active' hatana aur naye pe lagana (CSS ke liye)
     elements.modeBtns.forEach(btn => btn.classList.remove('active'));
     if (btnElement) btnElement.classList.add('active');
     
@@ -91,59 +95,93 @@ function setMode(minutes, btnElement) {
     updateDisplay();
 }
 
-// 10. Jab Timer 00:00 ho jaye
-function sessionComplete() {
-    pauseTimer();
-    
-    // Sound play karna
-    elements.alarm.play().catch(e => console.log("Sound play error:", e));
-    
-    // Session counter badhana
-    sessions++;
-    elements.sessionCount.textContent = sessions;
-    
-    // Browser Notification bhejna
-    if ("Notification" in window && Notification.permission === "granted") {
-        new Notification("timeflow by indus", { body: "Session complete! Great focus." });
-    } else {
-        alert("Session complete! Great focus.");
+// Organised Custom Timer Logic
+function toggleCustomArea() {
+    elements.customArea.classList.toggle('hidden');
+    if (!elements.customArea.classList.contains('hidden')) {
+        elements.customInput.focus(); // Auto-focus input
     }
-    
-    resetTimer(); // Agle session ke liye timer ready karna
 }
 
-// --- EVENT LISTENERS (Buttons par click hone ka intezaar karna) ---
+function handleSetCustom() {
+    const minutes = parseInt(elements.customInput.value);
+    
+    if (minutes && minutes > 0 && minutes <= 180) { // Limit 3 hours
+        // Update the Custom button to show the time
+        elements.customToggleBtn.dataset.time = minutes;
+        
+        // Treat this button as active
+        elements.modeBtns.forEach(btn => btn.classList.remove('active'));
+        elements.customToggleBtn.classList.add('active');
+        
+        setMode(minutes, elements.customToggleBtn);
+        elements.customInput.value = ''; // Clear input
+    } else {
+        alert("Enter minutes between 1 and 180.");
+    }
+}
 
+// Session Complete logic
+function sessionComplete() {
+    const activeMode = document.querySelector('.mode-btn.active');
+    const isFocusSession = activeMode && activeMode.textContent.includes('Focus');
+    const isCustomSession = activeMode && activeMode.id === 'custom-toggle-btn';
+
+    pauseTimer();
+    elements.alarm.play().catch(e => console.log("Sound error:", e));
+    
+    // Track performance only if it was a Focus or Custom session (not Break)
+    if (isFocusSession || isCustomSession) {
+        sessions++;
+        // Calculate minutes added (handles custom times correctly)
+        const minutesAdded = activeMode.dataset.time ? parseInt(activeMode.dataset.time) : 25;
+        totalFocusMinutes += minutesAdded;
+        
+        // Update UI
+        elements.sessionCount.textContent = sessions;
+        elements.totalTimeDisplay.textContent = totalFocusMinutes;
+        
+        if ("Notification" in window && Notification.permission === "granted") {
+            new Notification("Timeflow", { body: `Focus session complete! (+${minutesAdded} min)` });
+        }
+    } else {
+        // Break complete
+        if ("Notification" in window && Notification.permission === "granted") {
+            new Notification("Timeflow", { body: `Break over. Ready to focus?` });
+        }
+    }
+    
+    resetTimer();
+}
+
+// --- Event Listeners ---
 elements.startBtn.addEventListener('click', startTimer);
 elements.pauseBtn.addEventListener('click', pauseTimer);
 elements.resetBtn.addEventListener('click', resetTimer);
 
-// Focus aur Break buttons ke liye logic
+// Mode buttons (excluding Custom)
 elements.modeBtns.forEach(btn => {
-    if (btn.id !== 'custom-btn') {
+    if (btn.id !== 'custom-toggle-btn') {
         btn.addEventListener('click', (e) => {
             setMode(parseInt(e.target.dataset.time), e.currentTarget);
         });
     }
 });
 
-// Custom Timer ke liye prompt box lana
-elements.customBtn.addEventListener('click', (e) => {
-    const input = prompt("Enter custom minutes:", "15");
-    
-    // Check karna ki user ne sahi number dala hai ya nahi
-    if (input !== null && input.trim() !== "" && !isNaN(input) && input > 0) {
-        const minutes = parseInt(input);
-        elements.customBtn.dataset.time = minutes;
-        elements.customBtn.textContent = `Custom (${minutes}m)`; // Button ka text update karna
-        setMode(minutes, e.currentTarget);
+// Organised Custom Events
+elements.customToggleBtn.addEventListener('click', toggleCustomArea);
+elements.setCustomBtn.addEventListener('click', handleSetCustom);
+// Allow pressing 'Enter' inside input
+elements.customInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        handleSetCustom();
     }
 });
 
-// Page load hote hi Notification ki permission maangna
-if ("Notification" in window && Notification.permission !== "granted" && Notification.permission !== "denied") {
+// Notifications
+if ("Notification" in window && Notification.permission !== "granted") {
     Notification.requestPermission();
 }
 
-// Shuru mein time screen par dikhana
+// Init
 updateDisplay();
