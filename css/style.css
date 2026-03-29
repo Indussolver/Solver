@@ -1,3 +1,11 @@
+:root {
+    --bg-color: #ffffff;
+    --text-main: #111111;
+    --text-muted: #999999;
+    --accent: #f4f4f5; /* Very subtle grey for modern UI elements */
+    --border-light: #eaeaea;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,97 +14,161 @@
 }
 
 body {
-    background-color: #ffffff;
-    color: #1a1a1a;
+    background-color: var(--bg-color);
+    color: var(--text-main);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    transition: background-color 0.5s ease;
+    min-height: 100vh;
+    transition: background-color 0.8s ease;
 }
 
-/* Focus Mode Style - Hides distractions */
-body.focus-mode {
-    background-color: #fafafa;
-}
-body.focus-mode .modes, 
-body.focus-mode footer {
-    opacity: 0.1;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-}
-
-.container {
+.app-wrapper {
     text-align: center;
     width: 100%;
-    max-width: 400px;
-    padding: 20px;
+    max-width: 420px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
+/* --- Focus Mode Animations --- */
+body.focus-mode .fade-element {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+}
+
+.fade-element {
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.focus-mode .controls {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body.focus-mode #start-btn, 
+body.focus-mode #reset-btn {
+    display: none;
+}
+
+body.focus-mode #pause-btn {
+    display: inline-block; /* Only show pause during focus mode */
+}
+
+/* --- Typography & Branding --- */
 .brand {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: -0.5px;
-    margin-bottom: 40px;
-    color: #000;
+    letter-spacing: -0.3px;
 }
 
 .author {
-    color: #888;
-    font-weight: 300;
+    color: var(--text-muted);
+    font-weight: 400;
 }
 
 .timer-display {
-    font-size: 5rem;
-    font-weight: 300;
-    letter-spacing: -2px;
+    font-size: 5.5rem;
+    font-weight: 200;
+    letter-spacing: -3px;
+    color: var(--text-main);
     margin-bottom: 30px;
+    font-variant-numeric: tabular-nums; /* Prevents text shifting */
 }
 
+/* --- Buttons --- */
 button {
     background: transparent;
-    border: 1px solid #eaeaea;
-    color: #333;
-    padding: 8px 16px;
+    border: none;
     font-size: 12px;
-    border-radius: 4px;
+    font-weight: 500;
     cursor: pointer;
+    border-radius: 6px;
     transition: all 0.2s ease;
-    margin: 0 4px;
-}
-
-button:hover {
-    background: #f5f5f5;
-    border-color: #ddd;
 }
 
 .controls {
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    height: 36px;
 }
 
+.primary-btn {
+    background-color: var(--text-main);
+    color: var(--bg-color);
+    padding: 0 24px;
+}
+.primary-btn:hover { background-color: #333333; }
+
+.secondary-btn {
+    background-color: var(--accent);
+    color: var(--text-main);
+    padding: 0 24px;
+}
+.secondary-btn:hover { background-color: #e4e4e7; }
+
+.icon-btn {
+    color: var(--text-muted);
+    padding: 0 16px;
+    border: 1px solid var(--border-light);
+}
+.icon-btn:hover {
+    border-color: #cccccc;
+    color: var(--text-main);
+}
+
+.hidden { display: none !important; }
+
+/* --- Mode Switcher (Pill Design) --- */
 .modes {
-    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background: var(--accent);
+    padding: 6px;
+    border-radius: 8px;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .mode-btn {
-    border: none;
-    color: #888;
+    padding: 6px 16px;
+    color: var(--text-muted);
 }
 
-.mode-btn:hover {
-    color: #000;
-    background: transparent;
-}
+.mode-btn:hover { color: var(--text-main); }
 
 .mode-btn.active {
-    color: #000;
-    font-weight: 500;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft shadow */
 }
 
+/* --- Footer --- */
 footer {
-    font-size: 12px;
-    color: #888;
-    border-top: 1px solid #f0f0f0;
-    padding-top: 20px;
     margin-top: 20px;
+}
+
+.session-tracker {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background-color: #10b981; /* Subtle green status dot */
+    border-radius: 50%;
 }
