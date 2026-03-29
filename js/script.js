@@ -1,72 +1,123 @@
-let timer;
-let timeLeft = 25 * 60; // Default 25 minutes
+let timerInterval;
+let timeLeft = 25 * 60;
 let isRunning = false;
-let sessionsCompleted = 0;
+let sessions = 0;
 
-const display = document.getElementById('time-display');
-const sessionCountDisplay = document.getElementById('session-count');
-const alarmSound = document.getElementById('alarm-sound');
-const body = document.body;
+const elements = {
+    display: document.getElementById('time-display'),
+    startBtn: document.getElementById('start-btn'),
+    pauseBtn: document.getElementById('pause-btn'),
+    resetBtn: document.getElementById('reset-btn'),
+    modeBtns: document.querySelectorAll('.mode-btn'),
+    customBtn: document.getElementById('custom-btn'),
+    sessionCount: document.getElementById('session-count'),
+    alarm: document.getElementById('alarm-sound'),
+    body: document.body
+};
 
+// Format seconds into MM:SS
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+// Update the main display and browser tab title
 function updateDisplay() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    const formatted = formatTime(timeLeft);
+    elements.display.textContent = formatted;
+    document.title = `${formatted} - timeflow`; 
+}
+
+// Smoothly hide distractions
+function toggleFocusMode(active) {
+    if (active) {
+        elements.body.classList.add('focus-mode');
+    } else {
+        elements.body.classList.remove('focus-mode');
+    }
 }
 
 function startTimer() {
-    if (!isRunning) {
-        isRunning = true;
-        body.classList.add('focus-mode'); // Enable distraction-free mode
-        timer = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                updateDisplay();
-            } else {
-                completeSession();
-            }
-        }, 1000);
-    }
+    if (isRunning) return;
+    isRunning = true;
+    toggleFocusMode(true);
+    
+    timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            updateDisplay();
+        } else {
+            sessionComplete();
+        }
+    }, 1000);
 }
 
 function pauseTimer() {
     isRunning = false;
-    clearInterval(timer);
-    body.classList.remove('focus-mode'); // Disable focus mode on pause
+    clearInterval(timerInterval);
+    toggleFocusMode(false);
 }
 
 function resetTimer() {
     pauseTimer();
-    timeLeft = 25 * 60; // Reset back to 25 mins by default
+    const activeMode = document.querySelector('.mode-btn.active');
+    // Check if a mode is active, otherwise default to 25
+    timeLeft = (activeMode && activeMode.dataset.time) ? parseInt(activeMode.dataset.time) * 60 : 25 * 60;
     updateDisplay();
 }
 
-function setTimer(minutes) {
+function setMode(minutes, btnEvent) {
     pauseTimer();
+    
+    // Update active button styling
+    elements.modeBtns.forEach(btn => btn.classList.remove('active'));
+    if (btnEvent) btnEvent.currentTarget.classList.add('active');
+    
     timeLeft = minutes * 60;
     updateDisplay();
 }
 
-function setCustomTimer() {
-    const min = prompt("Kitne minutes ka timer set karna hai?", "15");
-    if (min !== null && !isNaN(min) && min > 0) {
-        setTimer(parseInt(min));
-    }
-}
-
-function completeSession() {
+function sessionComplete() {
     pauseTimer();
-    alarmSound.play();
-    sessionsCompleted++;
-    sessionCountDisplay.textContent = sessionsCompleted;
-    alert("Timer complete! Take a break."); // Fallback notification
+    elements.alarm.play();
+    sessions++;
+    elements.sessionCount.textContent = sessions;
+    
+    // Modern Browser Notification
+    if (Notification.permission === "granted") {
+        new Notification("timeflow by indus", { body: "Session complete! Great focus." });
+    } else {
+        alert("Session complete! Great focus.");
+    }
     resetTimer();
 }
 
-// Event Listeners
-document.getElementById('start-btn').addEventListener('click', startTimer);
-document.getElementById('pause-btn').addEventListener('click', pauseTimer);
-document.getElementById('reset-btn').addEventListener('click', resetTimer);
+// --- Event Listeners ---
+elements.startBtn.addEventListener('click', startTimer);
+elements.pauseBtn.addEventListener('click', pauseTimer);
+elements.resetBtn.addEventListener('click', resetTimer);
 
-// Initialize display
+elements.modeBtns.forEach(btn => {
+    if (btn.id !== 'custom-btn') {
+        btn.addEventListener('click', (e) => setMode(parseInt(e.target.dataset.time), e));
+    }
+});
+
+// Custom Timer Logic
+elements.customBtn.addEventListener('click', (e) => {
+    const input = prompt("Enter custom minutes:", "15");
+    if (input && !isNaN(input) && input > 0) {
+        elements.customBtn.dataset.time = input;
+        setMode(parseInt(input), e);
+        elements.customBtn.textContent = `Custom (${input}m)`;
+    }
+});
+
+// Ask for notification permission on load
+if ("Notification" in window && Notification.permission !== "granted" && Notification.permission !== "denied") {
+    Notification.requestPermission();
+}
+
+// Initial Call
 updateDisplay();
