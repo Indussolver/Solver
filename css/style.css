@@ -2,7 +2,7 @@
     --bg-color: #ffffff;
     --text-main: #111111;
     --text-muted: #999999;
-    --accent: #f4f4f5; /* Very subtle grey for modern UI elements */
+    --accent: #f4f4f5; /* Subtle grey */
     --border-light: #eaeaea;
 }
 
@@ -11,6 +11,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased; /* Crisp fonts on Mac */
 }
 
 body {
@@ -21,16 +22,17 @@ body {
     align-items: center;
     min-height: 100vh;
     transition: background-color 0.8s ease;
+    overflow: hidden; /* Prevent scrolling in focus mode */
 }
 
 .app-wrapper {
     text-align: center;
     width: 100%;
-    max-width: 420px;
-    padding: 40px 20px;
+    max-width: 400px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 50px; /* Space between sections */
 }
 
 /* --- Focus Mode Animations --- */
@@ -52,17 +54,18 @@ body.focus-mode .controls {
 }
 
 body.focus-mode #start-btn, 
-body.focus-mode #reset-btn {
-    display: none;
+body.focus-mode #reset-btn,
+body.focus-mode .custom-area {
+    display: none !important;
 }
 
 body.focus-mode #pause-btn {
-    display: inline-block; /* Only show pause during focus mode */
+    display: inline-block;
 }
 
-/* --- Typography & Branding --- */
+/* --- Typography --- */
 .brand {
-    font-size: 13px;
+    font-size: 12px; /* Small font */
     font-weight: 500;
     letter-spacing: -0.3px;
 }
@@ -73,19 +76,19 @@ body.focus-mode #pause-btn {
 }
 
 .timer-display {
-    font-size: 5.5rem;
+    font-size: 6rem; /* Large but clean */
     font-weight: 200;
-    letter-spacing: -3px;
+    letter-spacing: -4px;
     color: var(--text-main);
-    margin-bottom: 30px;
-    font-variant-numeric: tabular-nums; /* Prevents timer text from jumping */
+    margin-bottom: 20px;
+    font-variant-numeric: tabular-nums;
 }
 
 /* --- Buttons --- */
 button {
     background: transparent;
     border: none;
-    font-size: 12px;
+    font-size: 12px; /* Small font */
     font-weight: 500;
     cursor: pointer;
     border-radius: 6px;
@@ -96,8 +99,8 @@ button {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 40px;
     height: 36px;
+    margin-bottom: 20px;
 }
 
 .primary-btn {
@@ -119,56 +122,92 @@ button {
     padding: 0 16px;
     border: 1px solid var(--border-light);
 }
-.icon-btn:hover {
-    border-color: #cccccc;
-    color: var(--text-main);
+.icon-btn:hover { border-color: #cccccc; color: var(--text-main); }
+
+/* --- Organised Custom Section --- */
+.modes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
-.hidden { display: none !important; }
-
-/* --- Mode Switcher (Pill Design) --- */
-.modes {
+.modes-pill {
     display: flex;
-    justify-content: center;
-    gap: 8px;
     background: var(--accent);
-    padding: 6px;
+    padding: 4px;
     border-radius: 8px;
     width: fit-content;
-    margin: 0 auto;
 }
 
 .mode-btn {
-    padding: 6px 16px;
+    padding: 6px 14px;
     color: var(--text-muted);
+    font-size: 11px; /* Super small */
 }
-
-.mode-btn:hover { color: var(--text-main); }
 
 .mode-btn.active {
     background-color: var(--bg-color);
     color: var(--text-main);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft shadow for active tab */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 
-/* --- Footer --- */
-footer {
-    margin-top: 20px;
-}
-
-.session-tracker {
-    display: inline-flex;
+.custom-area {
+    display: flex;
+    gap: 8px;
     align-items: center;
-    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.custom-area input {
+    width: 50px;
+    padding: 6px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
     font-size: 11px;
+    text-align: center;
+    outline: none;
+}
+.custom-area input:focus { border-color: #999; }
+
+#set-custom-btn {
+    background: var(--text-main);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 11px;
+}
+
+/* --- Performance Section (Super Minimalist) --- */
+footer {
+    margin-top: auto; /* Pushes to bottom */
+    border-top: 1px solid var(--border-light);
+    padding-top: 20px;
+}
+
+.performance-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.perf-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perf-label {
+    font-size: 10px; /* Micro font */
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
 }
 
-.dot {
-    width: 6px;
-    height: 6px;
-    background-color: #10b981; /* Subtle green dot */
-    border-radius: 50%;
+.perf-value {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-main);
 }
+
+.hidden { display: none !important; }
