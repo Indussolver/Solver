@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>timeflow by indus</title>
+    <title>Timeflow by indus</title>
     
     <link rel="stylesheet" href="./css/style.css">
     
@@ -12,7 +12,7 @@
 <body>
     <div class="app-wrapper" id="app">
         <header class="fade-element">
-            <div class="brand">timeflow <span class="author">by indus</span></div>
+            <div class="brand">Timeflow <span class="author">by indus</span></div>
         </header>
 
         <main>
@@ -24,16 +24,30 @@
                 <button id="reset-btn" class="icon-btn">Reset</button>
             </div>
 
-            <div class="modes fade-element">
-                <button class="mode-btn active" data-time="25">Focus</button>
-                <button class="mode-btn" data-time="5">Break</button>
-                <button class="mode-btn" id="custom-btn">Custom</button>
+            <div class="modes-container fade-element">
+                <div class="modes-pill">
+                    <button class="mode-btn active" data-time="25">Focus</button>
+                    <button class="mode-btn" data-time="5">Break</button>
+                    <button class="mode-btn" id="custom-toggle-btn">Custom</button>
+                </div>
+                
+                <div id="custom-input-area" class="custom-area hidden">
+                    <input type="number" id="custom-minutes" placeholder="Min" min="1" max="180">
+                    <button id="set-custom-btn">Set</button>
+                </div>
             </div>
         </main>
 
         <footer class="fade-element">
-            <div class="session-tracker">
-                <span class="dot"></span> Sessions: <span id="session-count">0</span>
+            <div class="performance-section">
+                <div class="perf-item">
+                    <span class="perf-label">Today</span>
+                    <span class="perf-value"><span id="session-count">0</span> sessions</span>
+                </div>
+                <div class="perf-item">
+                    <span class="perf-label">Focus Time</span>
+                    <span class="perf-value"><span id="total-focus-time">0</span> min</span>
+                </div>
             </div>
         </footer>
     </div>
