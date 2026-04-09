@@ -120,3 +120,158 @@
         text-align: center;
     }
 }
+/* --- FEATURED PRODUCTS SECTION --- */
+.featured-products {
+    padding: 80px 10%;
+    background-color: #FAFAFA; /* Matches global body background */
+}
+
+/* Section Headings */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title .sub-heading {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #6F4E37; /* Theme Brown */
+    margin-bottom: 8px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111111;
+}
+
+/* Grid Layout */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+    gap: 30px;
+}
+
+/* --- PRODUCT CARD STYLING --- */
+.product-card {
+    background-color: #FFFFFF;
+    border-radius: 8px; /* Slight modern curve */
+    overflow: hidden; /* Keeps zoomed image inside borders */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); /* Very soft, elegant shadow */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Shadow deepens on hover */
+    transform: translateY(-5px); /* Slight lift effect */
+}
+
+/* Image Hover Zoom Effect */
+.card-image {
+    width: 100%;
+    height: 250px; /* Fixed height for uniformity */
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease; /* Smooth zoom */
+}
+
+.product-card:hover .card-image img {
+    transform: scale(1.08); /* Zooms in 8% on hover */
+}
+
+/* Card Content & Typography */
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Pushes button to bottom if heights vary */
+}
+
+.card-text {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.card-text h3 {
+    font-size: 15px; /* Small, premium font */
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 6px;
+}
+
+.card-text .price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #6F4E37; /* Theme Brown */
+}
+
+/* Small Minimal Button */
+.btn-order {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6F4E37;
+    background-color: transparent;
+    border: 1px solid #6F4E37;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: auto; /* Aligns button to bottom */
+}
+
+.btn-order:hover {
+    background-color: #6F4E37;
+    color: #FFFFFF;
+}
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+    .featured-products {
+        padding: 60px 5%; /* Adjusted padding for phone */
+    }
+
+    .section-title h2 {
+        font-size: 26px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns strictly on mobile */
+        gap: 15px; /* Tighter gap for smaller screens */
+    }
+
+    .card-image {
+        height: 160px; /* Smaller image height for mobile */
+    }
+
+    .card-content {
+        padding: 12px; /* Less padding inside card */
+    }
+
+    .card-text h3 {
+        font-size: 12px; /* Even smaller font for mobile fitting */
+        line-height: 1.3;
+    }
+
+    .card-text .price {
+        font-size: 12px;
+    }
+
+    .btn-order {
+        padding: 8px 0;
+        font-size: 10px; /* Minimal button text */
+    }
+}
