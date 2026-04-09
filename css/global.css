@@ -1,4 +1,4 @@
-/* Google Fonts - Inter (Minimal aur Clean look ke liye) */
+/* Google Fonts - Inter (300 light, 400 regular, 500 medium) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
 
 /* --- Base Reset --- */
@@ -10,9 +10,11 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #FFFFFF; /* Pure white focus */
-    color: #111111;
-    -webkit-font-smoothing: antialiased; /* Mac/iOS me text crisp dikhane ke liye */
+    /* --- COLOR CHANGE: Soft Off-White background --- */
+    background-color: #F9F9F7; 
+    color: #1A1A1A; /* Soft black, not pure black */
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
 /* --- Global Navbar --- */
@@ -20,20 +22,22 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 5%;
-    background-color: #FFFFFF;
-    position: sticky;
+    padding: 20px 5%;
+    /* Navbar background same as body to blend in */
+    background-color: #F9F9F7; 
+    position: fixed; /* Fix it to top */
+    width: 100%;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .logo {
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 3px; /* Premium spacing */
+    letter-spacing: 4px; /* Extreme spacing for minimal feel */
     text-transform: uppercase;
     text-decoration: none;
-    color: #111111;
+    color: #1A1A1A;
 }
 
 nav {
@@ -43,24 +47,41 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: #666666;
-    margin-left: 40px;
+    color: #555555; /* Soft gray text */
+    margin-left: 35px;
     font-size: 11px; /* Small minimal font */
     text-transform: uppercase;
     letter-spacing: 1.5px;
     transition: color 0.3s ease;
 }
 
-nav a:hover {
-    color: #111111;
+nav a:hover, nav a.active {
+    color: #1A1A1A; /* Darken on hover or if active page */
 }
 
-/* --- Mobile Optimization for Navbar --- */
+/* --- Mobile Menu Icon (SVG/Hamburger) --- */
+.mobile-menu-icon {
+    display: none; /* Hide on desktop */
+    cursor: pointer;
+}
+
+/* --- Helper Classes --- */
+.small-text {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #888888;
+}
+
+/* --- Mobile Optimization for Global Elements --- */
 @media (max-width: 768px) {
     header {
-        padding: 20px;
+        padding: 15px 20px;
     }
-    nav a {
-        display: none; /* Mobile me menu hide karenge, baad me JS se hamburger menu banayenge */
+    nav a:not(.cart-link) {
+        display: none; /* Hide main links on mobile */
+    }
+    .mobile-menu-icon {
+        display: block; /* Show menu icon */
     }
 }
