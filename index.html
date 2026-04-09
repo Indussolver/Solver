@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webnex | Official Store</title>
+    <title>Peak9 | Elevated Essentials</title>
     
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/home.css">
@@ -11,22 +11,63 @@
 <body>
 
     <header>
-        <a href="index.html" class="logo">Webnex</a>
+        <a href="index.html" class="logo">Peak9</a>
         
         <nav>
+            <a href="index.html" class="active">Home</a>
             <a href="shop.html">Shop</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
-            <a href="#" style="color: #111; font-weight: 500;">Cart (0)</a>
+            <a href="#" class="cart-link" style="color: #1A1A1A; font-weight: 500; margin-left: 50px;">
+                Cart<span id="cart-count">(0)</span>
+            </a>
+            
+            <div class="mobile-menu-icon">|||</div>
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <span class="hero-tagline">New Collection</span>
-            <h1>Redefining everyday essentials with minimalist design.</h1>
-            <a href="shop.html" class="btn-primary">Explore Shop</a>
+    <main style="padding-top: 80px;"> <section class="hero">
+            <div class="hero-content">
+                <span class="small-text hero-fade-in">New Arrivals</span>
+                <h1 class="hero-fade-in">Functionality<br>Meets Form.</h1>
+                <p class="small-hero-p hero-fade-in">Purpose-built gear designed for the modern landscape. Minimalist aesthetic, maximal performance.</p>
+                <a href="shop.html" class="btn-primary hero-fade-in">Shop Collection</a>
+            </div>
+            </section>
+
+        <section class="featured-preview">
+            <div class="section-header">
+                <span class="small-text">Gear Focus</span>
+                <h2>Core Essentials</h2>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/600x750.png?text=Peak9+Product+1" alt="Product Name">
+                    </div>
+                    <div class="product-details">
+                        <h3>Stealth Backpack</h3>
+                        <p>$120.00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="https://via.placeholder.com/600x750.png?text=Peak9+Product+2" alt="Product Name">
+                    </div>
+                    <div class="product-details">
+                        <h3>Technical Tee</h3>
+                        <p>$55.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-all-wrapper">
+                <a href="shop.html" class="text-link">View All Shop →</a>
+            </div>
         </section>
+
     </main>
 
     <script src="js/global.js"></script>
