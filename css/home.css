@@ -1,43 +1,59 @@
-/* --- Hero Section --- */
+/* --- HERO SECTION --- */
 .hero {
-    /* Screen ki height minus navbar height */
-    height: calc(100vh - 70px); 
+    height: 80vh; /* thoda chota kiya full screen se premium feel ke liye */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Content left side me */
     align-items: center;
-    text-align: center;
-    padding: 0 20px;
-    background-color: #FAFAFA; /* Subtle off-white taaki content pop kare */
+    padding: 0 10%;
+    
+    /* ADD IMAGE HERE later in assets/images/ */
+    background-color: #E6E6E1; /* Temporary subtle gray-beige background */
+    
+    /* Agar image use karein toh:
+    background-image: url('../assets/images/hero-image.jpg');
+    background-size: cover;
+    background-position: center;
+    */
 }
 
-.hero-tagline {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #888888;
-    margin-bottom: 24px;
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-content .small-text {
+    margin-bottom: 20px;
+    display: block;
 }
 
 .hero h1 {
-    font-size: 48px;
-    font-weight: 300; /* Thin font for elegance */
-    letter-spacing: -1px;
-    line-height: 1.2;
+    font-size: 56px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: #1A1A1A;
+}
+
+.small-hero-p {
+    font-size: 13px;
+    color: #666666;
+    font-weight: 300;
+    line-height: 1.6;
     margin-bottom: 40px;
-    max-width: 600px;
+    max-width: 350px;
 }
 
 /* --- Minimal Button --- */
 .btn-primary {
     display: inline-block;
-    padding: 14px 36px;
-    background-color: #111111;
-    color: #FFFFFF;
+    padding: 16px 40px;
+    background-color: #1A1A1A; /* Solid black */
+    color: #F9F9F7; /* Button text uses page background color */
     text-decoration: none;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: 500;
     transition: background-color 0.4s ease;
 }
 
@@ -45,13 +61,124 @@
     background-color: #444444;
 }
 
-/* --- Mobile Optimization for Hero --- */
+/* --- FEATURED PREVIEW SECTION --- */
+.featured-preview {
+    padding: 100px 5%;
+    background-color: #F9F9F7; /* blending with body */
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header .small-text {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 Column Grid for Desktop/Tablet */
+    gap: 30px;
+}
+
+.product-card {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.product-image-wrapper {
+    background-color: #EDEDE8; /* Placeholder color inside the grid */
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.product-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    mix-blend-mode: multiply; /* Agar background image pure white hai toh use blends in */
+    transition: transform 0.8s ease;
+}
+
+.product-card:hover .product-image-wrapper img {
+    transform: scale(1.03); /* subtle zoom on hover */
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.product-details h3 {
+    font-size: 13px; /* Small font as requested */
+    font-weight: 400;
+    color: #333333;
+}
+
+.product-details p {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1A1A1A;
+}
+
+.view-all-wrapper {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.text-link {
+    font-size: 12px;
+    color: #1A1A1A;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+}
+
+/* --- Mobile Optimization (Phone Focus) --- */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 32px;
-        margin-bottom: 30px;
+    /* Hero */
+    .hero {
+        padding: 0 30px;
+        height: 70vh;
+        justify-content: center; /* Center on mobile */
+        text-align: center;
     }
-    .hero-tagline {
-        font-size: 9px;
+    .hero h1 {
+        font-size: 36px;
+    }
+    .small-hero-p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Section Header */
+    .featured-preview {
+        padding: 60px 20px;
+    }
+    .section-header h2 {
+        font-size: 20px;
+    }
+
+    /* Product Grid - Mobile par 2 hi rakhte hain small look ke liye, not stacked */
+    .product-grid {
+        gap: 15px;
+    }
+    .product-details h3, .product-details p {
+        font-size: 11px; /* Even smaller on mobile */
     }
 }
