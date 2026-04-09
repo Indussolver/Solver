@@ -275,3 +275,92 @@
         font-size: 10px; /* Minimal button text */
     }
 }
+/* --- TRUST BUILDER SECTION --- */
+.trust-builder {
+    padding: 80px 10%;
+    background-color: #FFFFFF; /* Pure white for contrast with previous section */
+    text-align: center;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto; /* Centers the grid on the screen */
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Icon Container for Premium Look */
+.feature-icon {
+    font-size: 28px;
+    margin-bottom: 24px;
+    background-color: #F9F5F0; /* Soft warm brown background */
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Perfect circle */
+    transition: transform 0.4s ease, background-color 0.4s ease;
+}
+
+.feature-item:hover .feature-icon {
+    transform: translateY(-8px); /* Gentle float effect on hover */
+    background-color: #F1E8DC; /* Slightly darker brown on hover */
+}
+
+/* Small, minimal typography */
+.feature-item h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.feature-item p {
+    font-size: 13px;
+    color: #666666;
+    line-height: 1.6;
+    max-width: 250px; /* Keeps text nicely wrapped */
+}
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+    .trust-builder {
+        padding: 60px 5%;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr; /* Stack into 1 column on phone */
+        gap: 30px;
+    }
+
+    .feature-item {
+        padding: 10px 0;
+    }
+
+    .feature-icon {
+        font-size: 24px; /* Slightly smaller icon */
+        width: 65px;
+        height: 65px;
+        margin-bottom: 16px;
+    }
+
+    .feature-item h3 {
+        font-size: 13px; /* Crisper, smaller font for mobile */
+    }
+
+    .feature-item p {
+        font-size: 12px; /* Easy to read, small text */
+        max-width: 280px;
+    }
+}
