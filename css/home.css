@@ -1,292 +1,122 @@
 /* --- HERO SECTION --- */
 .hero {
-    height: 80vh; /* thoda chota kiya full screen se premium feel ke liye */
-    display: flex;
-    justify-content: flex-start; /* Content left side me */
-    align-items: center;
-    padding: 0 10%;
+    width: 100%;
+    height: 90vh; /* 90% viewport height */
     
-    /* ADD IMAGE HERE later in assets/images/ */
-    background-color: #E6E6E1; /* Temporary subtle gray-beige background */
-    
-    /* Agar image use karein toh:
-    background-image: url('../assets/images/hero-image.jpg');
+    /* Background Image with 60% Dark Overlay using linear-gradient */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1920&q=80');
     background-size: cover;
     background-position: center;
-    */
+    background-repeat: no-repeat;
+    
+    /* Vertical Center & Left Aligned Layout */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 10%; /* 10% gap from the left side */
 }
 
 .hero-content {
-    max-width: 500px;
+    max-width: 600px;
+    color: #FFFFFF; /* White text looks best on dark overlay */
 }
 
-.hero-content .small-text {
-    margin-bottom: 20px;
-    display: block;
-}
-
-.hero h1 {
-    font-size: 56px;
-    font-weight: 300;
-    letter-spacing: -2px;
+/* Typography matching your exact specs */
+.hero-content h1 {
+    font-size: 60px; /* Bold 60px */
+    font-weight: 700;
+    margin-bottom: 10px;
     line-height: 1.1;
-    margin-bottom: 24px;
-    color: #1A1A1A;
 }
 
-.small-hero-p {
-    font-size: 13px;
-    color: #666666;
-    font-weight: 300;
+.hero-content h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #EAEAEA; /* Slightly softer white for subtext */
+}
+
+.hero-content p {
+    font-size: 18px; /* Subtext 18-20px */
     line-height: 1.6;
     margin-bottom: 40px;
-    max-width: 350px;
+    font-weight: 400;
 }
 
-/* --- Minimal Button --- */
-.btn-primary {
-    display: inline-block;
-    padding: 16px 40px;
-    background-color: #1A1A1A; /* Solid black */
-    color: #F9F9F7; /* Button text uses page background color */
+/* --- BUTTONS --- */
+.hero-buttons {
+    display: flex;
+    gap: 20px; /* Space between buttons */
+}
+
+.btn {
+    padding: 15px 35px;
+    font-size: 16px;
+    font-weight: 600;
     text-decoration: none;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 500;
-    transition: background-color 0.4s ease;
+    border-radius: 4px; /* Slight rounding for modern feel */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Primary: Brown */
+.btn-primary {
+    background-color: #6F4E37;
+    color: #FFFFFF;
+    border: 2px solid #6F4E37;
 }
 
 .btn-primary:hover {
-    background-color: #444444;
+    background-color: #5A3E2B; /* Darker brown on hover */
+    border-color: #5A3E2B;
 }
 
-/* --- FEATURED PREVIEW SECTION --- */
-.featured-preview {
-    padding: 100px 5%;
-    background-color: #F9F9F7; /* blending with body */
+/* Secondary: Outline White */
+.btn-secondary {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
 }
 
-.section-header {
-    text-align: center;
-    margin-bottom: 60px;
+.btn-secondary:hover {
+    background-color: #FFFFFF;
+    color: #111111; /* Dark text when hovered */
 }
 
-.section-header .small-text {
-    margin-bottom: 10px;
-    display: block;
-}
-
-.section-header h2 {
-    font-size: 24px;
-    font-weight: 300;
-    letter-spacing: 1px;
-}
-
-/* Product Grid */
-.product-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 Column Grid for Desktop/Tablet */
-    gap: 30px;
-}
-
-.product-card {
-    text-decoration: none;
-    color: inherit;
-    transition: opacity 0.3s ease;
-    cursor: pointer;
-}
-
-.product-image-wrapper {
-    background-color: #EDEDE8; /* Placeholder color inside the grid */
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-
-.product-image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    mix-blend-mode: multiply; /* Agar background image pure white hai toh use blends in */
-    transition: transform 0.8s ease;
-}
-
-.product-card:hover .product-image-wrapper img {
-    transform: scale(1.03); /* subtle zoom on hover */
-}
-
-.product-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.product-details h3 {
-    font-size: 13px; /* Small font as requested */
-    font-weight: 400;
-    color: #333333;
-}
-
-.product-details p {
-    font-size: 13px;
-    font-weight: 500;
-    color: #1A1A1A;
-}
-
-.view-all-wrapper {
-    text-align: center;
-    margin-top: 60px;
-}
-
-.text-link {
-    font-size: 12px;
-    color: #1A1A1A;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-weight: 500;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    padding-bottom: 5px;
-}
-
-/* --- Mobile Optimization (Phone Focus) --- */
+/* --- PHONE OPTIMIZATION (Mobile Responsive) --- */
 @media (max-width: 768px) {
-    /* Hero */
     .hero {
-        padding: 0 30px;
-        height: 70vh;
-        justify-content: center; /* Center on mobile */
-        text-align: center;
-    }
-    .hero h1 {
-        font-size: 36px;
-    }
-    .small-hero-p {
-        margin-left: auto;
-        margin-right: auto;
+        padding: 0 5%; /* Less padding on small screens */
+        justify-content: center; /* Center content on mobile for better visibility */
+        text-align: center; /* Center text alignment */
     }
 
-    /* Section Header */
-    .featured-preview {
-        padding: 60px 20px;
-    }
-    .section-header h2 {
-        font-size: 20px;
+    .hero-content {
+        margin-top: 60px; /* Avoid overlapping with sticky navbar */
     }
 
-    /* Product Grid - Mobile par 2 hi rakhte hain small look ke liye, not stacked */
-    .product-grid {
+    .hero-content h1 {
+        font-size: 42px; /* Smaller heading for phone */
+    }
+
+    .hero-content h2 {
+        font-size: 22px;
+    }
+
+    .hero-content p {
+        font-size: 16px; /* Optimized readable font */
+        margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+        flex-direction: column; /* Stack buttons vertically on phone */
         gap: 15px;
-    }
-    .product-details h3, .product-details p {
-        font-size: 11px; /* Even smaller on mobile */
-    }
-}
-/* --- FEATURED PREVIEW SECTION --- */
-.featured-preview {
-    padding: 100px 5%;
-    background-color: #F9F9F7;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-header .small-text {
-    margin-bottom: 10px;
-    display: block;
-}
-
-.section-header h2 {
-    font-size: 24px;
-    font-weight: 300;
-    letter-spacing: 1px;
-}
-
-/* --- THE 8-ITEM GRID --- */
-.product-grid {
-    display: grid;
-    /* Desktop par 4 items ek row me */
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 40px 30px; /* row-gap 40px, column-gap 30px */
-}
-
-.product-card {
-    text-decoration: none;
-    color: inherit;
-    transition: opacity 0.3s ease;
-    cursor: pointer;
-}
-
-.product-image-wrapper {
-    background-color: #EDEDE8; /* Soft aesthetic background for transparent PNGs */
-    overflow: hidden;
-    margin-bottom: 15px;
-    aspect-ratio: 4/5; /* Cafe images ke liye tall aspect ratio achha lagta hai */
-}
-
-.product-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures image fits perfectly */
-    display: block;
-    mix-blend-mode: multiply;
-    transition: transform 0.8s ease;
-}
-
-.product-card:hover .product-image-wrapper img {
-    transform: scale(1.05);
-}
-
-.product-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.product-details h3 {
-    font-size: 13px; /* Small font */
-    font-weight: 400;
-    color: #333333;
-}
-
-.product-details p {
-    font-size: 12px;
-    font-weight: 500;
-    color: #1A1A1A;
-}
-
-/* --- MOBILE OPTIMIZATION (Strictly Phone Optimized) --- */
-@media (max-width: 768px) {
-    .featured-preview {
-        padding: 60px 20px;
-    }
-    
-    .section-header h2 {
-        font-size: 20px;
-        margin-bottom: 40px;
+        width: 100%;
     }
 
-    /* Mobile par exactly 2 items ek line me */
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px 15px; /* Phone par gap kam kar diya taaki fit ho */
-    }
-
-    /* Mobile par fonts aur chote aur crisp honge */
-    .product-details {
-        flex-direction: column; /* Phone par price naam ke neeche aayega */
-    }
-
-    .product-details h3 {
-        font-size: 11px;
-        margin-bottom: 4px;
-        line-height: 1.2;
-    }
-
-    .product-details p {
-        font-size: 11px;
-        color: #666666; /* Phone par price thoda subtle rakha hai */
+    .btn {
+        width: 100%; /* Full width buttons on phone */
+        text-align: center;
     }
 }
