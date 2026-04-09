@@ -1,0 +1,66 @@
+/* Google Fonts - Inter (Minimal aur Clean look ke liye) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+/* --- Base Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFFFFF; /* Pure white focus */
+    color: #111111;
+    -webkit-font-smoothing: antialiased; /* Mac/iOS me text crisp dikhane ke liye */
+}
+
+/* --- Global Navbar --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 5%;
+    background-color: #FFFFFF;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 3px; /* Premium spacing */
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #111111;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #666666;
+    margin-left: 40px;
+    font-size: 11px; /* Small minimal font */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #111111;
+}
+
+/* --- Mobile Optimization for Navbar --- */
+@media (max-width: 768px) {
+    header {
+        padding: 20px;
+    }
+    nav a {
+        display: none; /* Mobile me menu hide karenge, baad me JS se hamburger menu banayenge */
+    }
+}

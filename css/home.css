@@ -1,0 +1,57 @@
+/* --- Hero Section --- */
+.hero {
+    /* Screen ki height minus navbar height */
+    height: calc(100vh - 70px); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    background-color: #FAFAFA; /* Subtle off-white taaki content pop kare */
+}
+
+.hero-tagline {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #888888;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 300; /* Thin font for elegance */
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+/* --- Minimal Button --- */
+.btn-primary {
+    display: inline-block;
+    padding: 14px 36px;
+    background-color: #111111;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background-color 0.4s ease;
+}
+
+.btn-primary:hover {
+    background-color: #444444;
+}
+
+/* --- Mobile Optimization for Hero --- */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+    .hero-tagline {
+        font-size: 9px;
+    }
+}
