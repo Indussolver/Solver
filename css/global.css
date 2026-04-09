@@ -1,7 +1,6 @@
-/* Google Fonts - Inter (300 light, 400 regular, 500 medium) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+/* Google Fonts - Inter for clean, modern look */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* --- Base Reset --- */
 * {
     margin: 0;
     padding: 0;
@@ -10,78 +9,49 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    /* --- COLOR CHANGE: Soft Off-White background --- */
-    background-color: #F9F9F7; 
-    color: #1A1A1A; /* Soft black, not pure black */
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+    background-color: #FAFAFA;
+    color: #333;
 }
 
-/* --- Global Navbar --- */
-header {
+/* --- TRANSPARENT & STICKY NAVBAR --- */
+.navbar {
+    position: fixed; /* Fixed at top, scrolls with user */
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 5%;
-    /* Navbar background same as body to blend in */
-    background-color: #F9F9F7; 
-    position: fixed; /* Fix it to top */
-    width: 100%;
-    top: 0;
+    background: transparent; /* Complete transparent initially */
     z-index: 1000;
+    /* Optional: Jab scroll ho toh background add karne ke liye JS use kar sakte hain baad me */
 }
 
-.logo {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 4px; /* Extreme spacing for minimal feel */
-    text-transform: uppercase;
+.navbar .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFFFFF; /* White text for dark hero overlay */
     text-decoration: none;
-    color: #1A1A1A;
+    letter-spacing: 2px;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-}
-
-nav a {
+.navbar nav a {
+    color: #FFFFFF;
     text-decoration: none;
-    color: #555555; /* Soft gray text */
-    margin-left: 35px;
-    font-size: 11px; /* Small minimal font */
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: 600;
     transition: color 0.3s ease;
 }
 
-nav a:hover, nav a.active {
-    color: #1A1A1A; /* Darken on hover or if active page */
+.navbar nav a:hover {
+    color: #6F4E37; /* Brown hover effect */
 }
 
-/* --- Mobile Menu Icon (SVG/Hamburger) --- */
-.mobile-menu-icon {
-    display: none; /* Hide on desktop */
-    cursor: pointer;
-}
-
-/* --- Helper Classes --- */
-.small-text {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #888888;
-}
-
-/* --- Mobile Optimization for Global Elements --- */
+/* Navbar Phone Optimization */
 @media (max-width: 768px) {
-    header {
-        padding: 15px 20px;
-    }
-    nav a:not(.cart-link) {
-        display: none; /* Hide main links on mobile */
-    }
-    .mobile-menu-icon {
-        display: block; /* Show menu icon */
+    .navbar nav {
+        display: none; /* Hide standard links on mobile, future me hamburger aayega */
     }
 }
