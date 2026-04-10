@@ -1,434 +1,110 @@
-/* --- 1. HERO SECTION (Minimalist Redesign) --- */
+/* Hero Section */
 .hero {
-    width: 100%;
-    height: 90vh;
-    
-    /* Background Image with Dark Overlay */
-    background: linear-gradient(rgba(17, 17, 17, 0.65), rgba(17, 17, 17, 0.65)), 
-                url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1920&q=80');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Parallax effect for premium feel */
-    
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 10%;
+    padding: 120px 20px 60px; /* Space for fixed navbar */
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.hero-content {
-    max-width: 550px;
-    color: #FFFFFF;
-}
-
-/* Minimalist Typography Setup */
-.hero-eyebrow {
-    display: block;
-    font-size: 11px; /* Small, premium font */
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: #D4B895; /* Soft beige/brown accent */
-    margin-bottom: 12px;
-}
-
-.hero-content h1 {
-    font-size: 48px; /* Refined size, not overly huge */
-    font-weight: 700;
-    letter-spacing: -1px;
-    margin-bottom: 8px;
-    line-height: 1.1;
-}
-
-.hero-content h2 {
-    font-size: 18px; /* Kept small for minimal look */
-    font-weight: 400;
-    color: #EAEAEA;
-    margin-bottom: 20px;
-}
-
-.hero-content p {
-    font-size: 14px; /* Small readable paragraph font */
+.hero h1 {
+    font-size: 32px;
     font-weight: 300;
-    line-height: 1.7;
-    margin-bottom: 35px;
-    color: #CCCCCC; /* Softer white for paragraph */
+    line-height: 1.2;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
 }
 
-/* Button Styling (Sleeker and smaller) */
-.hero-buttons {
-    display: flex;
-    gap: 16px;
+.hero p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
 }
 
 .btn {
-    padding: 12px 30px; /* Reduced padding for minimal feel */
-    font-size: 12px; /* Small button text */
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-decoration: none;
-    border-radius: 2px; /* Very sharp, slight curve */
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background-color: #6F4E37; /* Theme Brown */
-    color: #FFFFFF;
-    border: 1px solid #6F4E37;
-}
-
-.btn-primary:hover {
-    background-color: #5A3E2B;
-    border-color: #5A3E2B;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: #FFFFFF;
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
-}
-
-.btn-secondary:hover {
-    background-color: #FFFFFF;
-    color: #111111;
-    border-color: #FFFFFF;
-}
-
-/* --- MOBILE OPTIMIZATION (Strict Phone Focus) --- */
-@media (max-width: 768px) {
-    .hero {
-        padding: 0 6%;
-        height: 85vh; /* Slightly reduced height on phone */
-        justify-content: center; 
-        text-align: center;
-        background-attachment: scroll; /* Fixes background jumping on iOS */
-    }
-
-    .hero-content {
-        margin-top: 50px; /* Pushed down to clear sticky navbar */
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Centers everything */
-    }
-
-    /* Scaling fonts down beautifully for small screens */
-    .hero-eyebrow {
-        font-size: 10px;
-        margin-bottom: 10px;
-    }
-
-    .hero-content h1 {
-        font-size: 36px;
-    }
-
-    .hero-content h2 {
-        font-size: 15px;
-        margin-bottom: 15px;
-    }
-
-    .hero-content p {
-        font-size: 13px; /* Extra small but readable */
-        max-width: 300px;
-        margin-bottom: 30px;
-    }
-
-    /* Buttons stack vertically and take full width */
-    .hero-buttons {
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
-        max-width: 280px; /* Prevents buttons from getting too wide on tablets */
-    }
-
-    .btn {
-        width: 100%;
-        padding: 14px 0; /* Easier to tap on phone */
-        font-size: 11px;
-    }
-}
-/* --- FEATURED PRODUCTS SECTION --- */
-.featured-products {
-    padding: 80px 10%;
-    background-color: #FAFAFA; /* Matches global body background */
-}
-
-/* Section Headings */
-.section-title {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.section-title .sub-heading {
-    display: block;
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: var(--text-main);
+    color: var(--bg-color);
     font-size: 12px;
-    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #6F4E37; /* Theme Brown */
-    margin-bottom: 8px;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: background 0.3s;
 }
 
-.section-title h2 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #111111;
+.btn:hover {
+    background-color: var(--accent);
 }
 
-/* Grid Layout */
+/* Featured Section */
+.featured-section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Mobile-First Grid */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
-    gap: 30px;
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row on mobile */
+    gap: 15px;
 }
 
-/* --- PRODUCT CARD STYLING --- */
 .product-card {
-    background-color: #FFFFFF;
-    border-radius: 8px; /* Slight modern curve */
-    overflow: hidden; /* Keeps zoomed image inside borders */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); /* Very soft, elegant shadow */
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
 .product-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Shadow deepens on hover */
-    transform: translateY(-5px); /* Slight lift effect */
+    transform: translateY(-2px);
 }
 
-/* Image Hover Zoom Effect */
-.card-image {
+.product-img-placeholder {
     width: 100%;
-    height: 250px; /* Fixed height for uniformity */
-    overflow: hidden;
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease; /* Smooth zoom */
-}
-
-.product-card:hover .card-image img {
-    transform: scale(1.08); /* Zooms in 8% on hover */
-}
-
-/* Card Content & Typography */
-.card-content {
-    padding: 20px;
+    aspect-ratio: 1 / 1;
+    background-color: #EBE8E3;
     display: flex;
-    flex-direction: column;
-    flex-grow: 1; /* Pushes button to bottom if heights vary */
-}
-
-.card-text {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.card-text h3 {
-    font-size: 15px; /* Small, premium font */
-    font-weight: 600;
-    color: #333333;
-    margin-bottom: 6px;
-}
-
-.card-text .price {
-    font-size: 14px;
-    font-weight: 700;
-    color: #6F4E37; /* Theme Brown */
-}
-
-/* Small Minimal Button */
-.btn-order {
-    display: block;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #6F4E37;
-    background-color: transparent;
-    border: 1px solid #6F4E37;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    margin-top: auto; /* Aligns button to bottom */
-}
-
-.btn-order:hover {
-    background-color: #6F4E37;
-    color: #FFFFFF;
-}
-
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 768px) {
-    .featured-products {
-        padding: 60px 5%; /* Adjusted padding for phone */
-    }
-
-    .section-title h2 {
-        font-size: 26px;
-    }
-
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns strictly on mobile */
-        gap: 15px; /* Tighter gap for smaller screens */
-    }
-
-    .card-image {
-        height: 160px; /* Smaller image height for mobile */
-    }
-
-    .card-content {
-        padding: 12px; /* Less padding inside card */
-    }
-
-    .card-text h3 {
-        font-size: 12px; /* Even smaller font for mobile fitting */
-        line-height: 1.3;
-    }
-
-    .card-text .price {
-        font-size: 12px;
-    }
-
-    .btn-order {
-        padding: 8px 0;
-        font-size: 10px; /* Minimal button text */
-    }
-}
-/* --- TRUST BUILDER SECTION --- */
-.trust-builder {
-    padding: 80px 10%;
-    background-color: #FFFFFF; /* Pure white for contrast with previous section */
-    text-align: center;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
-    gap: 40px;
-    max-width: 1100px;
-    margin: 0 auto; /* Centers the grid on the screen */
-}
-
-.feature-item {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 20px;
-}
-
-/* Icon Container for Premium Look */
-.feature-icon {
-    font-size: 28px;
-    margin-bottom: 24px;
-    background-color: #F9F5F0; /* Soft warm brown background */
-    width: 75px;
-    height: 75px;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    border-radius: 50%; /* Perfect circle */
-    transition: transform 0.4s ease, background-color 0.4s ease;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }
 
-.feature-item:hover .feature-icon {
-    transform: translateY(-8px); /* Gentle float effect on hover */
-    background-color: #F1E8DC; /* Slightly darker brown on hover */
-}
-
-/* Small, minimal typography */
-.feature-item h3 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #111111;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
-
-.feature-item p {
+.product-info h3 {
     font-size: 13px;
-    color: #666666;
-    line-height: 1.6;
-    max-width: 250px; /* Keeps text nicely wrapped */
+    font-weight: 400;
+    margin-bottom: 2px;
 }
 
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 768px) {
-    .trust-builder {
-        padding: 60px 5%;
-    }
+.product-info .price {
+    font-size: 12px;
+    color: var(--text-muted);
+}
 
-    .features-grid {
-        grid-template-columns: 1fr; /* Stack into 1 column on phone */
+/* Tablet & Desktop Adjustments */
+@media (min-width: 768px) {
+    .hero h1 { font-size: 48px; }
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 items per row on larger screens */
         gap: 30px;
     }
-
-    .feature-item {
-        padding: 10px 0;
-    }
-
-    .feature-icon {
-        font-size: 24px; /* Slightly smaller icon */
-        width: 65px;
-        height: 65px;
-        margin-bottom: 16px;
-    }
-
-    .feature-item h3 {
-        font-size: 13px; /* Crisper, smaller font for mobile */
-    }
-
-    .feature-item p {
-        font-size: 12px; /* Easy to read, small text */
-        max-width: 280px;
-    }
-}
-/* --- FEATURED PRODUCTS SECTION --- */
-.featured-products {
-    padding: 80px 10%;
-    /* Same as body to blend perfectly */
-    background-color: #F5F1E7; 
-}
-
-/* Product Card Styling Update */
-.product-card {
-    /* Cards ko thoda light rakha hai taaki background se alag dikhein */
-    background-color: #FFFFFF; 
-    border-radius: 6px;
-    overflow: hidden;
-    /* Thoda dark shadow contrast ke liye */
-    box-shadow: 0 4px 20px rgba(44, 30, 22, 0.06); 
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* --- TRUST BUILDER SECTION --- */
-.trust-builder {
-    padding: 80px 10%;
-    /* Is section ko thoda alag dikhane ke liye halka sa darker tone */
-    background-color: #EBE5D9; 
-    text-align: center;
-}
-
-/* Icon Container for Premium Look */
-.feature-icon {
-    font-size: 28px;
-    margin-bottom: 24px;
-    background-color: #F5F1E7; /* Matches main body */
-    border: 1px solid rgba(44, 30, 22, 0.1); /* Thin border for visibility */
-    width: 75px;
-    height: 75px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    transition: transform 0.4s ease;
 }
