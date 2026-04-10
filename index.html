@@ -42,13 +42,13 @@
             <p>Our top picks curated for you</p>
         </div>
         
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-img-placeholder">Image</div>
-                <div class="product-info">
-                    <h3>Classic Espresso</h3>
-                    <span class="price">$9</span>
-                </div>
+        <div class="product-card" onclick="openCheckout('Classic Espresso', 9)">
+    <div class="product-img-placeholder">Image</div>
+    <div class="product-info">
+        <h3>Classic Espresso</h3>
+        <span class="price">$9</span>
+    </div>
+</div>
             </div>
             <div class="product-card">
                 <div class="product-img-placeholder">Image</div>
@@ -107,7 +107,29 @@
             <p>&copy; 2026 Peak9. All rights reserved.</p>
         </div>
     </footer>
-
+<div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCheckout()">&times;</span>
+            <h2>Checkout</h2>
+            <p id="checkoutItem">Item Name</p>
+            
+            <form id="checkoutForm">
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="John Doe" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+1 234 567 8900" required>
+                </div>
+                <div class="input-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" rows="3" placeholder="Enter your full address..." required></textarea>
+                </div>
+                <button type="submit" class="btn checkout-submit">Pay $<span id="checkoutPrice">0</span></button>
+            </form>
+        </div>
+    </div>
     <script src="js/global.js"></script>
 </body>
 </html>
