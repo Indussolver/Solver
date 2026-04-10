@@ -1,123 +1,151 @@
-/* --- HERO SECTION --- */
+/* --- 1. HERO SECTION (Minimalist Redesign) --- */
 .hero {
     width: 100%;
-    height: 90vh; /* 90% viewport height */
+    height: 90vh;
     
-    /* Background Image with 60% Dark Overlay using linear-gradient */
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+    /* Background Image with Dark Overlay */
+    background: linear-gradient(rgba(17, 17, 17, 0.65), rgba(17, 17, 17, 0.65)), 
                 url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1920&q=80');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-attachment: fixed; /* Parallax effect for premium feel */
     
-    /* Vertical Center & Left Aligned Layout */
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 10%; /* 10% gap from the left side */
+    padding: 0 10%;
 }
 
 .hero-content {
-    max-width: 600px;
-    color: #FFFFFF; /* White text looks best on dark overlay */
+    max-width: 550px;
+    color: #FFFFFF;
 }
 
-/* Typography matching your exact specs */
+/* Minimalist Typography Setup */
+.hero-eyebrow {
+    display: block;
+    font-size: 11px; /* Small, premium font */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #D4B895; /* Soft beige/brown accent */
+    margin-bottom: 12px;
+}
+
 .hero-content h1 {
-    font-size: 60px; /* Bold 60px */
+    font-size: 48px; /* Refined size, not overly huge */
     font-weight: 700;
-    margin-bottom: 10px;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
     line-height: 1.1;
 }
 
 .hero-content h2 {
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 18px; /* Kept small for minimal look */
+    font-weight: 400;
+    color: #EAEAEA;
     margin-bottom: 20px;
-    color: #EAEAEA; /* Slightly softer white for subtext */
 }
 
 .hero-content p {
-    font-size: 18px; /* Subtext 18-20px */
-    line-height: 1.6;
-    margin-bottom: 40px;
-    font-weight: 400;
+    font-size: 14px; /* Small readable paragraph font */
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 35px;
+    color: #CCCCCC; /* Softer white for paragraph */
 }
 
-/* --- BUTTONS --- */
+/* Button Styling (Sleeker and smaller) */
 .hero-buttons {
     display: flex;
-    gap: 20px; /* Space between buttons */
+    gap: 16px;
 }
 
 .btn {
-    padding: 15px 35px;
-    font-size: 16px;
+    padding: 12px 30px; /* Reduced padding for minimal feel */
+    font-size: 12px; /* Small button text */
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     text-decoration: none;
-    border-radius: 4px; /* Slight rounding for modern feel */
+    border-radius: 2px; /* Very sharp, slight curve */
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
-/* Primary: Brown */
 .btn-primary {
-    background-color: #6F4E37;
+    background-color: #6F4E37; /* Theme Brown */
     color: #FFFFFF;
-    border: 2px solid #6F4E37;
+    border: 1px solid #6F4E37;
 }
 
 .btn-primary:hover {
-    background-color: #5A3E2B; /* Darker brown on hover */
+    background-color: #5A3E2B;
     border-color: #5A3E2B;
 }
 
-/* Secondary: Outline White */
 .btn-secondary {
     background-color: transparent;
     color: #FFFFFF;
-    border: 2px solid #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
 }
 
 .btn-secondary:hover {
     background-color: #FFFFFF;
-    color: #111111; /* Dark text when hovered */
+    color: #111111;
+    border-color: #FFFFFF;
 }
 
-/* --- PHONE OPTIMIZATION (Mobile Responsive) --- */
+/* --- MOBILE OPTIMIZATION (Strict Phone Focus) --- */
 @media (max-width: 768px) {
     .hero {
-        padding: 0 5%; /* Less padding on small screens */
-        justify-content: center; /* Center content on mobile for better visibility */
-        text-align: center; /* Center text alignment */
+        padding: 0 6%;
+        height: 85vh; /* Slightly reduced height on phone */
+        justify-content: center; 
+        text-align: center;
+        background-attachment: scroll; /* Fixes background jumping on iOS */
     }
 
     .hero-content {
-        margin-top: 60px; /* Avoid overlapping with sticky navbar */
+        margin-top: 50px; /* Pushed down to clear sticky navbar */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers everything */
+    }
+
+    /* Scaling fonts down beautifully for small screens */
+    .hero-eyebrow {
+        font-size: 10px;
+        margin-bottom: 10px;
     }
 
     .hero-content h1 {
-        font-size: 42px; /* Smaller heading for phone */
+        font-size: 36px;
     }
 
     .hero-content h2 {
-        font-size: 22px;
+        font-size: 15px;
+        margin-bottom: 15px;
     }
 
     .hero-content p {
-        font-size: 16px; /* Optimized readable font */
+        font-size: 13px; /* Extra small but readable */
+        max-width: 300px;
         margin-bottom: 30px;
     }
 
+    /* Buttons stack vertically and take full width */
     .hero-buttons {
-        flex-direction: column; /* Stack buttons vertically on phone */
-        gap: 15px;
+        flex-direction: column;
+        gap: 12px;
         width: 100%;
+        max-width: 280px; /* Prevents buttons from getting too wide on tablets */
     }
 
     .btn {
-        width: 100%; /* Full width buttons on phone */
-        text-align: center;
+        width: 100%;
+        padding: 14px 0; /* Easier to tap on phone */
+        font-size: 11px;
     }
 }
 /* --- FEATURED PRODUCTS SECTION --- */
