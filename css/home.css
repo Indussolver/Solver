@@ -392,3 +392,43 @@
         max-width: 280px;
     }
 }
+/* --- FEATURED PRODUCTS SECTION --- */
+.featured-products {
+    padding: 80px 10%;
+    /* Same as body to blend perfectly */
+    background-color: #F5F1E7; 
+}
+
+/* Product Card Styling Update */
+.product-card {
+    /* Cards ko thoda light rakha hai taaki background se alag dikhein */
+    background-color: #FFFFFF; 
+    border-radius: 6px;
+    overflow: hidden;
+    /* Thoda dark shadow contrast ke liye */
+    box-shadow: 0 4px 20px rgba(44, 30, 22, 0.06); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* --- TRUST BUILDER SECTION --- */
+.trust-builder {
+    padding: 80px 10%;
+    /* Is section ko thoda alag dikhane ke liye halka sa darker tone */
+    background-color: #EBE5D9; 
+    text-align: center;
+}
+
+/* Icon Container for Premium Look */
+.feature-icon {
+    font-size: 28px;
+    margin-bottom: 24px;
+    background-color: #F5F1E7; /* Matches main body */
+    border: 1px solid rgba(44, 30, 22, 0.1); /* Thin border for visibility */
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: transform 0.4s ease;
+}
