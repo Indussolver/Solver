@@ -55,3 +55,81 @@ body {
         display: none; /* Hide standard links on mobile, future me hamburger aayega */
     }
 }
+/* Google Fonts - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* --- BASE RESET & THEME --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* NAYA WARM CAFE BACKGROUND - Ab white blur nahi hoga */
+    background-color: #F5F1E7; 
+    /* DEEP ESPRESSO TEXT - Very high contrast */
+    color: #2C1E16; 
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- STICKY NAVBAR (All Pages Safe) --- */
+.navbar {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 5%;
+    
+    /* Solid warm background so it looks perfect on ALL pages, not just Home */
+    background-color: rgba(245, 241, 231, 0.98); 
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(44, 30, 22, 0.08); /* Subtle bottom line */
+    z-index: 1000;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Navbar Links Setup */
+.navbar nav a {
+    color: #5A4433; /* Medium Brown */
+    text-decoration: none;
+    margin-left: 32px;
+    font-size: 13px; /* Small, premium font */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.navbar nav a:hover, 
+.navbar nav a.active {
+    color: #2C1E16; /* Dark Espresso on hover/active */
+}
+
+/* --- GLOBAL HEADINGS & TEXT --- */
+h1, h2, h3 {
+    color: #2C1E16;
+}
+
+p {
+    color: #5A4433;
+}
+
+/* Navbar Phone Optimization */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 5%;
+    }
+    .navbar nav {
+        display: none; /* Keep hidden for mobile layout */
+    }
+}
